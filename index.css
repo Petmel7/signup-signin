@@ -1,0 +1,126 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* h1,
+h2,
+h3,
+div,
+ul,
+li,
+p,
+a,
+svg,
+use,
+span {
+    list-style-type: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+} */
+
+/* Стилі для основного контейнера форми */
+.form {
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Стилі для заголовка форми */
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Стилі для лейблів інпутів */
+.form-label {
+    display: block;
+    font-weight: bold;
+}
+
+/* Стилі для інпутів */
+.form-input {
+    width: 94%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* Стилі для кнопки */
+.form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Змінити стилі кнопки при наведенні */
+.form button:hover {
+    background-color: #45a049;
+}
+
+/* Стилі для посилання на створення нового акаунту */
+.form-account {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-account a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Змінити стилі посилання при наведенні */
+.form-account a:hover {
+    text-decoration: underline;
+}
+
+.form-block {
+    margin-bottom: 20px;
+}
+
+/* Загальні стилі для інпута файлу */
+.button-input {
+    display: none;
+    /* Ховаємо стандартний інпут файлу */
+}
+
+
+
+
+/* Стилізація для макету кнопки */
+.custom-file-upload {
+    display: inline-block;
+    padding: 5px 15px;
+    cursor: pointer;
+    background-color: rgb(96, 96, 96);
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Стилізація для тексту на кнопці */
+.custom-file-upload span {
+    margin-right: 5px;
+}
+
+/* Стилізація для інпута файлу, що є невидимим поверх кнопки */
+.custom-file-upload input {
+    display: none;
+}
+
+.button-file {
+    margin-top: 10px;
+}
+
