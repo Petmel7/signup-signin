@@ -124,3 +124,33 @@ span {
     margin-top: 10px;
 }
 
+
+.account {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.account-img {
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.account-title {
+    margin-top: 15px;
+    font-size: 24px;
+}
+
+.account-button {
+    display: block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.account-button:hover {
+    background-color: #0056b3;
+}

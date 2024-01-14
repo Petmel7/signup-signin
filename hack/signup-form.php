@@ -38,9 +38,12 @@ require_once __DIR__ . '/../hack/actions/helpers.php';
         <div class="form-block">
             <label class="custom-file-upload">
                 <span>Choose File</span>
-                <input class="button-input" type="file" id="avatar" name="avatar" accept="image/*">
+                <input class="button-input" type="file" id="avatar" name="avatar" accept="image/*" <?php validationErrorAttr(fieldName: 'avatar'); ?>>
+
+                <?php if (hasValidationError(fieldName: 'avatar')) : ?>
+                    <small><?php validationErrorMessage(fieldName: 'avatar'); ?></small>
+                <?php endif; ?>
             </label>
-            <button class="button-file" type="submit">Upload Image</button>
         </div>
 
         <label class="form-label" for="">Password

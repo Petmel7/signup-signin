@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../hack/actions/helpers.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,12 +19,24 @@
     <form class="form" action="php/signin.php" method="post">
         <p class="form-title">Signin</p>
 
-        <label class="form-label" for="">Name
-            <input class="form-input" type="text" placeholder="Macaulay Culkin" name="name">
+        <?php if (hasMessage(key: 'error')) : ?>
+            <div class="notise error"><?php echo getMessage(key: 'error'); ?></div>
+        <?php endif; ?>
+
+        <label class="form-label" for="">E-mail
+            <input class="form-input" type="text" placeholder="MacaulayCulkin@gmail.com" name="email" <?php validationErrorAttr(fieldName: 'email'); ?> value="<?php echo old(key: 'email') ?>">
+
+            <?php if (hasValidationError(fieldName: 'email')) : ?>
+                <small><?php validationErrorMessage(fieldName: 'email'); ?></small>
+            <?php endif; ?>
         </label>
 
         <label class="form-label" for="">Password
-            <input class="form-input" type="text" placeholder="*******" name="password">
+            <input class="form-input" type="text" placeholder="*******" name="password" <?php validationErrorAttr(fieldName: 'password'); ?>>
+
+            <?php if (hasValidationError(fieldName: 'password')) : ?>
+                <small><?php validationErrorMessage(fieldName: 'password'); ?></small>
+            <?php endif; ?>
         </label>
 
         <button type="submit">Continue</button>
