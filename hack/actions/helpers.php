@@ -20,16 +20,16 @@ function hasValidationError(string $fieldName): bool
 }
 
 
-function validationErrorAttr(string $fieldName)
+function validationErrorAttr(string $fieldName): string
 {
-    echo isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
+    return isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
 }
 
-function validationErrorMessage(string $fieldName)
+function validationErrorMessage(string $fieldName): string
 {
     $message = $_SESSION['validation'][$fieldName] ?? '';
     unset($_SESSION['validation'][$fieldName]);
-    echo $message;
+    return $message;
 }
 
 function addOldValue(string $key, mixed $value): void
@@ -110,4 +110,25 @@ function currentUser(): array|bool
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
     $stmt->execute(['id' => $userId]);
     return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+}
+
+function logout(): void
+{
+    unset($_SESSION['user']['id']);
+}
+
+function checkAuth(): void
+{
+    if (!isset($_SESSION['user']['id'])) {
+        $baseUrl = '/signup-signin';
+        redirect($baseUrl . '/index.php?page=signin');
+    }
+}
+
+function checkGuest(): void
+{
+    if (isset($_SESSION['user']['id'])) {
+        $baseUrl = '/signup-signin';
+        redirect($baseUrl . '/index.php?page=home');
+    }
 }

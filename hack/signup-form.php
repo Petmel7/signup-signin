@@ -1,61 +1,60 @@
 <?php
 require_once __DIR__ . '/../hack/actions/helpers.php';
+
+checkGuest();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup-Signin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
-</head>
+<?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
     <form class="form" action="php/signup.php" method="post" enctype="multipart/form-data">
         <p class="form-title">Signup</p>
 
         <label class="form-label" for="name">Name
-            <input class="form-input" type="text" placeholder="Macaulay Culkin" name="name" aria-invalid="true" <?php validationErrorAttr(fieldName: 'name'); ?> value="<?php echo old(key: 'name') ?>">
+            <input class="form-input" type="text" placeholder="Macaulay Culkin" name="name" aria-invalid="true" <?php echo validationErrorAttr(fieldName: 'name'); ?> value="<?php echo old(key: 'name') ?>">
 
             <?php if (hasValidationError(fieldName: 'name')) : ?>
-                <small><?php validationErrorMessage(fieldName: 'name'); ?></small>
+                <small class="notise"><?php echo validationErrorMessage(fieldName: 'name'); ?></small>
             <?php endif; ?>
         </label>
 
         <label class="form-label" for="">E-mail
-            <input class="form-input" type="text" placeholder="MacaulayCulkin@gmail.com" name="email" <?php validationErrorAttr(fieldName: 'email'); ?> value="<?php echo old(key: 'email') ?>">
+            <input class="form-input" type="text" placeholder="MacaulayCulkin@gmail.com" name="email" <?php echo validationErrorAttr(fieldName: 'email'); ?> value="<?php echo old(key: 'email') ?>">
 
             <?php if (hasValidationError(fieldName: 'email')) : ?>
-                <small><?php validationErrorMessage(fieldName: 'email'); ?></small>
+                <small class="notise"><?php echo validationErrorMessage(fieldName: 'email'); ?></small>
             <?php endif; ?>
         </label>
 
         <div class="form-block">
-            <label class="custom-file-upload">
-                <span>Choose File</span>
-                <input class="button-input" type="file" id="avatar" name="avatar" accept="image/*" <?php validationErrorAttr(fieldName: 'avatar'); ?>>
+            <label class="custom-file-upload">Choose File
+                <input class="button-input" type="file" id="avatar" name="avatar" accept="image/*" <?php echo validationErrorAttr(fieldName: 'avatar'); ?>>
 
                 <?php if (hasValidationError(fieldName: 'avatar')) : ?>
-                    <small><?php validationErrorMessage(fieldName: 'avatar'); ?></small>
+                    <small class="notise"><?php echo validationErrorMessage(fieldName: 'avatar'); ?></small>
                 <?php endif; ?>
             </label>
         </div>
 
         <label class="form-label" for="">Password
-            <input class="form-input" type="text" placeholder="*******" name="password" <?php validationErrorAttr(fieldName: 'password'); ?>>
+            <div class="custom-placeholder">
+                <input class="form-input" type="text" placeholder=" " name="password" <?php echo validationErrorAttr(fieldName: 'password'); ?>>
+                <span class="placeholder-text">************</span>
+            </div>
 
             <?php if (hasValidationError(fieldName: 'password')) : ?>
-                <small><?php validationErrorMessage(fieldName: 'password'); ?></small>
+                <small class="notise"><?php echo validationErrorMessage(fieldName: 'password'); ?></small>
             <?php endif; ?>
         </label>
 
         <label class="form-label" for="">Repeat password
-            <input class="form-input" type="text" placeholder="*******" name="repeat-password">
+            <div class="custom-placeholder">
+                <input class="form-input" type="text" placeholder=" " name="repeat-password">
+                <span class="placeholder-text">************</span>
+            </div>
         </label>
 
         <div class="form-block">
@@ -67,6 +66,7 @@ require_once __DIR__ . '/../hack/actions/helpers.php';
 
         <p class="form-account">I already have an <a href="index.php?page=signin">account</a></p>
     </form>
+    <script src="index.js"></script>
 </body>
 
 </html>

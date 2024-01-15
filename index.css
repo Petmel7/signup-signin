@@ -1,5 +1,12 @@
 body {
     font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
 }
 
 /* h1,
@@ -20,9 +27,14 @@ span {
 } */
 
 /* Стилі для основного контейнера форми */
+
 .form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     max-width: 300px;
-    margin: auto;
+    width: 100%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -36,6 +48,10 @@ span {
     margin-bottom: 20px;
 }
 
+.notise {
+    color: red;
+}
+
 /* Стилі для лейблів інпутів */
 .form-label {
     display: block;
@@ -45,27 +61,36 @@ span {
 /* Стилі для інпутів */
 .form-input {
     width: 94%;
-    padding: 8px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 5px;
+    padding: 8px;
+}
+
+.form-input:focus {
+    outline: 1px solid #68e2e4;
+}
+
+.placeholder {
+    padding: 11px 8px 5px 8px;
 }
 
 /* Стилі для кнопки */
 .form button {
     width: 100%;
     padding: 10px;
-    background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    background: linear-gradient(to right, #68e2e4, #5545f4);
+    transition: background 0.3s ease;
 }
 
 /* Змінити стилі кнопки при наведенні */
 .form button:hover {
-    background-color: #45a049;
+    background: linear-gradient(to right, #5545f4, #68e2e4);
 }
 
 /* Стилі для посилання на створення нового акаунту */
@@ -104,15 +129,14 @@ span {
     display: inline-block;
     padding: 5px 15px;
     cursor: pointer;
-    background-color: rgb(96, 96, 96);
+    background: linear-gradient(to right, #5545f4, #68e2e4);
     color: white;
     border: none;
     border-radius: 4px;
 }
 
-/* Стилізація для тексту на кнопці */
-.custom-file-upload span {
-    margin-right: 5px;
+.custom-file-upload:hover {
+    background: linear-gradient(to right, #68e2e4, #5545f4);
 }
 
 /* Стилізація для інпута файлу, що є невидимим поверх кнопки */
@@ -124,8 +148,10 @@ span {
     margin-top: 10px;
 }
 
-
+/* Accaunt */
 .account {
+    max-width: 400px;
+    margin: auto;
     text-align: center;
     margin-top: 20px;
 }
@@ -147,10 +173,43 @@ span {
     background-color: #007bff;
     color: #fff;
     text-decoration: none;
+    border: transparent;
     border-radius: 5px;
     font-size: 16px;
+    margin: 0 auto;
 }
 
 .account-button:hover {
     background-color: #0056b3;
+}
+
+
+
+
+
+/* фгамщйурим */
+
+.custom-placeholder {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-65%);
+    color: #aaa;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.2s;
+}
+
+.form-input:focus+.placeholder-text {
+    opacity: 0;
 }
