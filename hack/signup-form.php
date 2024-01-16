@@ -58,8 +58,8 @@ checkGuest();
         </label>
 
         <div class="form-block">
-            <input type="checkbox" name="checkbox">
-            <label class="" for="">I accept all user terms</label>
+            <input class="form-checkbox" type="checkbox" id="customCheckbox" name="checkbox">
+            <label class="custom-checkbox-label" for="customCheckbox">I accept all user terms</label>
         </div>
 
         <button type="submit">Continue</button>
