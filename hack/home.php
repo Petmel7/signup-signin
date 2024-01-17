@@ -14,7 +14,7 @@ $user = currentUser();
 <body>
     <div class="account">
 
-        <form action="hack/actions/change-photo.php" method="post" enctype="multipart/form-data">
+        <form id="photoForm" action="hack/actions/change-photo.php" method="post" enctype="multipart/form-data">
             <div class="change">
                 <label class="change-photo">
                     <input class="button-input" type="file" id="avatar" name="avatar" accept="image/*" <?php echo validationErrorAttr(fieldName: 'avatar'); ?>>
@@ -28,7 +28,10 @@ $user = currentUser();
                     <?php endif; ?>
                 </label>
             </div>
-            <button type="submit">Change</button>
+        </form>
+
+        <form action="hack/actions/delete-photo.php" method="post">
+            <button class="account-button__delete" type="submit">Delete photo</button>
         </form>
 
         <h1 class="account-title"><?php echo $user['name']; ?></h1>
@@ -37,6 +40,8 @@ $user = currentUser();
             <button class="account-button" type="submit">Logout</button>
         </form>
     </div>
+
+    <script src="index.js"></script>
 </body>
 
 </html>

@@ -279,12 +279,12 @@ span {
     text-align: center;
 }
 
-.account {
+.change {
     position: relative;
     overflow: hidden;
 }
 
-.account:hover::before {
+.change:hover::before {
     content: '';
     position: absolute;
     top: 0;
@@ -299,7 +299,7 @@ span {
 
 .change-photo__text {
     position: absolute;
-    top: 35%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
@@ -307,8 +307,35 @@ span {
     font-size: 24px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    cursor: pointer;
 }
 
-.account:hover .change-photo__text {
+.change:hover .change-photo__text {
     opacity: 1;
+}
+
+
+
+
+/* Аccount button delete */
+.account-button__delete {
+    background-color: #a5a5a5;
+    /* Червоний колір кнопки (можна змінити за бажанням) */
+    color: #fff;
+    /* Колір тексту на кнопці */
+    padding: 3px 10px;
+    /* Підгонка величини відступів під ваш дизайн */
+    border: none;
+    /* Відсутність межі */
+    border-radius: 5px;
+    /* Закруглені кути */
+    cursor: pointer;
+    /* Змінює форму курсора при наведенні на кнопку */
+    font-size: 14px;
+    /* Розмір шрифту (можна змінити за бажанням) */
+}
+
+.account-button__delete:hover {
+    background-color: #c82333;
+    /* Зміна кольору кнопки при наведенні (можна змінити за бажанням) */
 }

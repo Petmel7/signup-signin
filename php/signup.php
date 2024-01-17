@@ -5,7 +5,6 @@ require_once __DIR__ . '/../hack/actions/helpers.php';
 $uploadPath = '../../uploads';
 
 // data
-// $avatarPath = null;
 
 $name = $_POST['name'] ?? null;
 $email = $_POST['email'] ?? null;
@@ -25,20 +24,27 @@ if (!filter_var($email, filter: FILTER_VALIDATE_EMAIL)) {
     addValidationError(fieldName: 'email', message: 'Неправельне пошта!');
 }
 
-if (!empty($avatar)) {
+$avatar = $_FILES['avatar'] ?? null;
+
+// Перевірка наявності файлу і його розмір
+if (!empty($avatar) && $avatar['size'] > 0) {
     $types = ['image/jpeg', 'image/png'];
 
     if (!in_array($avatar['type'], $types)) {
-        addValidationError(fieldName: 'email', message: 'Не правельний формат картинки!');
+        addValidationError(fieldName: 'avatar', message: 'Неправильний формат картинки!');
     }
 
     if ($avatar['size'] / 1000000 > 1) {
-        addValidationError(fieldName: 'email', message: 'Файл повинен бути менще одного мб!');
+        addValidationError(fieldName: 'avatar', message: 'Файл повинен бути менше одного мб!');
     }
-}
 
-if (!empty($avatar)) {
-    $avatarPath = uploadFile($avatar, prefix: 'avatar');
+    // Якщо валідація успішна, завантажуємо файл
+    if (!hasValidationError(fieldName: 'avatar')) {
+        $avatarPath = uploadFile($avatar, prefix: 'avatar');
+    }
+} else {
+    // Якщо файл не обрано, встановлюємо значення за замовчуванням
+    $avatarPath = 'uploads/avatar_4367658739.jpg'; // Замініть це значення на ваш шлях за замовчуванням
 }
 
 if (empty($password)) {
@@ -58,9 +64,6 @@ if (!empty($_SESSION['validation'])) {
 }
 
 $pdo = getPDO();
-
-// var_dump($avatarPath);
-
 
 // add user db
 
@@ -85,3 +88,5 @@ if (empty($_SESSION['validation'])) {
     $baseUrl = '/signup-signin';
     redirect($baseUrl . '/index.php?page=signin');
 }
+
+// var_dump($avatarPath);
