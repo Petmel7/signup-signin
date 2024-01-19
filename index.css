@@ -9,7 +9,7 @@ body {
     margin: 0;
 }
 
-/* h1,
+h1,
 h2,
 h3,
 div,
@@ -24,7 +24,7 @@ span {
     text-decoration: none;
     margin: 0;
     padding: 0;
-} */
+}
 
 /* Стилі для основного контейнера форми */
 
@@ -169,7 +169,7 @@ span {
 
 
 .account-title {
-    margin-top: 15px;
+    margin: 15px;
     font-size: 24px;
 }
 
@@ -336,7 +336,7 @@ span {
 
 
 
-
+/* Modal delete cancel */
 .modal {
     display: none;
     position: fixed;
@@ -357,6 +357,14 @@ span {
     text-align: center;
     border-radius: 4px;
     height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content__text {
+    margin-bottom: 20px;
 }
 
 .account-button__delete {
@@ -385,4 +393,24 @@ span {
 .friends-link:not(:last-child) {
     margin-right: 50px;
 } */
+
+.friends {
+    margin-bottom: 20px;
+}
+
+.friend-list__li {
+    margin-bottom: 20px;
+}
+
+.friend-list__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.friend-list__name {
+    font-weight: bold;
+}
 

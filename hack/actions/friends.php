@@ -1,40 +1,51 @@
 <?php
 
 require_once __DIR__ . '/helpers.php';
+require_once __DIR__ . '/../../monolog-config.php';
 
-// Отримуємо з'єднання з базою даних
-$conn = getPDO();
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-// Ваш SQL-запит для отримання даних з бази даних
-$sql = "SELECT * FROM users";
-$result = $conn->query($sql);
+    $loggedInUsername = getLoggedInUsername();
 
-// Масив для збереження результатів запиту
-$users = array();
+    handleGetRequest($loggedInUsername, $log);
+}
 
-// Перевіряємо, чи є результат
-if ($result !== false) {
-    // Використовуємо метод rowCount(), оскільки у PDOStatement немає властивості num_rows
-    $rowCount = $result->rowCount();
+function handleGetRequest($loggedInUsername, $log)
+{
+    try {
+        // Отримуємо з'єднання з базою даних
+        $conn = getPDO();
 
-    if ($rowCount > 0) {
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            // Додаємо дані кожного користувача до масиву
-            $users[] = array(
-                'name' => $row['name'],
-                'avatar' => $row['avatar'],
-                // Додайте інші поля, які вам потрібні
-            );
+        // Ваш SQL-запит для отримання даних з бази даних
+        $sql = "SELECT name, avatar FROM users WHERE name <> ?";
+
+        // Використовуємо подготовлений запит
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$loggedInUsername]);
+
+        // $log->warning('warning $loggedInUsername', [$loggedInUsername]);
+        // $log->error('error $loggedInUsername', [$loggedInUsername]);
+
+        // Отримуємо всі рядки разом
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($users) {
+            header('Content-Type: application/json');
+            echo json_encode($users);
+        } else {
+            echo json_encode(['error' => 'No users found.']);
+        }
+    } catch (PDOException $e) {
+        // Обробка помилок бази даних
+        echo json_encode(['error' => $e->getMessage()]);
+    } finally {
+        // Закриваємо з'єднання з базою даних у будь-якому випадку
+        if ($conn !== null) {
+            $conn = null;
         }
     }
 }
 
-// Виводимо дані у форматі JSON (можете використовувати інший формат, якщо потрібно)
-header('Content-Type: application/json');
-echo json_encode($users);
+handleGetRequest($loggedInUsername, $log);
 
-// Закриваємо з'єднання з базою даних
-$conn = null; // Закриваємо з'єднання
-
-// $baseUrl = '/signup-signin';
-// redirect($baseUrl . '/index.php?page=home');
+var_dump($loggedInUsername);

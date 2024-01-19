@@ -30,9 +30,10 @@ if (!password_verify($password, $user['password'])) {
 }
 
 $_SESSION['user']['id'] = $user['id'];
+$_SESSION['user']['name'] = $user['name'];
 
 $baseUrl = '/signup-signin';
 redirect($baseUrl . '/index.php?page=home');
 
 
-// var_dump($user);
+// var_dump($_SESSION['user']['name']);

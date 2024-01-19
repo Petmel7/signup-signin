@@ -1,7 +1,9 @@
 <?php
+
 session_start();
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/../../monolog-config.php';
 
 function getPDO(): PDO
 {
@@ -112,6 +114,17 @@ function currentUser(): array|bool
     return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
 }
 
+function getUserDataByUsername($username): array
+{
+    $conn = getPDO();
+
+    $stmt = $conn->prepare("SELECT * FROM users WHERE name = ?");
+    $stmt->execute([$username]);
+    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $userData;
+}
+
 function logout(): void
 {
     unset($_SESSION['user']['id']);
@@ -132,3 +145,10 @@ function checkGuest(): void
         redirect($baseUrl . '/index.php?page=home');
     }
 }
+
+function getLoggedInUsername(): string|null
+{
+    return isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
+}
+
+var_dump($_SESSION['user']['name']);

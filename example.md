@@ -1,45 +1,31 @@
-1 На домашній сторінці створити кнопку друзі, при кліку на яку відкриється модалка з вибором двох кнопок "рекомендовані" і "мої друзі"
+1 Зробити щоб відображало всіх користувачів кромі авторизованого
 
-2 Створити запит get php
+// function handleGetRequest()
+// {
+// try {
+// $conn = getPDO();
 
-3 Розмістити корисеувачів на сторінці js
+// $sql = "SELECT name, avatar FROM users";
 
-Не розумію чому воно не працює, навіть консоль не показує
+// $stmt = $conn->prepare($sql);
+// $stmt->execute();
 
-    <script>
-        const friendsForm = document.getElementById('friendsForm');
+// $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        async function displayFriends(event) {
-            event.preventDefault();
+// header('Content-Type: application/json');
+// echo json_encode($users);
 
-            const friendsForm = document.getElementById('friendsForm');
-            friendsForm.addEventListener('submit', displayFriends);
+// } catch (PDOException $e) {
+//         echo json_encode(['error' => $e->getMessage()]);
+//     } finally {
+//         if ($conn !== null) {
+// $conn = null;
+// }
+// }
+// }
 
-            try {
-                const response = await fetch('friends.php', {
-                    method: 'POST'
-                });
+// handleGetRequest();
 
-                console.log('response', response)
-
-                if (response.ok) {
-                    const friends = await response.json();
-                    const friendsContainer = document.getElementById('friendsDataContainer');
-                    friendsContainer.innerHTML = '';
-
-                    const friendsHTML = friends.map(friend => `
-                        <li>
-                            <p>${friend.name}</p>
-                            <p>${friend.avatar}</p>
-                        </li>
-                    `).join('');
-
-                    friendsContainer.insertAdjacentHTML('beforeend', friendsHTML);
-                } else {
-                    throw new Error('Network response was not ok.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Помилка');
-            }
-        }?
+ось що в log
+[2024-01-19T18:53:05.923104+01:00] my_log.WARNING: warning $loggedInUsername [null] []
+[2024-01-19T18:53:05.924409+01:00] my_log.ERROR: error $loggedInUsername [null] []

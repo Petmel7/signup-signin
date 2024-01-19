@@ -45,10 +45,10 @@ $user = currentUser();
         <h1 class="account-title"><?php echo $user['name']; ?></h1>
 
         <form id="friendsForm" action="hack/actions/friends.php" method="post">
-            <button class="friends" type="submit" onclick="displayFriends()">Friends</button>
+            <button class="friends" type="submit" onclick="displayFriends(event)">Search friends</button>
         </form>
 
-        <ul id="friendsDataContainer"></ul>
+        <ul class="friend-list" id="friendsDataContainer"></ul>
 
         <form action="hack/actions/logout.php" method="post">
             <button class="account-button" type="submit">Logout</button>
@@ -57,56 +57,15 @@ $user = currentUser();
 
     <!-- <script>
         const friendsForm = document.getElementById('friendsForm');
-
-        async function displayFriends(event) {
-            event.preventDefault();
-
-            const friendsForm = document.getElementById('friendsForm');
-            friendsForm.addEventListener('submit', displayFriends);
-
-            try {
-                const response = await fetch('friends.php', {
-                    method: 'POST'
-                });
-
-                console.log('response', response)
-
-                if (response.ok) {
-                    const friends = await response.json();
-                    const friendsContainer = document.getElementById('friendsDataContainer');
-                    friendsContainer.innerHTML = '';
-
-                    const friendsHTML = friends.map(friend => `
-                        <li>
-                            <p>${friend.name}</p>
-                            <p>${friend.avatar}</p>
-                        </li>
-                    `).join('');
-
-                    friendsContainer.insertAdjacentHTML('beforeend', friendsHTML);
-                } else {
-                    throw new Error('Network response was not ok.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Помилка');
-            }
-        }
-    </script> -->
-
-    <script>
-        const friendsForm = document.getElementById('friendsForm');
         friendsForm.addEventListener('submit', displayFriends);
 
         async function displayFriends(event) {
             event.preventDefault();
 
             try {
-                const response = await fetch('friends.php', {
+                const response = await fetch('hack/actions/friends.php', {
                     method: 'POST'
                 });
-
-                console.log('response', response);
 
                 if (response.ok) {
                     const friends = await response.json();
@@ -114,9 +73,11 @@ $user = currentUser();
                     friendsContainer.innerHTML = '';
 
                     const friendsHTML = friends.map(friend => `
-                    <li>
-                        <p>${friend.name}</p>
-                        <p>${friend.avatar}</p>
+                    <li class="friend-list__li">
+                        <a href='index.php?page=user&username=${encodeURIComponent(friend.name)}'>
+                            <img class="friend-list__img" src='hack/${friend.avatar}' alt='${friend.name}'>
+                            <p class="friend-list__name">${friend.name}</p>
+                        </a>
                     </li>
                 `).join('');
 
@@ -129,7 +90,7 @@ $user = currentUser();
                 alert('Помилка');
             }
         }
-    </script>
+    </script> -->
 
     <script src="index.js"></script>
 </body>
