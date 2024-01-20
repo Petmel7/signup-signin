@@ -45,19 +45,21 @@ $user = currentUser();
         <h1 class="account-title"><?php echo $user['name']; ?></h1>
 
         <form id="friendsForm" action="hack/actions/friends.php" method="post">
-            <button class="friends" type="submit" onclick="displayFriends(event)">Search friends</button>
+            <button class="friends" type="submit">Search friends</button>
         </form>
 
-        <ul class="friend-list" id="friendsDataContainer"></ul>
+        <!-- <ul class="friend-list" id="friendsDataContainer"></ul> -->
 
         <form action="hack/actions/logout.php" method="post">
             <button class="account-button" type="submit">Logout</button>
         </form>
     </div>
 
+    <!-- <script src="js/display-friends.js"></script> -->
+
+    <!-- Додайте цей скрипт в ваш HTML-код home.php -->
     <!-- <script>
         const friendsForm = document.getElementById('friendsForm');
-        friendsForm.addEventListener('submit', displayFriends);
 
         async function displayFriends(event) {
             event.preventDefault();
@@ -68,20 +70,8 @@ $user = currentUser();
                 });
 
                 if (response.ok) {
-                    const friends = await response.json();
-                    const friendsContainer = document.getElementById('friendsDataContainer');
-                    friendsContainer.innerHTML = '';
-
-                    const friendsHTML = friends.map(friend => `
-                    <li class="friend-list__li">
-                        <a href='index.php?page=user&username=${encodeURIComponent(friend.name)}'>
-                            <img class="friend-list__img" src='hack/${friend.avatar}' alt='${friend.name}'>
-                            <p class="friend-list__name">${friend.name}</p>
-                        </a>
-                    </li>
-                `).join('');
-
-                    friendsContainer.insertAdjacentHTML('beforeend', friendsHTML);
+                    // Після успішного запиту, перенаправте користувача на сторінку friends-list.php
+                    window.location.href = 'friends-list.php';
                 } else {
                     throw new Error('Network response was not ok.');
                 }
@@ -90,7 +80,10 @@ $user = currentUser();
                 alert('Помилка');
             }
         }
+
+        friendsForm.addEventListener('submit', displayFriends);
     </script> -->
+
 
     <script src="index.js"></script>
 </body>

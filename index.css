@@ -331,6 +331,7 @@ span {
 
 .account-button__delete:hover {
     background-color: #c82333;
+    color: #fff;
 }
 
 
@@ -396,6 +397,19 @@ span {
 
 .friends {
     margin-bottom: 20px;
+    background-color: #e0e0e0;
+    color: #000;
+    padding: 3px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 120px;
+}
+
+.friends:hover {
+    background-color: #555;
+    color: #fff;
 }
 
 .friend-list__li {

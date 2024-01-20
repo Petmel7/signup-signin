@@ -1,60 +1,56 @@
-<!-- <!DOCTYPE html>
+<?php
+require_once __DIR__ . '/actions/helpers.php';
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
 
-    <div id="friendsDataContainer"></div>
+    <ul class="friend-list" id="friendsDataContainer"></ul>
 
+    <!-- <script src="js/display-friends.js"></script> -->
     <script>
-        function fetchFriendsData() {
-            // Використовуйте AJAX або Fetch API для виклику серверного скрипта friends.php
-            // Тут наведено приклад використання Fetch API:
+        const friendsForm = document.getElementById('friendsForm');
+        // friendsForm.addEventListener('submit', displayFriends);
 
-            fetch('friends.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    // Можливо, передайте параметри, якщо потрібно
-                    body: JSON.stringify({}),
-                })
-                .then(response => response.json())
-                .then(data => displayFriendsData(data))
-                .catch(error => console.error('Error fetching friends data:', error));
+        async function displayFriends(event) {
+            event.preventDefault();
+
+            try {
+                const response = await fetch('hack/actions/friends.php', {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    const friends = await response.json();
+                    const friendsContainer = document.getElementById('friendsDataContainer');
+                    friendsContainer.innerHTML = '';
+
+                    const friendsHTML = friends.map(friend => `
+                    <li class="friend-list__li">
+                        <a href='index.php?page=user&username=${encodeURIComponent(friend.name)}'>
+                            <img class="friend-list__img" src='hack/${friend.avatar}' alt='${friend.name}'>
+                            <p class="friend-list__name">${friend.name}</p>
+                        </a>
+                    </li>
+                `).join('');
+
+                    friendsContainer.insertAdjacentHTML('beforeend', friendsHTML);
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Помилка');
+            }
         }
 
-        function displayFriendsData(data) {
-            // Отримані дані буде масив користувачів. Можете використовувати ці дані для відображення на сторінці.
-
-            // Наприклад, використовуйте контейнер friendsDataContainer для відображення фото та імен користувачів.
-            const friendsDataContainer = document.getElementById('friendsDataContainer');
-
-            // Очищаємо контейнер перед відображенням нових даних
-            friendsDataContainer.innerHTML = '';
-
-            // Проходимося по кожному користувачеві і відображаємо його фото та ім'я
-            data.forEach(user => {
-                const userElement = document.createElement('div');
-                userElement.classList.add('user');
-
-                const imgElement = document.createElement('img');
-                imgElement.src = user.photo;
-                imgElement.alt = user.name;
-
-                const nameElement = document.createElement('p');
-                nameElement.textContent = user.name;
-
-                userElement.appendChild(imgElement);
-                userElement.appendChild(nameElement);
-
-                friendsDataContainer.appendChild(userElement);
-            });
-        }
+        displayFriends();
     </script>
-
 
 </body>
 
-</html> -->
+</html>
