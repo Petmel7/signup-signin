@@ -11,13 +11,10 @@ require_once __DIR__ . '/actions/helpers.php';
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 
-    <!-- <script src="js/display-friends.js"></script> -->
-    <script>
+    <!-- <script>
         const friendsForm = document.getElementById('friendsForm');
-        // friendsForm.addEventListener('submit', displayFriends);
 
-        async function displayFriends(event) {
-            event.preventDefault();
+        async function displayFriends() {
 
             try {
                 const response = await fetch('hack/actions/friends.php', {
@@ -49,7 +46,9 @@ require_once __DIR__ . '/actions/helpers.php';
         }
 
         displayFriends();
-    </script>
+    </script> -->
+
+    <script src="js/display-friends.js"></script>
 
 </body>
 

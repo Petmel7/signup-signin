@@ -55,35 +55,17 @@ $user = currentUser();
         </form>
     </div>
 
-    <!-- <script src="js/display-friends.js"></script> -->
-
-    <!-- Додайте цей скрипт в ваш HTML-код home.php -->
-    <!-- <script>
+    <script>
         const friendsForm = document.getElementById('friendsForm');
 
-        async function displayFriends(event) {
-            event.preventDefault();
+        friendsForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Заборона звичайного подання форми
 
-            try {
-                const response = await fetch('hack/actions/friends.php', {
-                    method: 'POST'
-                });
+            displayFriends(); // Викликати функцію, яка відправляє AJAX-запит
+        });
+    </script>
 
-                if (response.ok) {
-                    // Після успішного запиту, перенаправте користувача на сторінку friends-list.php
-                    window.location.href = 'friends-list.php';
-                } else {
-                    throw new Error('Network response was not ok.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Помилка');
-            }
-        }
-
-        friendsForm.addEventListener('submit', displayFriends);
-    </script> -->
-
+    <script src="js/display-friends.js"></script>
 
     <script src="index.js"></script>
 </body>
