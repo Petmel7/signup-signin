@@ -151,6 +151,75 @@ function getLoggedInUsername(): string|null
     return isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
 }
 
+// function handleGetRequest($loggedInUsername)
+// {
+//     try {
+//         // Отримуємо з'єднання з базою даних
+//         $conn = getPDO();
+
+//         // Ваш SQL-запит для отримання даних з бази даних
+//         $sql = "SELECT name, avatar FROM users WHERE name <> ?";
+
+//         // Використовуємо подготовлений запит
+//         $stmt = $conn->prepare($sql);
+//         $stmt->execute([$loggedInUsername]);
+
+//         // Отримуємо всі рядки разом
+//         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         if ($users) {
+//             header('Content-Type: application/json');
+//             echo json_encode($users);
+//         } else {
+//             echo json_encode(['error' => 'No users found.']);
+//         }
+//     } catch (PDOException $e) {
+//         // Обробка помилок бази даних
+//         echo json_encode(['error' => $e->getMessage()]);
+//     } finally {
+//         // Закриваємо з'єднання з базою даних у будь-якому випадку
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
+// }
+
+// function handleGetRequest($loggedInUsername)
+// {
+//     try {
+//         // Отримуємо з'єднання з базою даних
+//         $conn = getPDO();
+
+//         // Ваш SQL-запит для отримання даних з бази даних
+//         $sql = "SELECT name, avatar FROM users WHERE name <> ?";
+
+//         // Використовуємо подготовлений запит
+//         $stmt = $conn->prepare($sql);
+//         $stmt->execute([$loggedInUsername]);
+
+//         // Отримуємо всі рядки разом
+//         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         return $users;
+//     } catch (PDOException $e) {
+//         // Обробка помилок бази даних
+//         return ['error' => $e->getMessage()];
+//     } finally {
+//         // Закриваємо з'єднання з базою даних у будь-якому випадку
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
+// }
+
+// // Виведення результату поза функцією
+// header('Content-Type: application/json');
+// echo json_encode(handleGetRequest(getLoggedInUsername()));
+
+
+
+
+
 function handleGetRequest($loggedInUsername)
 {
     try {
@@ -167,15 +236,10 @@ function handleGetRequest($loggedInUsername)
         // Отримуємо всі рядки разом
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($users) {
-            header('Content-Type: application/json');
-            echo json_encode($users);
-        } else {
-            echo json_encode(['error' => 'No users found.']);
-        }
+        return $users;
     } catch (PDOException $e) {
         // Обробка помилок бази даних
-        echo json_encode(['error' => $e->getMessage()]);
+        return ['error' => $e->getMessage()];
     } finally {
         // Закриваємо з'єднання з базою даних у будь-якому випадку
         if ($conn !== null) {
@@ -183,5 +247,11 @@ function handleGetRequest($loggedInUsername)
         }
     }
 }
+
+
+// Виведення результату поза функцією
+// header('Content-Type: application/json');
+// echo json_encode(handleGetRequest(getLoggedInUsername()));
+
 
 // var_dump($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;

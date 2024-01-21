@@ -412,8 +412,16 @@ span {
     color: #fff;
 }
 
+.friend-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
 .friend-list__li {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .friend-list__img {

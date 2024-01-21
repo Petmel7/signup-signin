@@ -45,29 +45,18 @@ $user = currentUser();
         <h1 class="account-title"><?php echo $user['name']; ?></h1>
 
         <form id="friendsForm" action="hack/actions/friends.php" method="post">
-            <button class="friends" type="submit">Search friends</button>
+            <button class="friends" type="button" onclick="searchFriends()">Search friends</button>
         </form>
 
-        <!-- <ul class="friend-list" id="friendsDataContainer"></ul> -->
-
-        <form action="hack/actions/logout.php" method="post">
-            <button class="account-button" type="submit">Logout</button>
+        <form action=" hack/actions/logout.php" method="post">
+            <button class="account-button" type="button">Logout</button>
         </form>
     </div>
 
-    <script>
-        const friendsForm = document.getElementById('friendsForm');
-
-        friendsForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Заборона звичайного подання форми
-
-            displayFriends(); // Викликати функцію, яка відправляє AJAX-запит
-        });
-    </script>
-
-    <script src="js/display-friends.js"></script>
-
+    <script src="js/search-friends.js"></script>
     <script src="index.js"></script>
 </body>
 
 </html>
+
+<!-- onclick="searchFriends()" -->
