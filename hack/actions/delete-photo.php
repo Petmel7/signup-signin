@@ -6,10 +6,6 @@ if (isset($_SESSION['user']['id'])) {
 
     $userId = $_SESSION['user']['id'];
 
-    // Ваш код для видалення поточного фото (наприклад, видалення з бази даних або файлу)
-    // ...
-
-    // Заміна на фото за замовчуванням
     $defaultImagePath = 'uploads/avatar_4367658739.jpg'; // Замініть це значення на ваш шлях за замовчуванням
 
     $updateQuery = "UPDATE users SET avatar = '$defaultImagePath' WHERE id = $userId";

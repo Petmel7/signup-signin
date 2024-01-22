@@ -1,10 +1,42 @@
-function searchFriends() {
-    // Отримати елемент форми
-    let form = document.getElementById('friendsForm');
+let timer;
 
-    // Здійснити відправку форми
-    form.submit();
+        async function searchFriends() {
+            clearTimeout(timer);
 
-    // Перейти на іншу сторінку (зараз відбудеться після відправки форми)
-    window.location.href = 'index.php?page=friends-list';
-}
+            timer = setTimeout(async () => {
+                const searchInput = document.getElementById('searchInput').value;
+                const friendsContainer = document.getElementById('friendsDataContainer');
+
+                try {
+                    const response = await fetch('hack/actions/search-friends.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: searchInput
+                        }),
+                    });
+
+                    if (response.ok) {
+                        const friends = await response.json();
+                        friendsContainer.innerHTML = ''; // Очищаємо контейнер перед виведенням нових результатів
+
+                        friends.forEach(friend => {
+                            friendsContainer.innerHTML += `
+                            <li class="friend-list__li">
+                                <a href='index.php?page=user&username=${encodeURIComponent(friend.name)}'>
+                                    <img class="friend-list__img" src='hack/${friend.avatar}' alt='${friend.name}'>
+                                    <p class="friend-list__name">${friend.name}</p>
+                                </a>
+                            </li>`;
+                        });
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Помилка');
+                }
+            }, 300); // Затримка перед викликом пошуку (зменшення кількості запитів)
+        }

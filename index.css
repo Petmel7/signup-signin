@@ -372,28 +372,10 @@ span {
     cursor: pointer;
 }
 
-/* .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.friends {
-    margin-bottom: 20px;
-}
 
-.friends-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.friends-link:not(:last-child) {
-    margin-right: 50px;
-} */
+
 
 .friends {
     margin-bottom: 20px;
@@ -434,5 +416,24 @@ span {
 
 .friend-list__name {
     font-weight: bold;
+}
+
+
+.search-friend {
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.search-friend__input {
+    width: 100%;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    padding: 8px;
+}
+
+.search-friend__input:focus {
+    outline: 1px solid #68e2e4;
 }
 

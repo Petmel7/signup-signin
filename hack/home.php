@@ -45,7 +45,7 @@ $user = currentUser();
         <h1 class="account-title"><?php echo $user['name']; ?></h1>
 
         <form id="friendsForm" action="hack/actions/friends.php" method="post">
-            <button class="friends" type="button" onclick="searchFriends()">Search friends</button>
+            <button class="friends" type="button" onclick="forwarding()">Search friends</button>
         </form>
 
         <form action=" hack/actions/logout.php" method="post">
@@ -53,8 +53,9 @@ $user = currentUser();
         </form>
     </div>
 
-    <script src="js/search-friends.js"></script>
-    <script src="index.js"></script>
+    <script src="js/forwarding.js"></script>
+    <script src="js/photo-replacement.js"></script>
+    <script src="js/delete-photo.js"></script>
 </body>
 
 </html>

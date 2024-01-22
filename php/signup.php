@@ -26,7 +26,6 @@ if (!filter_var($email, filter: FILTER_VALIDATE_EMAIL)) {
 
 $avatar = $_FILES['avatar'] ?? null;
 
-// Перевірка наявності файлу і його розмір
 if (!empty($avatar) && $avatar['size'] > 0) {
     $types = ['image/jpeg', 'image/png'];
 
@@ -38,13 +37,12 @@ if (!empty($avatar) && $avatar['size'] > 0) {
         addValidationError(fieldName: 'avatar', message: 'Файл повинен бути менше одного мб!');
     }
 
-    // Якщо валідація успішна, завантажуємо файл
     if (!hasValidationError(fieldName: 'avatar')) {
         $avatarPath = uploadFile($avatar, prefix: 'avatar');
     }
 } else {
-    // Якщо файл не обрано, встановлюємо значення за замовчуванням
-    $avatarPath = 'uploads/avatar_4367658739.jpg'; // Замініть це значення на ваш шлях за замовчуванням
+
+    $avatarPath = 'uploads/avatar_4367658739.jpg';
 }
 
 if (empty($password)) {
