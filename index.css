@@ -437,3 +437,12 @@ span {
     outline: 1px solid #68e2e4;
 }
 
+#subscription-buttons {
+    text-align: center;
+}
+
+#unsubscribeButton {
+    display: none;
+    background-color: #c82333;
+}
+

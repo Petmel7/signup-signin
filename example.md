@@ -30,3 +30,121 @@
 Додайте зручний інтерфейс для перегляду підписок та підписчиків на сторінці користувача.
 Виводьте зміст, який дозволяє користувачеві взаємодіяти з підписками (наприклад, перегляд новин від підписаних користувачів).
 Нехай цей загальний план послужить вам основою для подальшої розробки вашого функціоналу підписки.
+
+//========================================================
+створи мені кнопку підписки та відписки на користувача має бути оновлення інтерфейсу користувача в реальному часі, показуючи зміни в списку підписчиків та підписок.
+
+Не додається підписка в базу даних
+
+<!-- ЗБЕРЕЖЕННЯ КНОПОК БЕЗ ЛОКАЛСТОРЕДЖ -->
+
+<!-- <script>
+        // Функція для зміни стану кнопок
+        function updateButtons(isSubscribed) {
+            const subscribeButton = document.getElementById('subscribeButton');
+            const unsubscribeButton = document.getElementById('unsubscribeButton');
+
+            if (isSubscribed) {
+                subscribeButton.style.display = 'none';
+                unsubscribeButton.style.display = 'block';
+            } else {
+                unsubscribeButton.style.display = 'none';
+                subscribeButton.style.display = 'block';
+            }
+        }
+
+        // Функція для підписки на користувача
+        async function subscribe(userId) {
+            try {
+                const response = await fetch('hack/subscription/add_subscription.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        subscriber_id: loggedInUserId,
+                        target_user_id: userId
+                    }),
+                });
+
+                if (response.ok) {
+                    // Оновити інтерфейс
+                    updateButtons(true);
+                } else {
+                    alert('Failed to subscribe');
+                }
+            } catch (error) {
+                console.log(error);
+                alert('Error in fetch request');
+            }
+        }
+
+        // Функція для відписки від користувача
+        async function unsubscribe(userId) {
+            try {
+                const response = await fetch('hack/subscription/remove_subscription.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        subscriber_id: loggedInUserId,
+                        target_user_id: userId
+                    }),
+                });
+
+                if (response.ok) {
+                    // Оновити інтерфейс
+                    updateButtons(false);
+                } else {
+                    alert('Failed to unsubscribe');
+                }
+            } catch (error) {
+                console.log(error);
+                alert('Error in fetch request');
+            }
+        }
+
+        // Перевірка і встановлення стану при завантаженні сторінки
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Отримати інформацію про підписки поточного користувача
+            const currentUserSubscriptions = await getCurrentUserSubscriptions();
+
+            console.log('currentUserSubscriptions', currentUserSubscriptions);
+
+            // Перевірка і встановлення стану кнопок на основі інформації від сервера
+            const userId = loggedInUserId;
+
+            console.log('userId', userId);
+            console.log('loggedInUserId', loggedInUserId);
+
+            const isSubscribed = currentUserSubscriptions.some(user => user.id === userId);
+            updateButtons(isSubscribed);
+        });
+
+        // Функція для отримання інформації про підписки поточного користувача
+        async function getCurrentUserSubscriptions() {
+            try {
+                const response = await fetch('hack/subscription/get_subscriptions.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: loggedInUserId,
+                    }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    return result || [];
+                } else {
+                    console.error('Failed to fetch user subscriptions');
+                    return [];
+                }
+            } catch (error) {
+                console.error('Error in fetch request', error);
+                return [];
+            }
+        }
+    </script> -->

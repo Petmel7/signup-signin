@@ -18,12 +18,6 @@ if (isset($data['user_id'])) {
     echo json_encode(['error' => 'Invalid request']);
 }
 
-
-
-
-
-
-
 function getSubscriptions($user_id)
 {
     try {
