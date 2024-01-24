@@ -19,3 +19,25 @@ if (isset($data['name']) && isset($_SESSION['user']['name'])) {
     // Обробка помилок, якщо не отримано ім'я з AJAX-запиту або користувач не авторизований
     echo json_encode(['error' => 'Invalid request']);
 }
+
+function searchFriendsByName($name, $loggedInUsername)
+{
+    try {
+        $conn = getPDO();
+        $sql = "SELECT name, avatar FROM users WHERE name LIKE :search AND name <> :loggedInUsername";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':search', "%{$name}%", PDO::PARAM_STR);
+        $stmt->bindValue(':loggedInUsername', $loggedInUsername, PDO::PARAM_STR);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    } catch (PDOException $e) {
+
+        return ['error' => $e->getMessage()];
+    } finally {
+        if ($conn !== null) {
+            $conn = null;
+        }
+    }
+}

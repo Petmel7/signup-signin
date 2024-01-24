@@ -49,7 +49,7 @@ $user = currentUser();
         </form>
 
         <form action=" hack/actions/logout.php" method="post">
-            <button class="account-button" type="button">Logout</button>
+            <button class="account-button" type="submit">Logout</button>
         </form>
     </div>
 

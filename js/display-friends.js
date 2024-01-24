@@ -8,9 +8,9 @@ async function displayFriends() {
         });
 
         if (response.ok) {
-            const friendsText = await response.text(); // Отримати текстове представлення відповіді
+            const friendsText = await response.text();
 
-            const friends = JSON.parse(friendsText); // Парсити текст як JSON
+            const friends = JSON.parse(friendsText);
             const friendsContainer = document.getElementById('friendsDataContainer');
             friendsContainer.innerHTML = '';
 

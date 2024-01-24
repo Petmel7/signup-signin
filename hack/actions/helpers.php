@@ -3,7 +3,6 @@
 session_start();
 
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/../../monolog-config.php';
 
 function getPDO(): PDO
 {
@@ -29,7 +28,6 @@ function hasValidationError(string $fieldName): bool
 {
     return isset($_SESSION['validation'][$fieldName]);
 }
-
 
 function validationErrorAttr(string $fieldName): string
 {
@@ -165,44 +163,23 @@ function getLoggedInUsername(): string|null
     return isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
 }
 
-function handleGetRequest($loggedInUsername)
+function getSubscriptions($user_id)
 {
     try {
         $conn = getPDO();
 
-        $sql = "SELECT name, avatar FROM users WHERE name <> ?";
-
+        // Отримати список користувачів, на які підписаний конкретний користувач
+        $sql = "SELECT users.* FROM users
+                INNER JOIN subscriptions ON users.id = subscriptions.target_user_id
+                WHERE subscriptions.subscriber_id = :user_id";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$loggedInUsername]);
-
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $users;
-    } catch (PDOException $e) {
-
-        return ['error' => $e->getMessage()];
-    } finally {
-
-        if ($conn !== null) {
-            $conn = null;
-        }
-    }
-}
-
-function searchFriendsByName($name, $loggedInUsername)
-{
-    try {
-        $conn = getPDO();
-        $sql = "SELECT name, avatar FROM users WHERE name LIKE :search AND name <> :loggedInUsername";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':search', "%{$name}%", PDO::PARAM_STR);
-        $stmt->bindValue(':loggedInUsername', $loggedInUsername, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     } catch (PDOException $e) {
-
+        // Обробка помилок бази даних
         return ['error' => $e->getMessage()];
     } finally {
         if ($conn !== null) {
