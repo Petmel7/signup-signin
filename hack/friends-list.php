@@ -1,18 +1,12 @@
 <?php
 require_once __DIR__ . '/actions/helpers.php';
 
-// $loggedInUsername = getLoggedInUsername();
-// $friends = getSubscriptions($loggedInUsername);
-
-// header('Content-Type: application/json');
-// echo json_encode($friends);
-
-if (isset($_GET['username'])) {
-    $username = $_GET['username'];
-    $userData = getUserDataByUsername($username);
-    $loggedInUserId = currentUserId();
-}
-
+// if (isset($_GET['username'])) {
+//     $username = $_GET['username'];
+//     $userData = getUserDataByUsername($username);
+//     $loggedInUserId = currentUserId();
+// }
+// var_dump('frieands-list $loggedInUserId', $loggedInUserId);
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +22,10 @@ if (isset($_GET['username'])) {
 
     <!-- <script>
         let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
+        console.log('phploggedInUserId', loggedInUserId);
     </script> -->
 
-    <!-- <form action="hack/subscription/get_subscriptions.php" method="post" id="myFriendsForm"> -->
-    <button type="button" onclick="getFriendsData()">My friends</button>
-    <!-- </form> -->
-
+    <button type="button" onclick="getFriendsData(loggedInUserId)">My friends</button>
 
     <ul id="myFriendsDataContainer"></ul>
 
@@ -43,8 +35,8 @@ if (isset($_GET['username'])) {
     <script src="js/search-friends.js"></script>
 
     <script>
-        async function getFriendsData(event) {
-            event.preventDefault();
+        async function getFriendsData(loggedInUserId) {
+            // event.preventDefault();
             try {
                 const response = await fetch('hack/subscription/get_subscriptions.php', {
                     method: 'POST',
@@ -55,6 +47,8 @@ if (isset($_GET['username'])) {
                         user_id: loggedInUserId,
                     }),
                 });
+
+                console.log('loggedInUserId', loggedInUserId);
 
                 if (response.ok) {
                     const friends = await response.json();
@@ -85,29 +79,6 @@ if (isset($_GET['username'])) {
         }
     </script>
 
-    <!-- <script>
-        
-        document.addEventListener('DOMContentLoaded', async function() {
-            const friendsDataContainer = document.getElementById('myFriendsDataContainer');
-            const myFriendsForm = document.getElementById('myFriendsForm');
-
-            myFriendsForm.addEventListener('submit', async function(event) {
-                event.preventDefault();
-                const friends = await getFriendsData();
-
-                // Видалити попередні елементи з контейнера
-                friendsDataContainer.innerHTML = '';
-
-                // Відображення друзів на сторінці
-                friends.forEach(friend => {
-                    const friendItem = document.createElement('li');
-                    friendItem.textContent = friend.name; // Тут можна використати інші властивості з об'єкта друга (наприклад, avatar)
-
-                    friendsDataContainer.appendChild(friendItem);
-                });
-            });
-        });
-    </script> -->
 </body>
 
 </html>

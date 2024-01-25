@@ -5,6 +5,8 @@ if (isset($_GET['username'])) {
     $username = $_GET['username'];
     $userData = getUserDataByUsername($username);
     $loggedInUserId = currentUserId();
+
+    // var_dump('user-page $loggedInUserId', $loggedInUserId);
 }
 
 ?>
