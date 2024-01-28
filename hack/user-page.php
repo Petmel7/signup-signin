@@ -5,10 +5,7 @@ if (isset($_GET['username'])) {
     $username = $_GET['username'];
     $userData = getUserDataByUsername($username);
     $loggedInUserId = currentUserId();
-
-    // var_dump('user-page $loggedInUserId', $loggedInUserId);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -16,23 +13,29 @@ if (isset($_GET['username'])) {
 
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
+<!-- Передача loggedInUserId в JavaScript -->
+<script>
+    let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
+</script>
+
 <body>
     <div class="account">
         <img class="account-img" src="hack/<?php echo $userData['avatar']; ?>" width="200px" height="200px" alt="<?php echo $userData['name']; ?>">
         <h1 class="account-title"><?php echo $userData['name']; ?></h1>
 
-        <!-- Передача loggedInUserId в JavaScript -->
-        <script>
-            let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
-        </script>
-
-        <div id="subscription-buttons">
-            <button id="subscribeButton" onclick="subscribe(<?php echo $userData['id']; ?>)">Підписатися</button>
-            <button id="unsubscribeButton" onclick="unsubscribe(<?php echo $userData['id']; ?>)">Відписатися</button>
+        <div class="subscription" id="subscription-buttons">
+            <button class="subscription-buttons" id="subscribeButton" onclick="subscribe(<?php echo $userData['id']; ?>)">Підписатися</button>
+            <button class="subscription-buttons" id="unsubscribeButton" onclick="unsubscribe(<?php echo $userData['id']; ?>)">Відписатися</button>
         </div>
+
     </div>
 
     <script src="js/subscribers.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            getCurrentUserSubscriptions(<?php echo $userData['id']; ?>);
+        });
+    </script>
 
 </body>
 

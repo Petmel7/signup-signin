@@ -437,12 +437,36 @@ span {
     outline: 1px solid #68e2e4;
 }
 
-#subscription-buttons {
-    text-align: center;
+.subscription {
+    display: flex;
+    justify-content: center;
+}
+
+.subscription-buttons {
+    border: none;
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#subscribeButton {
+    color: #000;
+    background-color: silver;
+}
+
+#subscribeButton:hover {
+    background-color: rgb(112, 112, 112);
+    color: #fff;
 }
 
 #unsubscribeButton {
     display: none;
     background-color: #c82333;
+    text-align: center;
+    color: #fff;
+}
+
+#unsubscribeButton:hover {
+    background-color: #861924;
 }
 

@@ -1,33 +1,27 @@
 <?php
 require_once __DIR__ . '/actions/helpers.php';
 
-// if (isset($_GET['username'])) {
-//     $username = $_GET['username'];
-//     $userData = getUserDataByUsername($username);
-//     $loggedInUserId = currentUserId();
-// }
-// var_dump('frieands-list $loggedInUserId', $loggedInUserId);
+$loggedInUserId = currentUserId();
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include_once __DIR__ . '/../components/head.php'; ?>
+<script>
+    let loggedInUserId = <?php echo isset($loggedInUserId) ? json_encode($loggedInUserId) : 'null'; ?>;
+    console.log('loggedInUserId', loggedInUserId);
+</script>
 
 <body>
-
     <form class="search-friend" id="searchForm">
         <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="searchFriends()">
     </form>
 
-    <!-- <script>
-        let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
-        console.log('phploggedInUserId', loggedInUserId);
-    </script> -->
-
     <button type="button" onclick="getFriendsData(loggedInUserId)">My friends</button>
 
-    <ul id="myFriendsDataContainer"></ul>
+    <!-- <ul id="myFriendsDataContainer"></ul> -->
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 
@@ -36,7 +30,6 @@ require_once __DIR__ . '/actions/helpers.php';
 
     <script>
         async function getFriendsData(loggedInUserId) {
-            // event.preventDefault();
             try {
                 const response = await fetch('hack/subscription/get_subscriptions.php', {
                     method: 'POST',
@@ -44,7 +37,7 @@ require_once __DIR__ . '/actions/helpers.php';
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        user_id: loggedInUserId,
+                        user_id: loggedInUserId
                     }),
                 });
 
@@ -54,8 +47,7 @@ require_once __DIR__ . '/actions/helpers.php';
                     const friends = await response.json();
                     console.log('friends', friends);
                     const friendsDataContainer = document.getElementById('friendsDataContainer');
-
-                    friendsDataContainer.innerHTML = '';
+                    // friendsDataContainer.innerHTML = '';
 
                     const friendsHTML = friends.map(friend => `
                         <li class="friend-list__li">
@@ -64,9 +56,9 @@ require_once __DIR__ . '/actions/helpers.php';
                                 <p class="friend-list__name">${friend.name}</p>
                             </a>
                         </li>
-                        `).join('');
+                    `).join('');
 
-                    friendsDataContainer.innerHTML = friendsHTML;
+                    friendsDataContainer.insertAdjacentHTML('beforeend', friendsHTML);
                     return friends || [];
                 } else {
                     console.error('Failed to fetch user subscriptions');
