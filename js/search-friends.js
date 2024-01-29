@@ -20,8 +20,7 @@ let timer;
 
                     if (response.ok) {
                         const friends = await response.json();
-                        friendsContainer.innerHTML = ''; // Очищаємо контейнер перед виведенням нових результатів
-
+                        friendsContainer.innerHTML = '';
                         friends.forEach(friend => {
                             friendsContainer.innerHTML += `
                             <li class="friend-list__li">
@@ -38,5 +37,5 @@ let timer;
                     console.error('Error:', error);
                     alert('Помилка');
                 }
-            }, 300); // Затримка перед викликом пошуку (зменшення кількості запитів)
+            }, 300);
         }

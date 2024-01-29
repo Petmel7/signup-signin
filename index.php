@@ -13,6 +13,15 @@ if (isset($_GET['page'])) {
     } elseif ($_GET['page'] === 'friends-list') {
         // Обробка сторінки списку друзів
         require './hack/friends-list.php';
+    } elseif ($_GET['page'] === 'my-friends-list') {
+        // Обробка сторінки списку друзів
+        require './hack/my-friends-list.php';
+    } elseif ($_GET['page'] === 'my-subscribers-list') {
+        // Обробка сторінки списку друзів
+        require './hack/my-subscribers-list.php';
+    } elseif ($_GET['page'] === 'his-friends-list') {
+        // Обробка сторінки списку друзів
+        require './hack/his-friends-list.php';
     } else {
         require './hack/signin-form.php';
     }

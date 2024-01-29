@@ -470,3 +470,26 @@ span {
     background-color: #861924;
 }
 
+
+/* My friends */
+.search-friend {
+    position: relative;
+}
+
+.my-friends__button {
+    position: absolute;
+    top: 40%;
+    right: 0px;
+    transform: translateY(-50%);
+    border: none;
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 110px;
+}
+
+.my-friends__button:hover {
+    background-color: #ccc;
+    color: #fff;
+}
+

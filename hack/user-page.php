@@ -13,7 +13,6 @@ if (isset($_GET['username'])) {
 
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
-<!-- Передача loggedInUserId в JavaScript -->
 <script>
     let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
 </script>
@@ -28,9 +27,12 @@ if (isset($_GET['username'])) {
             <button class="subscription-buttons" id="unsubscribeButton" onclick="unsubscribe(<?php echo $userData['id']; ?>)">Відписатися</button>
         </div>
 
+        <button type="button" onclick="redirectionHisFriends()">His friends</button>
+
     </div>
 
     <script src="js/subscribers.js"></script>
+    <script src="js/forwarding.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             getCurrentUserSubscriptions(<?php echo $userData['id']; ?>);
