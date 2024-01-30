@@ -162,5 +162,3 @@ function getLoggedInUsername(): string|null
 {
     return isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
 }
-
-// var_dump($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
