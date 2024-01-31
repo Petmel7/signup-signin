@@ -1,19 +1,16 @@
 <?php
-
 require_once '../actions/helpers.php';
 
-// Отримати дані з AJAX-запиту
-$data = json_decode(file_get_contents('php://input'), true);
+// Отримати дані з запиту
+$user_id = $_GET['user_id'] ?? null;
 
-if (isset($data['user_id'])) {
-    $user_id = $data['user_id'];
-
+if ($user_id !== null) {
     // Викликати функцію для отримання списку підписок користувача з бази даних
-    $subscriptions = getSubscriptions($user_id);
+    $hisSubscribers = getSubscribers($user_id);
 
     // Вивести результат в форматі JSON
     header('Content-Type: application/json');
-    echo json_encode($subscriptions);
+    echo json_encode($hisSubscribers);
 } else {
     // Обробка помилок, якщо не отримано всі необхідні дані з AJAX-запиту
     echo json_encode(['error' => 'Invalid request']);

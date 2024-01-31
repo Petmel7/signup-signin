@@ -22,9 +22,14 @@ if (isset($_GET['page'])) {
     } elseif ($_GET['page'] === 'his-friends-list') {
         // Обробка сторінки списку друзів
         require './hack/his-friends-list.php';
+    } elseif ($_GET['page'] === 'his-subscribers-list') {
+        // Обробка сторінки списку друзів
+        require './hack/his-subscribers-list.php';
     } else {
         require './hack/signin-form.php';
     }
 } else {
     require './hack/signin-form.php';
 }
+
+// his-subscribers-list

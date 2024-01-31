@@ -10,6 +10,10 @@ function redirectToMySubscribers() {
     window.location.href = 'index.php?page=my-subscribers-list';
 }
 
-function redirectionHisFriends() {
-    window.location.href = 'index.php?page=his-friends-list';
+function redirectionHisFriends(username) {
+    window.location.href = `index.php?page=his-friends-list&username=${encodeURIComponent(username)}`;
+}
+
+function redirectionHisSubscribers(username) {
+    window.location.href = `index.php?page=his-subscribers-list&username=${encodeURIComponent(username)}`;
 }

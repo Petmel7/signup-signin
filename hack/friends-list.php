@@ -16,6 +16,7 @@ require_once __DIR__ . '/actions/helpers.php';
     <ul class="friend-list" id="friendsDataContainer"></ul>
 
     <script src="js/display-friends.js"></script>
+    <script src="js/generateFriendListItem.js"></script>
     <script src="js/search-friends.js"></script>
     <script src="js/forwarding.js"></script>
 </body>

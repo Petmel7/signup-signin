@@ -27,7 +27,7 @@ if (isset($_GET['username'])) {
             <button class="subscription-buttons" id="unsubscribeButton" onclick="unsubscribe(<?php echo $userData['id']; ?>)">Відписатися</button>
         </div>
 
-        <button type="button" onclick="redirectionHisFriends()">His friends</button>
+        <button type="button" onclick="redirectionHisFriends('<?php echo $username; ?>')">His friends</button>
 
     </div>
 

@@ -1,6 +1,6 @@
-async function getFriendsData(loggedInUserId) {
+async function mySubscribersList(loggedInUserId) {
     try {
-        const response = await fetch('hack/subscription/get_subscriptions.php', {
+        const response = await fetch('hack/subscription/get_subscribers.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,4 +27,4 @@ async function getFriendsData(loggedInUserId) {
         return [];
     }
 }
-getFriendsData(loggedInUserId);
+mySubscribersList(loggedInUserId);

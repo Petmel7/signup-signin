@@ -35,6 +35,59 @@
 
 Зробити можливість перегляду підписок другого користувача
 
+В мене така ось проблема
+
+<?php
+require_once __DIR__ . '/actions/helpers.php';
+
+if (isset($_GET['username'])) {
+    $username = $_GET['username'];
+    $userData = getUserDataByUsername($username);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<?php include_once __DIR__ . '/../components/head.php'; ?>
+
+<body>
+    <form class="search-friend" id="searchForm">
+        <input class="search-friend__input" type="text" id="mySearchInput" name="mySearchInput" placeholder="Search" required oninput="mySearchFriends()">
+    </form>
+
+    <ul id="hisFriendsDataContainer"></ul>
+
+    <script>
+        async function hisGetFriendsData(hisUserId) {
+            try {
+                const response = await fetch(`hack/subscription/get_his_subscriptions.php?user_id=${hisUserId}`);
+
+                if (response.ok) {
+                    const hisSubscriptions = await response.json();
+                    // Обробка отриманих підписок, наприклад, вивід на сторінку
+                    console.log(hisSubscriptions);
+                } else {
+                    console.error('Failed to fetch user subscriptions');
+                }
+            } catch (error) {
+                console.error('Error in fetch request', error);
+            }
+        }
+
+        hisGetFriendsData(<?php echo $userData['id']; ?>)
+    </script>
+
+    такі помилки
+    <b>Warning</b>:  Undefined variable $userData in <b>C:\xampp\htdocs\signup-signin\hack\his-friends-list.php</b> on line <b>84</b><br />
+
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type null in <b>C:\xampp\htdocs\signup-signin\hack\his-friends-list.php</b> on line <b>84</b><br />
+
+</body>
+
+</html>
+
 <!-- ЗБЕРЕЖЕННЯ КНОПОК БЕЗ ЛОКАЛСТОРЕДЖ -->
 
 <!-- <script>

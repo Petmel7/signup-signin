@@ -162,3 +162,55 @@ function getLoggedInUsername(): string|null
 {
     return isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
 }
+
+function getSubscriptions($user_id)
+{
+    try {
+        $conn = getPDO();
+
+        // Отримати список користувачів, на які підписаний конкретний користувач
+        $sql = "SELECT users.* FROM users
+                INNER JOIN subscriptions ON users.id = subscriptions.target_user_id
+                WHERE subscriptions.subscriber_id = :user_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Вивести результат в форматі JSON
+        return $results;
+    } catch (PDOException $e) {
+        // Обробка помилок бази даних
+        return ['error' => $e->getMessage()];
+    } finally {
+        if ($conn !== null) {
+            $conn = null;
+        }
+    }
+}
+
+function getSubscribers($user_id)
+{
+    try {
+        $conn = getPDO();
+
+        // Отримати список підписників для конкретного користувача
+        $sql = "SELECT users.* FROM users
+                INNER JOIN subscriptions ON users.id = subscriptions.subscriber_id
+                WHERE subscriptions.target_user_id = :user_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (PDOException $e) {
+        // Обробка помилок бази даних
+        return ['error' => $e->getMessage()];
+    } finally {
+        if ($conn !== null) {
+            $conn = null;
+        }
+    }
+}
