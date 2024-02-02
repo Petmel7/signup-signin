@@ -14,7 +14,7 @@ if (isset($_GET['username'])) {
 
 <body>
     <form class="search-friend" id="searchForm">
-        <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="mySearchFriends()">
+        <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="hisSearchFriends(<?php echo $userData['id']; ?>)">
         <button class="subscription-buttons" type="button" onclick="redirectionHisSubscribers('<?php echo $username; ?>')">His subscribers</button>
     </form>
 
@@ -26,8 +26,10 @@ if (isset($_GET['username'])) {
     <script>
         hisGetFriendsData(<?php echo $userData['id']; ?>);
     </script>
-    <script src="js/search-friends.js"></script>
-    <!-- <script src="js/mySearchFriends.js"></script> -->
+    <script src="js/hisSearchFriends.js"></script>
+    <script src="js/generateGetElementById.js"></script>
+    <script src="js/generateSearchListItem.js"></script>
+
 </body>
 
 </html>

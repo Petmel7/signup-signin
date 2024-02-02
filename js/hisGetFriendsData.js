@@ -1,7 +1,6 @@
 async function hisGetFriendsData(hisUserId) {
     try {
         const response = await fetch(`hack/subscription/get_his_subscriptions.php?user_id=${hisUserId}`);
-        console.log('hisUserId', hisUserId);
 
         if (response.ok) {
             const friends = await response.json();
@@ -14,4 +13,5 @@ async function hisGetFriendsData(hisUserId) {
     } catch (error) {
         console.error('Error in fetch request', error);
     }
+
 }

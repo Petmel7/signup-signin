@@ -493,3 +493,21 @@ span {
     background-color: #ccc;
     color: #fff;
 }
+
+/* background: linear-gradient(to right, #68e2e4, #5545f4); */
+.message-textarea {
+    max-height: 20px;
+}
+
+.message-button {
+    border: none;
+    cursor: pointer;
+    padding: 10px 40px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #68e2e4, #5545f4);
+}
+
+.message-button:hover {
+    color: #fff;
+    background: linear-gradient(to right, #5545f4, #68e2e4);
+}
