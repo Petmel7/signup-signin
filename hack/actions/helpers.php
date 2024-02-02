@@ -204,6 +204,7 @@ function getSubscribers($user_id)
         $stmt->execute();
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $results;
     } catch (PDOException $e) {
         // Обробка помилок бази даних

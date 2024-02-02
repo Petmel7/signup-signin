@@ -86,7 +86,7 @@ span {
     cursor: pointer;
     background: linear-gradient(to right, #68e2e4, #5545f4);
     transition: background 0.3s ease;
-    
+
 }
 
 /* Змінити стилі кнопки при наведенні */
@@ -440,6 +440,7 @@ span {
 .subscription {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .subscription-buttons {
@@ -492,4 +493,3 @@ span {
     background-color: #ccc;
     color: #fff;
 }
-

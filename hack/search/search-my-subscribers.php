@@ -1,6 +1,5 @@
 <?php
-
-require_once 'helpers.php';
+require_once '../actions/helpers.php';
 
 // Отримати дані з AJAX-запиту
 $data = json_decode(file_get_contents('php://input'), true);
@@ -10,7 +9,7 @@ if (isset($data['name']) && isset($_SESSION['user']['name'])) {
     $loggedInUsername = $_SESSION['user']['name'];
 
     // Викликати функцію для пошуку в базі даних
-    $results = searchFriendsByName($name, $loggedInUsername);
+    $results = searchMySubscribersByName($name, $loggedInUsername);
 
     // Вивести результати у форматі JSON
     header('Content-Type: application/json');
@@ -20,20 +19,26 @@ if (isset($data['name']) && isset($_SESSION['user']['name'])) {
     echo json_encode(['error' => 'Invalid request']);
 }
 
-function searchFriendsByName($name, $loggedInUsername)
+// Пошук ваших підписників
+function searchMySubscribersByName($name, $loggedInUsername)
 {
     try {
         $conn = getPDO();
-        $sql = "SELECT name, avatar FROM users WHERE name LIKE :search AND name <> :loggedInUsername";
+
+        $sql = "SELECT users.name, users.avatar FROM users
+        INNER JOIN subscriptions ON users.id = subscriptions.subscriber_id
+        WHERE users.name LIKE :search AND users.name <> :loggedInUsername
+        AND subscriptions.target_user_id = :loggedInUserId";
+
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':search', "%{$name}%", PDO::PARAM_STR);
         $stmt->bindValue(':loggedInUsername', $loggedInUsername, PDO::PARAM_STR);
+        $stmt->bindValue(':loggedInUserId', $_SESSION['user']['id'], PDO::PARAM_INT);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $results;
     } catch (PDOException $e) {
-
         return ['error' => $e->getMessage()];
     } finally {
         if ($conn !== null) {

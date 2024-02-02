@@ -19,6 +19,8 @@ require_once __DIR__ . '/actions/helpers.php';
     <script src="js/generateFriendListItem.js"></script>
     <script src="js/search-friends.js"></script>
     <script src="js/forwarding.js"></script>
+    <script src="js/generateSearchListItem.js"></script>
+    <script src="js/generateGetElementById.js"></script>
 </body>
 
 </html>

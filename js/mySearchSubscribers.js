@@ -1,49 +1,41 @@
-let timer;
 
-        async function mySearchSubscribers() {
-            clearTimeout(timer);
+async function mySearchSubscribers() {
+    clearTimeout(timer);
 
-            timer = setTimeout(async () => {
-                const mySearchSubscribersInput = document.getElementById('mySearchSubscribersInput').value;
-                const mySubscribersContainer = document.getElementById('mySubscribersContainer');
+    timer = setTimeout(async () => {
+        const { searchInput, friendsContainer } = generateGetElementById();
 
-                try {
-                    if (mySearchSubscribersInput.trim() === '') {
+        try {
 
-                        mySubscribersContainer.innerHTML = '';
-                        await mySubscribersList(loggedInUserId);
-                        return;
-                    }
+            if (searchInput.trim() === '') {
 
-                    const response = await fetch('hack/actions/search-friends.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            name: mySearchSubscribersInput
-                        }),
-                    });
+                friendsContainer.innerHTML = '';
+                await mySubscribersList(loggedInUserId);
+                return;
+            }
 
-                    if (response.ok) {
+            const response = await fetch('hack/search/search-my-subscribers.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: searchInput
+                }),
+            });
 
-                        const mySubscribers = await response.json();
-                        mySubscribersContainer.innerHTML = '';
-                        mySubscribers.forEach(mySubscriber => {
-                            mySubscribersContainer.innerHTML += `
-                            <li class="friend-list__li">
-                                <a href='index.php?page=user&username=${encodeURIComponent(mySubscriber.name)}'>
-                                    <img class="friend-list__img" src='hack/${mySubscriber.avatar}' alt='${mySubscriber.name}'>
-                                    <p class="friend-list__name">${mySubscriber.name}</p>
-                                </a>
-                            </li>`;
-                        });
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Помилка');
-                }
-            }, 300);
+            if (response.ok) {
+                const friends = await response.json();
+                friendsContainer.innerHTML = '';
+
+                generateSearchListItem(friends);
+
+            } else {
+                throw new Error('Network response was not ok.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Помилка');
         }
+    }, 300)
+};
