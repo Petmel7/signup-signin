@@ -27,9 +27,9 @@ if (isset($_GET['username'])) {
             <button class="subscription-buttons" id="unsubscribeButton" onclick="unsubscribe(<?php echo $userData['id']; ?>)">Unsubscribe</button>
         </div>
 
-        <button class="subscription-buttons" type="button" onclick="redirectionHisFriends('<?php echo $username; ?>')">His friends</button>
+        <button class="subscription-buttons" type="button" onclick="redirectionHisFriends(<?php echo $userData['id']; ?>)">His friends</button>
 
-        <ul id="messagesContainer"></ul>
+        <ul class="message-block" id="messagesContainer"></ul>
 
         <form>
             <label for="">
@@ -90,6 +90,82 @@ if (isset($_GET['username'])) {
     <script>
         const messagesContainer = document.getElementById('messagesContainer');
 
+        // async function loadMessages() {
+        //     try {
+        //         const response = await fetch('hack/messages/get_messages.php', {
+        //             method: 'GET',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //         });
+
+        //         if (response.ok) {
+        //             const messages = await response.json();
+
+        //             console.log('messages', messages);
+
+        //             const messagesHTML = messages.reverse().map(message => `
+        //                 <li class="message-li">
+        //                     <p>${message.message_text}</p>
+        //                     <button class="message-li__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+        //                 </li>
+        //             `).join('');
+
+        //             messagesContainer.innerHTML = messagesHTML;
+        //             // messagesContainer.insertAdjacentHTML('', messagesHTML);
+
+        //         } else {
+        //             console.error('Failed to fetch messages');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error in fetch request', error);
+        //     }
+        // }
+
+        // loadMessages();
+
+        // async function loadMessages() {
+        //     try {
+        //         const response = await fetch('hack/messages/get_messages.php', {
+        //             method: 'GET',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //         });
+
+        //         if (response.ok) {
+        //             const messages = await response.json();
+
+        //             console.log('messages', messages);
+
+        //             // Вивести кожне повідомлення та інформацію про користувача
+        //             for (const message of messages) {
+        //                 const user = await getUserInfo(message.sender_id);
+        //                 console.log('User Info:', user);
+
+        //                 const messageHTML = `
+        //                     <li>
+        //                         <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
+        //                             <div>
+        //                                 <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'>
+        //                                 <p class="">${user.name}</p>
+        //                             </div>
+        //                             <p class="message-a__text">${message.message_text}</p>
+        //                             <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+        //                         </a>
+        //                     </li>`;
+
+        //                 messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
+        //             }
+        //         } else {
+        //             console.error('Failed to fetch messages');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error in fetch request', error);
+        //     }
+        // }
+        // loadMessages();
+
         async function loadMessages() {
             try {
                 const response = await fetch('hack/messages/get_messages.php', {
@@ -104,16 +180,28 @@ if (isset($_GET['username'])) {
 
                     console.log('messages', messages);
 
-                    const messagesHTML = messages.reverse().map(message => `
-                        <li>
-                            <p>${message.message_text}</p>
-                            <button onclick="deleteComment(<?php echo $userData['id']; ?>)">Delete</button>
-                        </li>
-                    `).join('');
+                    // Очищення контейнера перед вставкою нових повідомлень
+                    messagesContainer.innerHTML = '';
 
-                    messagesContainer.innerHTML = messagesHTML;
-                    // messagesContainer.insertAdjacentHTML('', messagesHTML);
+                    // Вивести кожне повідомлення та інформацію про користувача
+                    for (const message of messages) {
+                        const user = await getUserInfo(message.sender_id);
+                        console.log('User Info:', user);
 
+                        const messageHTML = `
+                    <li>
+                        <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
+                            <div>
+                                <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'>
+                                <p class="">${user.name}</p>
+                            </div>
+                            <p class="message-a__text">${message.message_text}</p>
+                            <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+                        </a>
+                    </li>`;
+
+                        messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
+                    }
                 } else {
                     console.error('Failed to fetch messages');
                 }
@@ -121,44 +209,64 @@ if (isset($_GET['username'])) {
                 console.error('Error in fetch request', error);
             }
         }
-
         loadMessages();
+
+
+        async function getUserInfo(userId) {
+            try {
+                const userResponse = await fetch(`hack/messages/get_user_by_id.php?id=${userId}`);
+                if (userResponse.ok) {
+                    return await userResponse.json();
+
+                    console.log("userId", userId)
+                } else {
+                    console.error('Failed to fetch user info');
+                    return {};
+                }
+            } catch (error) {
+                console.error('Error in fetch request', error);
+                return {};
+            }
+        }
     </script>
 
     <script>
-        // Функція для видалення коментаря
-        async function deleteComment(commentId) {
+        // Функція для видалення повідомлення
+        async function deleteMessage(messageId, event) {
+            event.preventDefault();
             try {
-                const response = await fetch('hack/comments/delete_comment.php', {
+                const response = await fetch('hack/messages/delete_messages.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        comment_id: commentId,
+                        message_id: messageId
                     }),
                 });
 
-                console.log('commentId', commentId)
+                console.log('messageId', messageId);
 
-                if (response.ok) {
-                    const result = await response.json();
+                loadMessages();
 
-                    if (result.success) {
-                        // Виконати додаткові дії, якщо видалення пройшло успішно
-                        console.log('Comment deleted successfully');
-                    } else {
-                        console.error('Failed to delete comment');
-                    }
-                } else {
-                    console.error('Network response was not ok.');
-                }
             } catch (error) {
                 console.error('Error:', error);
             }
         }
     </script>
 
+
+
+
+
+    <!-- <li class="">
+        <a href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
+            <img class="" src='hack/${user.avatar}' alt='${user.name}'>
+            <p class="">${user.name}</p>
+            <p>${message.message_text}</p>
+            <button onclick="deleteMessage(${message.id}, event)">Delete</button>
+        </a>
+    </li>`; -->
 
 </body>
 

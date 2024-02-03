@@ -1,23 +1,26 @@
 <?php
+
 require_once '../actions/helpers.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Отримати дані з POST-запиту
-    $commentId = $_POST['comment_id'] ?? null;
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // Отримати дані з GET-запиту
+    $userId = $_GET['id'] ?? null;
 
-    if ($commentId !== null) {
+    if ($userId !== null) {
         try {
             $conn = getPDO();
 
-            // Викликати функцію для видалення коментаря з бази даних
-            $sql = "DELETE FROM comments WHERE id = :comment_id";
+            // Отримати інформацію про користувача за його ідентифікатором
+            $sql = "SELECT name, avatar FROM users WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':comment_id', $commentId, PDO::PARAM_INT);
+            $stmt->bindParam(1, $userId, PDO::PARAM_INT);
             $stmt->execute();
 
-            // Повернути успішний результат
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Повернути результат у форматі JSON
             header('Content-Type: application/json');
-            echo json_encode(['success' => true]);
+            echo json_encode($user);
         } catch (PDOException $e) {
             // Обробка помилок бази даних
             header('Content-Type: application/json');
@@ -28,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        // Обробка помилок, якщо не отримано ідентифікатор коментаря
+        // Обробка помилок, якщо не отримано ідентифікатор користувача
         header('Content-Type: application/json');
         echo json_encode(['error' => 'Invalid request']);
     }
 } else {
-    // Обробка помилок, якщо запит не є POST-запитом
+    // Обробка помилок, якщо запит не є GET-запитом
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Invalid request method']);
 }
