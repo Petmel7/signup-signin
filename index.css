@@ -502,7 +502,7 @@ span {
 .message-textarea {
     resize: none;
     overflow-y: hidden;
-    width: 95%;
+    width: 100%;
 }
 
 .message-button {
@@ -510,6 +510,7 @@ span {
     cursor: pointer;
     padding: 10px 40px;
     border-radius: 4px;
+    margin: 0 auto;
     background: linear-gradient(to right, #68e2e4, #5545f4);
 }
 
@@ -529,6 +530,11 @@ span {
 /* .message-li {
     
 } */
+
+.message-conteaner {
+    width: 400px;
+    margin: 0 auto;
+}
 
 .message-a {
     display: flex;

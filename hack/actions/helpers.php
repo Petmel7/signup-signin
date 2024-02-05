@@ -125,14 +125,18 @@ function currentUserId(): int|bool
     return $userId;
 }
 
-
-function getUserDataByUsername($username): array
+function getUserDataByUsername($username): ?array
 {
     $conn = getPDO();
 
     $stmt = $conn->prepare("SELECT * FROM users WHERE name = ?");
     $stmt->execute([$username]);
+
+    // Перевірка, чи існують дані для витягнення
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($userData === false) {
+        return null;
+    }
 
     return $userData;
 }
@@ -214,4 +218,16 @@ function getSubscribers($user_id)
             $conn = null;
         }
     }
+}
+
+function getMessagesByRecipient($recipientId)
+{
+    $conn = getPDO();
+
+    $stmt = $conn->prepare("SELECT * FROM messages WHERE recipient_id = ?");
+    $stmt->execute([$recipientId]);
+
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $messages;
 }

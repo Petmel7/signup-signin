@@ -25,6 +25,9 @@ if (isset($_GET['page'])) {
     } elseif ($_GET['page'] === 'his-subscribers-list') {
         // Обробка сторінки списку друзів
         require './hack/his-subscribers-list.php';
+    } elseif ($_GET['page'] === 'user-page-messages') {
+        // Обробка сторінки списку друзів
+        require './hack/user-page-messages.php';
     } else {
         require './hack/signin-form.php';
     }
@@ -32,4 +35,4 @@ if (isset($_GET['page'])) {
     require './hack/signin-form.php';
 }
 
-// his-subscribers-list
+// user - page - messages
