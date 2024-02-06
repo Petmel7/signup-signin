@@ -19,11 +19,6 @@ if (isset($data['subscriber_id']) && isset($data['target_user_id'])) {
     echo json_encode(['error' => 'Invalid request']);
 }
 
-
-
-
-
-
 function removeSubscription($subscriber_id, $target_user_id)
 {
     try {

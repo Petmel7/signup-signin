@@ -3,34 +3,27 @@ require_once __DIR__ . '/actions/helpers.php';
 
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
+    $userData = getUserDataByUsername($username);
     $loggedInUserId = currentUserId();
 
-    // var_dump("username", $username);
     // var_dump("loggedInUserId", $loggedInUserId);
-
-    // Отримання даних користувача
-    $userData = getUserDataByUsername($username);
-
     // var_dump("userData", $userData);
 
-    // Виведення повідомлень, якщо вони існують
-    if ($userData) {
-        // Отримання повідомлень для поточного користувача
-        $userMessages = getMessagesByRecipient($userData['id']);
+    // // Отримання повідомлень для користувача, чию сторінку переглядаємо
+    // $userMessages = getMessagesByRecipient($userData['id']);
 
-        var_dump("userMessages", $userMessages);
+    // var_dump("userMessages", $userMessages);
 
-        if ($userMessages) {
-            foreach ($userMessages as $message) {
-                echo "<p>{$message['message_text']}</p>";
-            }
-        } else {
-            echo "<p>No messages for this user.</p>";
-        }
-    } else {
-        echo "User not found.";
-    }
+    // // Виведення повідомлень, якщо вони існують
+    // if ($userMessages) {
+    //     foreach ($userMessages as $message) {
+    //         echo "<p>{$message['message_text']}</p>";
+    //     }
+    // } else {
+    //     echo "<p>No messages for this user.</p>";
+    // }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +33,7 @@ if (isset($_GET['username'])) {
 
 <script>
     let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
+    let username = <?php echo json_encode($username); ?>
 </script>
 
 <body>
@@ -92,11 +86,10 @@ if (isset($_GET['username'])) {
                     }),
                 });
 
-                console.log('recipientId', recipientId);
+                // console.log('recipientId', recipientId);
 
                 if (response.ok) {
-                    console.log('responseMessage', response);
-                    loadMessages();
+                    loadMessages(parseInt('<?php echo $userData['id']; ?>'));
                     messageTextarea.value = '';
                 } else {
                     alert('Failed to message');
@@ -110,46 +103,55 @@ if (isset($_GET['username'])) {
     </script>
 
     <script>
-        async function loadMessages() {
+        async function loadMessages(recipientId) {
             const messagesContainer = document.getElementById('messagesContainer');
 
             try {
                 const response = await fetch('hack/messages/get_messages.php', {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    body: JSON.stringify({
+                        recipient_id: recipientId,
+                    }),
                 });
+
+                console.log("recipientId", recipientId);
 
                 if (response.ok) {
                     const messages = await response.json();
+                    console.log("messages", messages);
 
-                    const fragment = document.createDocumentFragment();
+                    if (messages.length > 0) { // перевірка наявності повідомлень
+                        const fragment = document.createDocumentFragment();
 
-                    for (const message of messages.reverse()) {
-                        const user = await getUserInfo(message.sender_id);
+                        for (const message of messages.reverse()) {
+                            const user = await getUserInfo(message.sender_id);
+                            console.log("user", user);
 
-                        const messageHTML = `
-                            <li class="message-li">
-                                <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
-
-                                    <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
-
-                                    <div class="message-div">
-                                        <div class="message-blk">
-                                            <p class="message-name">${user.name}</p>
-                                            <p class="message-a__text">${message.message_text}</p>
-                                        </div>
-                                        <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+                            const messageHTML = `
+                        <li class="message-li">
+                            <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
+                                <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
+                                <div class="message-div">
+                                    <div class="message-blk">
+                                        <p class="message-name">${user.name}</p>
+                                        <p class="message-a__text">${message.message_text}</p>
                                     </div>
-                                </a>
-                            </li>`;
+                                    <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+                                </div>
+                            </a>
+                        </li>`;
 
-                        fragment.appendChild(document.createRange().createContextualFragment(messageHTML));
+                            fragment.appendChild(document.createRange().createContextualFragment(messageHTML));
+                        }
+
+                        messagesContainer.innerHTML = '';
+                        messagesContainer.appendChild(fragment);
+                    } else {
+                        messagesContainer.innerHTML = '<p>No messages found.</p>'; // вивід повідомлення про відсутність повідомлень
                     }
-
-                    messagesContainer.innerHTML = '';
-                    messagesContainer.appendChild(fragment);
                 } else {
                     console.error('Failed to fetch messages');
                 }
@@ -158,13 +160,71 @@ if (isset($_GET['username'])) {
             }
         }
 
-        async function getUserInfo(userId) {
 
+        // async function loadMessages() {
+        //     const messagesContainer = document.getElementById('messagesContainer');
+
+        //     try {
+        //         const response = await fetch('hack/messages/get_messages.php', {
+        //             method: 'GET',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //         });
+
+        //         if (response.ok) {
+        //             const messages = await response.json();
+
+        //             const fragment = document.createDocumentFragment();
+
+        //             for (const message of messages.reverse()) {
+        //                 const user = await getUserInfo(message.sender_id);
+
+        //                 const messageHTML = `
+        //                     <li class="message-li">
+        //                         <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
+
+        //                             <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
+
+        //                             <div class="message-div">
+        //                                 <div class="message-blk">
+        //                                     <p class="message-name">${user.name}</p>
+        //                                     <p class="message-a__text">${message.message_text}</p>
+        //                                 </div>
+        //                                 <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+        //                             </div>
+        //                         </a>
+        //                     </li>`;
+
+        //                 fragment.appendChild(document.createRange().createContextualFragment(messageHTML));
+        //             }
+
+        //             messagesContainer.innerHTML = '';
+        //             messagesContainer.appendChild(fragment);
+        //         } else {
+        //             console.error('Failed to fetch messages');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error in fetch request', error);
+        //     }
+        // }
+
+        async function getUserInfo(loggedInUserId) {
             try {
-                const userResponse = await fetch(`hack/messages/get_user_by_id.php?id=${userId}`);
-                if (userResponse.ok) {
-                    return await userResponse.json();
+                const response = await fetch('hack/messages/get_user_by_id.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: loggedInUserId
+                    }),
+                });
 
+                console.log("get_loggedInUserId", loggedInUserId);
+
+                if (response.ok) {
+                    return await response.json();
                 } else {
                     console.error('Failed to fetch user info');
                     return {};
@@ -174,8 +234,28 @@ if (isset($_GET['username'])) {
                 return {};
             }
         }
+        // getUserInfo(loggedInUserId)
 
-        loadMessages();
+
+        // async function getUserInfo(userId) {
+
+        //     try {
+        //         const userResponse = await fetch(`hack/messages/get_user_by_id.php?id=${userId}`);
+        //         if (userResponse.ok) {
+        //             console.log("userResponse", userResponse);
+        //             return await userResponse.json();
+
+        //         } else {
+        //             console.error('Failed to fetch user info');
+        //             return {};
+        //         }
+        //     } catch (error) {
+        //         console.error('Error in fetch request', error);
+        //         return {};
+        //     }
+        // }
+
+        loadMessages(parseInt('<?php echo $userData['id']; ?>'));
     </script>
 
     <script>
@@ -194,7 +274,7 @@ if (isset($_GET['username'])) {
 
                 console.log('messageId', messageId);
 
-                loadMessages();
+                loadMessages(parseInt('<?php echo $userData['id']; ?>'));
 
             } catch (error) {
                 console.error('Error:', error);

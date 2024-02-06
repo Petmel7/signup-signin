@@ -10,7 +10,6 @@ if (isset($data['sender_id'], $data['recipient_id'], $data['message_text'])) {
     $recipientId = $data['recipient_id'];
     $messageText = $data['message_text'];
 
-    // Викликати функцію для збереження повідомлення в базі даних
     $result = saveMessage($senderId, $recipientId, $messageText);
 
     // Вивести результати у форматі JSON
@@ -34,14 +33,15 @@ function saveMessage($senderId, $recipientId, $messageText)
         VALUES (:sender_id, :recipient_id, :message_text, :sent_at)
         ON DUPLICATE KEY UPDATE message_text = :message_text, sent_at = :sent_at";
 
-        $stmt = $conn->prepare("SELECT * FROM messages WHERE recipient_id = ? AND sender_id = ?");
+        $stmt = $conn->prepare($sql);
+
         $stmt->bindParam(':sender_id', $senderId, PDO::PARAM_INT);
         $stmt->bindParam(':recipient_id', $recipientId, PDO::PARAM_INT);
         $stmt->bindParam(':message_text', $messageText, PDO::PARAM_STR);
         $stmt->bindParam(':sent_at', $sent_at, PDO::PARAM_STR);
 
         // Виконати SQL-запит
-        $stmt->execute([$loggedInUserId, $recipientId]);
+        $stmt->execute();
 
         return ['success' => 'Message sent successfully'];
     } catch (PDOException $e) {
@@ -52,7 +52,3 @@ function saveMessage($senderId, $recipientId, $messageText)
         }
     }
 }
-
-// $stmt = $conn->prepare("SELECT * FROM messages WHERE recipient_id = ? AND sender_id = ?");
-// $stmt->execute([$recipientId, $loggedInUserId]);
-// $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);

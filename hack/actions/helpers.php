@@ -220,14 +220,14 @@ function getSubscribers($user_id)
     }
 }
 
-function getMessagesByRecipient($recipientId)
-{
-    $conn = getPDO();
+// function getMessagesByRecipient($recipientId)
+// {
+//     $conn = getPDO();
 
-    $stmt = $conn->prepare("SELECT * FROM messages WHERE recipient_id = ?");
-    $stmt->execute([$recipientId]);
+//     $stmt = $conn->prepare("SELECT * FROM messages WHERE recipient_id = ?");
+//     $stmt->execute([$recipientId]);
 
-    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $messages;
-}
+//     return $messages;
+// }
