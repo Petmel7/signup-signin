@@ -5,23 +5,6 @@ if (isset($_GET['username'])) {
     $username = $_GET['username'];
     $userData = getUserDataByUsername($username);
     $loggedInUserId = currentUserId();
-
-    // var_dump("loggedInUserId", $loggedInUserId);
-    // var_dump("userData", $userData);
-
-    // // Отримання повідомлень для користувача, чию сторінку переглядаємо
-    // $userMessages = getMessagesByRecipient($userData['id']);
-
-    // var_dump("userMessages", $userMessages);
-
-    // // Виведення повідомлень, якщо вони існують
-    // if ($userMessages) {
-    //     foreach ($userMessages as $message) {
-    //         echo "<p>{$message['message_text']}</p>";
-    //     }
-    // } else {
-    //     echo "<p>No messages for this user.</p>";
-    // }
 }
 
 ?>
@@ -52,6 +35,8 @@ if (isset($_GET['username'])) {
 
     <script src="js/forwarding.js"></script>
 
+
+
     <script>
         const textarea = document.getElementById('messageTextarea');
 
@@ -60,6 +45,8 @@ if (isset($_GET['username'])) {
             this.style.height = (this.scrollHeight) + 'px';
         });
     </script>
+
+
 
     <script>
         async function sendMessages(recipientId, event) {
@@ -86,8 +73,6 @@ if (isset($_GET['username'])) {
                     }),
                 });
 
-                // console.log('recipientId', recipientId);
-
                 if (response.ok) {
                     loadMessages(parseInt('<?php echo $userData['id']; ?>'));
                     messageTextarea.value = '';
@@ -98,16 +83,17 @@ if (isset($_GET['username'])) {
                 console.log(error);
                 alert('Error in fetch request');
             }
-            // return;
+            return;
         }
     </script>
 
-    <script>
-        async function loadMessages(recipientId) {
-            const messagesContainer = document.getElementById('messagesContainer');
 
+
+    <script>
+        async function loadMessages(recipientId, senderId) {
+            const messagesContainer = document.getElementById('messagesContainer');
             try {
-                const response = await fetch('hack/messages/get_messages.php', {
+                const messagesResponse = await fetch('hack/messages/get_messages.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -117,146 +103,71 @@ if (isset($_GET['username'])) {
                     }),
                 });
 
-                console.log("recipientId", recipientId);
+                if (!messagesResponse.ok) {
+                    throw new Error('Failed to fetch messages');
+                }
 
-                if (response.ok) {
-                    const messages = await response.json();
-                    console.log("messages", messages);
+                const messagesData = await messagesResponse.json();
 
-                    if (messages.length > 0) { // перевірка наявності повідомлень
-                        const fragment = document.createDocumentFragment();
+                if (Array.isArray(messagesData.success)) {
+                    const messages = messagesData.success;
 
-                        for (const message of messages.reverse()) {
-                            const user = await getUserInfo(message.sender_id);
-                            console.log("user", user);
+                    // Отримати дані про користувача
+                    const userDataResponse = await fetch('hack/messages/get_user_by_id.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            sender_id: senderId
+                        }),
+                    });
 
-                            const messageHTML = `
-                        <li class="message-li">
-                            <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
-                                <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
-                                <div class="message-div">
-                                    <div class="message-blk">
-                                        <p class="message-name">${user.name}</p>
-                                        <p class="message-a__text">${message.message_text}</p>
-                                    </div>
-                                    <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
-                                </div>
-                            </a>
-                        </li>`;
-
-                            fragment.appendChild(document.createRange().createContextualFragment(messageHTML));
-                        }
-
-                        messagesContainer.innerHTML = '';
-                        messagesContainer.appendChild(fragment);
-                    } else {
-                        messagesContainer.innerHTML = '<p>No messages found.</p>'; // вивід повідомлення про відсутність повідомлень
+                    if (!userDataResponse.ok) {
+                        throw new Error('Failed to fetch user info');
                     }
+
+                    const userData = await userDataResponse.json();
+
+                    // Об'єднати дані про користувача з кожним повідомленням
+                    const messagesWithUserData = messages.map(message => {
+                        return {
+                            ...userData,
+                            ...message
+                        };
+                    });
+
+                    console.log("messagesWithUserData", messagesWithUserData)
+
+                    // Відобразити повідомлення
+                    const messagesHTML = messagesWithUserData.map(message =>
+                        `<li class="message-li">
+                    <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(message.success.name)}'>
+                        <img class="message-img" src='hack/${message.success.avatar}' alt='${message.success.name}'> 
+                        <div class="message-div">
+                            <div class="message-blk">
+                                <p class="message-name">${message.success.name}</p>
+                                <p class="message-a__text">${message.message_text}</p>
+                            </div>
+                            <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+                        </div>
+                    </a>
+                </li>`
+                    ).join('');
+
+                    messagesContainer.innerHTML = messagesHTML;
                 } else {
-                    console.error('Failed to fetch messages');
+                    console.error('Response data is not in the expected format');
                 }
             } catch (error) {
                 console.error('Error in fetch request', error);
             }
         }
 
-
-        // async function loadMessages() {
-        //     const messagesContainer = document.getElementById('messagesContainer');
-
-        //     try {
-        //         const response = await fetch('hack/messages/get_messages.php', {
-        //             method: 'GET',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //             },
-        //         });
-
-        //         if (response.ok) {
-        //             const messages = await response.json();
-
-        //             const fragment = document.createDocumentFragment();
-
-        //             for (const message of messages.reverse()) {
-        //                 const user = await getUserInfo(message.sender_id);
-
-        //                 const messageHTML = `
-        //                     <li class="message-li">
-        //                         <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
-
-        //                             <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
-
-        //                             <div class="message-div">
-        //                                 <div class="message-blk">
-        //                                     <p class="message-name">${user.name}</p>
-        //                                     <p class="message-a__text">${message.message_text}</p>
-        //                                 </div>
-        //                                 <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
-        //                             </div>
-        //                         </a>
-        //                     </li>`;
-
-        //                 fragment.appendChild(document.createRange().createContextualFragment(messageHTML));
-        //             }
-
-        //             messagesContainer.innerHTML = '';
-        //             messagesContainer.appendChild(fragment);
-        //         } else {
-        //             console.error('Failed to fetch messages');
-        //         }
-        //     } catch (error) {
-        //         console.error('Error in fetch request', error);
-        //     }
-        // }
-
-        async function getUserInfo(loggedInUserId) {
-            try {
-                const response = await fetch('hack/messages/get_user_by_id.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id: loggedInUserId
-                    }),
-                });
-
-                console.log("get_loggedInUserId", loggedInUserId);
-
-                if (response.ok) {
-                    return await response.json();
-                } else {
-                    console.error('Failed to fetch user info');
-                    return {};
-                }
-            } catch (error) {
-                console.error('Error in fetch request', error);
-                return {};
-            }
-        }
-        // getUserInfo(loggedInUserId)
-
-
-        // async function getUserInfo(userId) {
-
-        //     try {
-        //         const userResponse = await fetch(`hack/messages/get_user_by_id.php?id=${userId}`);
-        //         if (userResponse.ok) {
-        //             console.log("userResponse", userResponse);
-        //             return await userResponse.json();
-
-        //         } else {
-        //             console.error('Failed to fetch user info');
-        //             return {};
-        //         }
-        //     } catch (error) {
-        //         console.error('Error in fetch request', error);
-        //         return {};
-        //     }
-        // }
-
-        loadMessages(parseInt('<?php echo $userData['id']; ?>'));
+        loadMessages(parseInt('<?php echo $userData['id']; ?>'), 25);
     </script>
+
+
 
     <script>
         async function deleteMessage(messageId, event) {

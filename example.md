@@ -34,3 +34,54 @@
 //========================================================
 Потрібно зробити перехід на другу сторінку для переписки
 Реалізувати щоб повідомлення було адресовано конкретному користувачеві
+
+
+<script>
+    // async function loadMessages() {
+        //     const messagesContainer = document.getElementById('messagesContainer');
+
+        //     try {
+        //         const response = await fetch('hack/messages/get_messages.php', {
+        //             method: 'GET',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //         });
+
+        //         if (response.ok) {
+        //             const messages = await response.json();
+
+        //             const fragment = document.createDocumentFragment();
+
+        //             for (const message of messages.reverse()) {
+        //                 const user = await getUserInfo(message.sender_id);
+
+        //                 const messageHTML = `
+        //                     <li class="message-li">
+        //                         <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(user.name)}'>
+
+        //                             <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
+
+        //                             <div class="message-div">
+        //                                 <div class="message-blk">
+        //                                     <p class="message-name">${user.name}</p>
+        //                                     <p class="message-a__text">${message.message_text}</p>
+        //                                 </div>
+        //                                 <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+        //                             </div>
+        //                         </a>
+        //                     </li>`;
+
+        //                 fragment.appendChild(document.createRange().createContextualFragment(messageHTML));
+        //             }
+
+        //             messagesContainer.innerHTML = '';
+        //             messagesContainer.appendChild(fragment);
+        //         } else {
+        //             console.error('Failed to fetch messages');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error in fetch request', error);
+        //     }
+        // }
+</script>

@@ -85,10 +85,10 @@ require_once '../actions/helpers.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['id'])) {
-    $loggedInUserId = $data['id'];
+if (isset($data['sender_id'])) {
+    $senderId = $data['sender_id'];
 
-    $success = getLoggedInUser($loggedInUserId);
+    $success = getLoggedInUser($recipientId);
 
     header('Content-Type: application/json');
     echo json_encode(['success' => $success]);
@@ -96,7 +96,7 @@ if (isset($data['id'])) {
     echo json_encode(['error' => 'Invalid request']);
 }
 
-function getLoggedInUser($loggedInUserId)
+function getLoggedInUser($senderId)
 {
     try {
         $conn = getPDO();
@@ -104,7 +104,7 @@ function getLoggedInUser($loggedInUserId)
         // Отримати інформацію про користувача за його ідентифікатором
         $sql = "SELECT name, avatar FROM users WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(1, $loggedInUserId, PDO::PARAM_INT);
+        $stmt->bindParam(1, $senderId, PDO::PARAM_INT);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
