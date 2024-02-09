@@ -220,14 +220,26 @@ function getSubscribers($user_id)
     }
 }
 
-// function getMessagesByRecipient($recipientId)
+// function getMessagesBysenderId($senderId)
 // {
-//     $conn = getPDO();
+//     try {
+//         $conn = getPDO();
 
-//     $stmt = $conn->prepare("SELECT * FROM messages WHERE recipient_id = ?");
-//     $stmt->execute([$recipientId]);
+//         // SQL-запит для отримання повідомлень, адресованих конкретному користувачеві як відправник або отримувач
+//         $sql = "SELECT * FROM messages WHERE sender_id = ?";
+//         $stmt = $conn->prepare($sql);
+//         $stmt->execute([$senderId]);
 
-//     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         // Отримати результат запиту
+//         $senderById = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//     return $messages;
+//         return $senderById;
+//     } catch (PDOException $e) {
+//         // Обробка помилок бази даних
+//         return 'Error: ' . $e->getMessage();
+//     } finally {
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
 // }
