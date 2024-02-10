@@ -503,6 +503,8 @@ span {
     resize: none;
     overflow-y: hidden;
     width: 100%;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .message-button {
@@ -588,4 +590,23 @@ span {
 
 .message-a:hover .message-a__button {
     opacity: 1;
+}
+
+
+.message-sender .message-a {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.message-sender .message-div {
+    border-radius: 10px 0 10px 10px;
+    margin-right: 10px;
+}
+
+.message-sender .message-img {
+    margin: 0;
+}
+
+.message-recipient .message-div {
+    background-color: #eeeeee;
 }

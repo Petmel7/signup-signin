@@ -132,7 +132,6 @@ function getUserDataByUsername($username): ?array
     $stmt = $conn->prepare("SELECT * FROM users WHERE name = ?");
     $stmt->execute([$username]);
 
-    // Перевірка, чи існують дані для витягнення
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($userData === false) {
         return null;
@@ -172,7 +171,6 @@ function getSubscriptions($user_id)
     try {
         $conn = getPDO();
 
-        // Отримати список користувачів, на які підписаний конкретний користувач
         $sql = "SELECT users.* FROM users
                 INNER JOIN subscriptions ON users.id = subscriptions.target_user_id
                 WHERE subscriptions.subscriber_id = :user_id";
@@ -182,10 +180,9 @@ function getSubscriptions($user_id)
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Вивести результат в форматі JSON
         return $results;
     } catch (PDOException $e) {
-        // Обробка помилок бази даних
+
         return ['error' => $e->getMessage()];
     } finally {
         if ($conn !== null) {
@@ -199,7 +196,6 @@ function getSubscribers($user_id)
     try {
         $conn = getPDO();
 
-        // Отримати список підписників для конкретного користувача
         $sql = "SELECT users.* FROM users
                 INNER JOIN subscriptions ON users.id = subscriptions.subscriber_id
                 WHERE subscriptions.target_user_id = :user_id";
@@ -211,7 +207,7 @@ function getSubscribers($user_id)
 
         return $results;
     } catch (PDOException $e) {
-        // Обробка помилок бази даних
+
         return ['error' => $e->getMessage()];
     } finally {
         if ($conn !== null) {
@@ -219,27 +215,3 @@ function getSubscribers($user_id)
         }
     }
 }
-
-// function getMessagesBysenderId($senderId)
-// {
-//     try {
-//         $conn = getPDO();
-
-//         // SQL-запит для отримання повідомлень, адресованих конкретному користувачеві як відправник або отримувач
-//         $sql = "SELECT * FROM messages WHERE sender_id = ?";
-//         $stmt = $conn->prepare($sql);
-//         $stmt->execute([$senderId]);
-
-//         // Отримати результат запиту
-//         $senderById = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-//         return $senderById;
-//     } catch (PDOException $e) {
-//         // Обробка помилок бази даних
-//         return 'Error: ' . $e->getMessage();
-//     } finally {
-//         if ($conn !== null) {
-//             $conn = null;
-//         }
-//     }
-// }

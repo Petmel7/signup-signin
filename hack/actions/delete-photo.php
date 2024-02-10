@@ -6,7 +6,7 @@ if (isset($_SESSION['user']['id'])) {
 
     $userId = $_SESSION['user']['id'];
 
-    $defaultImagePath = 'uploads/avatar_4367658739.jpg'; // Замініть це значення на ваш шлях за замовчуванням
+    $defaultImagePath = 'uploads/avatar_4367658739.jpg';
 
     $updateQuery = "UPDATE users SET avatar = '$defaultImagePath' WHERE id = $userId";
 

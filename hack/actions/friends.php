@@ -31,5 +31,3 @@ function handleGetRequest($loggedInUsername)
         }
     }
 }
-
-// var_dump($loggedInUsername);

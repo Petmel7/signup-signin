@@ -5,6 +5,8 @@ if (isset($_GET['username'])) {
     $username = $_GET['username'];
     $userData = getUserDataByUsername($username);
     $loggedInUserId = currentUserId();
+
+    echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script>";
 }
 ?>
 
@@ -12,10 +14,6 @@ if (isset($_GET['username'])) {
 <html lang="en">
 
 <?php include_once __DIR__ . '/../components/head.php'; ?>
-
-<script>
-    let loggedInUserId = <?php echo json_encode($loggedInUserId); ?>;
-</script>
 
 <body>
     <div class="account">

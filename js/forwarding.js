@@ -22,8 +22,5 @@ function redirectionToMessages(username) {
     window.location.href = `index.php?page=user-page-messages&username=${encodeURIComponent(username)}`;
 }
 
-// function redirectionToMessages() {
-//     window.location.href = 'index.php?page=user-page-messages';
-// }
 
 

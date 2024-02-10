@@ -1,4 +1,4 @@
-// Модал видалення фото
+
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
 }
