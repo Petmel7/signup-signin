@@ -10,6 +10,7 @@ checkGuest();
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
+    <h1 class="bamboo">Bamboo</h1>
     <form class="form" action="php/signin.php" method="post">
         <p class="form-title">Signin</p>
 

@@ -26,6 +26,10 @@ span {
     padding: 0;
 }
 
+.bamboo {
+    text-align: center;
+}
+
 /* Стилі для основного контейнера форми */
 
 .form {
@@ -318,6 +322,11 @@ span {
 
 
 /* Аccount button delete */
+/* .account-button__block {
+    display: flex;
+    flex-direction: column;
+} */
+
 .account-button__delete {
     background-color: #e0e0e0;
     color: #000;

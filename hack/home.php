@@ -30,7 +30,12 @@ $user = currentUser();
             </div>
         </form>
 
-        <button class="account-button__delete" onclick="openModal()">Delete photo</button>
+        <div class="account-button__block">
+            <button class="account-button__delete" onclick="openModal()">Delete photo</button>
+            <button class="me-messages">Messages
+                <span>{1}</span>
+            </button>
+        </div>
 
         <div id="myModal" class="modal">
             <div class="modal-content">

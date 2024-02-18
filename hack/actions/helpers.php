@@ -112,18 +112,31 @@ function currentUser(): array|bool
     return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
 }
 
-function currentUserId(): int|bool
+// function currentUserId(): int|bool
+// {
+//     $pdo = getPDO();
+
+//     if (!isset($_SESSION['user'])) {
+//         return false;
+//     }
+
+//     $userId = $_SESSION['user']['id'] ?? null;
+
+//     return $userId;
+// }
+
+function currentUserId(): ?int
 {
     $pdo = getPDO();
 
-    if (!isset($_SESSION['user'])) {
-        return false;
+    if (!isset($_SESSION['user']['id'])) {
+        return null;
     }
 
-    $userId = $_SESSION['user']['id'] ?? null;
-
-    return $userId;
+    return $_SESSION['user']['id'];
 }
+
+//===========================================
 
 function getUserDataByUsername($username): ?array
 {
