@@ -343,6 +343,11 @@ span {
     color: #fff;
 }
 
+.me-messages__span {
+    font-weight: 700;
+    color: #c82333;
+}
+
 
 
 

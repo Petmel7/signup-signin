@@ -4,6 +4,10 @@ require_once __DIR__ . '/actions/helpers.php';
 checkAuth();
 
 $user = currentUser();
+
+$loggedInUserId = currentUserId();
+
+echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script>";
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +36,8 @@ $user = currentUser();
 
         <div class="account-button__block">
             <button class="account-button__delete" onclick="openModal()">Delete photo</button>
-            <button class="me-messages">Messages
-                <span>{1}</span>
+            <button onclick="redirectToMyMtssages()" class="me-messages">Messages
+                <span class="me-messages__span"></span>
             </button>
         </div>
 
@@ -59,6 +63,48 @@ $user = currentUser();
     <script src="js/forwarding.js"></script>
     <script src="js/photo-replacement.js"></script>
     <script src="js/delete-photo.js"></script>
+
+    <script>
+        function redirectToMyMtssages() {
+            window.location.href = 'index.php?page=message-page';
+        }
+    </script>
+
+    <script>
+        async function getNumberMessages(loggedInUserId) {
+            try {
+                const response = await fetch('hack/actions/get-message-for-authorized-user.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sender_id: loggedInUserId
+                    }),
+                });
+
+                if (response.ok) {
+                    const messages = await response.json();
+
+                    const totalElements = messages.success.length
+                    console.log("totalElements", totalElements)
+
+                    const spanElement = document.querySelector('.me-messages__span');
+
+                    spanElement.textContent = totalElements;
+
+                    return messages || [];
+                } else {
+                    console.error('Failed to fetch user subscriptions');
+                    return [];
+                }
+            } catch (error) {
+                console.error('Error in fetch request', error);
+                return [];
+            }
+        }
+        getNumberMessages(loggedInUserId)
+    </script>
 </body>
 
 </html>

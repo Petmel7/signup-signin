@@ -21,6 +21,7 @@ if (isset($_GET['page'])) {
         case 'his-friends-list':
         case 'his-subscribers-list':
         case 'user-page-messages':
+        case 'message-page':
 
             require "./hack/{$_GET['page']}.php";
             break;
@@ -61,6 +62,9 @@ if (isset($_GET['page'])) {
 //     } elseif ($_GET['page'] === 'user-page-messages') {
 //         // Обробка сторінки списку друзів
 //         require './hack/user-page-messages.php';
+//     } elseif ($_GET['page'] === 'message-page') {
+//         // Обробка сторінки списку друзів
+//         require './hack/message-page.php';
 //     } else {
 //         require './hack/signin-form.php';
 //     }

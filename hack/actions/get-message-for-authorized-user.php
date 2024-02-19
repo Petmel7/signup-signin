@@ -2,22 +2,29 @@
 
 require_once __DIR__ . '/helpers.php';
 
-$currentUserId = currentUserId();
-$messages = getMessageForAuthorizedUser($currentUserId);
+$data = json_decode(file_get_contents('php://input'), true);
 
-header('Content-Type: application/json');
-echo json_encode($messages);
+if (isset($data['sender_id'])) {
+    $currentUserId = $data['sender_id'];
+
+    $success = getMessageForAuthorizedUser($currentUserId);
+
+    header('Content-Type: application/json');
+    echo json_encode(['success' => $success]);
+} else {
+    echo json_encode(['error' => 'Invalid request']);
+}
 
 function getMessageForAuthorizedUser($currentUserId)
 {
     try {
         $conn = getPDO();
 
-        $sql = "SELECT * FROM messages WHERE sender_id = :loggedInUsername"; // Використовуємо плейсхолдер :loggedInUsername
+        $sql = "SELECT * FROM messages WHERE sender_id = :currentUserId";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':currentUserId', $currentUserId); // Передаємо значення через плейсхолдер
-        $stmt->execute(); // Виконуємо запит без параметрів, оскільки вони вже прив'язані до плейсхолдера
+        $stmt->bindParam(':currentUserId', $currentUserId);
+        $stmt->execute();
 
         $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
