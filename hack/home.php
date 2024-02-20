@@ -5,9 +5,9 @@ checkAuth();
 
 $user = currentUser();
 
-$loggedInUserId = currentUserId();
+$currentUserId = currentUserId();
 
-echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script>";
+echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>";
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +71,7 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
     </script>
 
     <script>
-        async function getNumberMessages(loggedInUserId) {
+        async function getNumberMessages(currentUserId) {
             try {
                 const response = await fetch('hack/actions/get-message-for-authorized-user.php', {
                     method: 'POST',
@@ -79,31 +79,28 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        sender_id: loggedInUserId
+                        recipient_id: currentUserId
                     }),
                 });
 
                 if (response.ok) {
                     const messages = await response.json();
 
-                    const totalElements = messages.success.length
+                    const totalElements = messages.messages.length
                     console.log("totalElements", totalElements)
 
                     const spanElement = document.querySelector('.me-messages__span');
 
                     spanElement.textContent = totalElements;
 
-                    return messages || [];
                 } else {
-                    console.error('Failed to fetch user subscriptions');
-                    return [];
+                    console.error('No messages found');
                 }
             } catch (error) {
                 console.error('Error in fetch request', error);
-                return [];
             }
         }
-        getNumberMessages(loggedInUserId)
+        getNumberMessages(currentUserId)
     </script>
 </body>
 

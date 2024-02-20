@@ -4,23 +4,23 @@ require_once __DIR__ . '/helpers.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['sender_id'])) {
-    $currentUserId = $data['sender_id'];
+if (isset($data['recipient_id'])) {
+    $currentUserId = $data['recipient_id'];
 
-    $success = getMessageForAuthorizedUser($currentUserId);
+    $messages = getMessagesForCurrentUser($currentUserId);
 
     header('Content-Type: application/json');
-    echo json_encode(['success' => $success]);
+    echo json_encode(['messages' => $messages]);
 } else {
     echo json_encode(['error' => 'Invalid request']);
 }
 
-function getMessageForAuthorizedUser($currentUserId)
+function getMessagesForCurrentUser($currentUserId)
 {
     try {
         $conn = getPDO();
 
-        $sql = "SELECT * FROM messages WHERE sender_id = :currentUserId";
+        $sql = "SELECT * FROM messages WHERE recipient_id = :currentUserId";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':currentUserId', $currentUserId);
@@ -38,5 +38,3 @@ function getMessageForAuthorizedUser($currentUserId)
         }
     }
 }
-
-// var_dump($currentUserId);

@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/actions/helpers.php';
 
-$loggedInUserId = currentUserId();
+$currentUserId = currentUserId();
 
-echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script>";
+echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>";
+
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +16,10 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
 
     <ul class="message-block" id="messagesContainer"></ul>
 
+
+
     <script>
-        async function getMessageForAuthorizedUser(loggedInUserId) {
+        async function getMessageForAuthorizedUser(currentUserId) {
             const messagesContainer = document.getElementById('messagesContainer');
             try {
                 const messagesResponse = await fetch('hack/actions/get-message-for-authorized-user.php', {
@@ -25,11 +28,9 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        sender_id: loggedInUserId
+                        recipient_id: currentUserId
                     }),
                 });
-
-                console.log('loggedInUserId', loggedInUserId);
 
                 if (!messagesResponse.ok) {
                     throw new Error('Failed to fetch messages');
@@ -37,8 +38,8 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
 
                 const messagesData = await messagesResponse.json();
 
-                if (Array.isArray(messagesData.success)) {
-                    const messages = messagesData.success;
+                if (Array.isArray(messagesData.messages)) {
+                    const messages = messagesData.messages;
 
                     const userDataResponse = await fetch('hack/messages/get_user_by_id.php')
 
@@ -48,9 +49,6 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
 
                     const userData = await userDataResponse.json();
 
-                    console.log("userData", userData)
-                    console.log("messages", messages)
-
                     const messagesWithUserData = messages.map(message => {
                         const sender = userData.find(user => user.id === message.sender_id);
                         return {
@@ -58,23 +56,28 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
                             user: sender
                         };
                     });
+                    // Створіть об'єкт для зберігання унікальних користувачів
+                    const uniqueUsers = {};
+                    // Пройдіться по всім повідомленням і додайте користувачів до об'єкта uniqueUsers
+                    messagesWithUserData.forEach(message => {
+                        uniqueUsers[message.user.id] = message.user;
+                    });
+                    // Перетворіть об'єкт у масив унікальних користувачів
+                    const uniqueUsersArray = Object.values(uniqueUsers);
 
-                    console.log("messagesWithUserData", messagesWithUserData)
-
-                    const messagesHTML = messagesWithUserData.map(message => {
-
-                        return `<li class="">
-                <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(message.user.name)}'>
-                    <img class="message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'> 
-                    <div class="message-div">
-                        <div class="message-blk">
-                            <p class="message-name">${message.user.name}</p>
-                            <p class="message-a__text">${message.message_text}</p>
+                    const messagesHTML = uniqueUsersArray.map(user => {
+                        return `<li class="message-conteaner">
+                    <a class="message-a" href='index.php?page=user-page-messages&username=${encodeURIComponent(user.name)}'>
+                        <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
+                        <div class="message-div">
+                            <div class="message-blk">
+                                <p class="message-name">${user.name}</p>
+                                <p class="message-a__text">Sent you a message...</p>
+                            </div>
+                            
                         </div>
-                        <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
-                    </div>
-                </a>
-            </li>`;
+                    </a>
+                </li>`;
                     }).join('');
 
                     messagesContainer.innerHTML = messagesHTML;
@@ -86,7 +89,9 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
                 console.error('Error in fetch request', error);
             }
         }
-        getMessageForAuthorizedUser(loggedInUserId)
+        getMessageForAuthorizedUser(currentUserId)
+
+        // <button class = "message-a__button" onclick = "deleteMessage(${message.id}, event)" > Delete < /button>
     </script>
 
 </body>
