@@ -38,8 +38,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
                 const messagesData = await messagesResponse.json();
 
-                if (Array.isArray(messagesData.messages)) {
-                    const messages = messagesData.messages;
+                console.log("messagesData", messagesData);
+
+                if (Array.isArray(messagesData.unviewed_messages)) {
+                    const messages = messagesData.unviewed_messages;
 
                     const userDataResponse = await fetch('hack/messages/get_user_by_id.php')
 
@@ -68,7 +70,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
                     const messagesHTML = uniqueUsersArray.map(user => {
                         return `<li class="message-conteaner">
                     <a class="message-a" href='index.php?page=user-page-messages&username=${encodeURIComponent(user.name)}'>
-                        <img class="message-img" src='hack/${user.avatar}' alt='${user.name}'> 
+                        <img class="message-img__who-wrote message-img" src='hack/${user.avatar}' alt='${user.name}'> 
                         <div class="message-div">
                             <div class="message-blk">
                                 <p class="message-name">${user.name}</p>

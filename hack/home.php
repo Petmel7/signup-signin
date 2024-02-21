@@ -86,12 +86,14 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
                 if (response.ok) {
                     const messages = await response.json();
 
-                    const totalElements = messages.messages.length
-                    console.log("totalElements", totalElements)
+                    console.log("messages", messages)
 
+                    // Лічильник непереглянутих повідомлень
+                    const unviewedMessagesCount = messages.unviewed_messages_count;
+
+                    // Встановлення тексту на кнопці
                     const spanElement = document.querySelector('.me-messages__span');
-
-                    spanElement.textContent = totalElements;
+                    spanElement.textContent = unviewedMessagesCount;
 
                 } else {
                     console.error('No messages found');
