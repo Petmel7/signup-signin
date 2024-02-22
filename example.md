@@ -8,3 +8,5 @@
 
 
 <?php if (hasMessage(key: 'error')) : ?>
+
+<?php if (hasMessage('error')) : ?>

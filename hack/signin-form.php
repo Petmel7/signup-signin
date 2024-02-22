@@ -14,7 +14,7 @@ checkGuest();
     <form class="form" action="php/signin.php" method="post">
         <p class="form-title">Signin</p>
 
-        <?php if (hasMessage('error')) : ?>
+        <?php if (hasMessage(key: 'error')) : ?>
             <small class="notise error"><?php echo getMessage(key: 'error'); ?></small>
         <?php endif; ?>
 
