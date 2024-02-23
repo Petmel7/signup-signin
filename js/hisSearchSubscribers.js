@@ -24,8 +24,6 @@ async function hisSearchSubscribers(hisUserId) {
                 }),
             });
 
-            console.log('hisSearchSubscribers hisUserId', hisUserId)
-
             if (response.ok) {
                 const friends = await response.json();
                 friendsContainer.innerHTML = '';

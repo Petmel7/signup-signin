@@ -11,8 +11,6 @@ async function deleteMessage(messageId, event) {
             }),
         });
 
-        console.log('messageId', messageId);
-
         loadMessages(loggedInUserId, recipientId);
     } catch (error) {
         console.error('Error:', error);

@@ -34,12 +34,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
             </div>
         </form>
 
-        <div class="account-button__block">
-            <button class="account-button__delete" onclick="openModal()">Delete photo</button>
-            <button onclick="redirectToMyMtssages()" class="me-messages">Messages
-                <span class="me-messages__span"></span>
-            </button>
-        </div>
+        <button class="account-button__delete" onclick="openModal()">Delete photo</button>
 
         <div id="myModal" class="modal">
             <div class="modal-content">
@@ -53,7 +48,14 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
         <h1 class="account-title"><?php echo $user['name']; ?></h1>
 
-        <button class="friends" type="button" onclick="forwarding()">Search friends</button>
+        <div class="me-messages__block">
+            <button onclick="redirectToMyMtssages()" class="me-messages">Messages
+                <span class="me-messages__span"></span>
+                🔔
+                <span class="badge">3</span>
+            </button>
+            <button class="friends" type="button" onclick="forwarding()">Search friends</button>
+        </div>
 
         <form action=" hack/actions/logout.php" method="post">
             <button class="account-button" type="submit">Logout</button>
@@ -63,47 +65,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
     <script src="js/forwarding.js"></script>
     <script src="js/photo-replacement.js"></script>
     <script src="js/delete-photo.js"></script>
+    <script src="js/getNumberMessages.js"></script>
 
-    <script>
-        function redirectToMyMtssages() {
-            window.location.href = 'index.php?page=message-page';
-        }
-    </script>
-
-    <script>
-        async function getNumberMessages(currentUserId) {
-            try {
-                const response = await fetch('hack/actions/get-message-for-authorized-user.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        recipient_id: currentUserId
-                    }),
-                });
-
-                if (response.ok) {
-                    const messages = await response.json();
-
-                    console.log("messages", messages)
-
-                    // Лічильник непереглянутих повідомлень
-                    const unviewedMessagesCount = messages.unviewed_messages_count;
-
-                    // Встановлення тексту на кнопці
-                    const spanElement = document.querySelector('.me-messages__span');
-                    spanElement.textContent = unviewedMessagesCount;
-
-                } else {
-                    console.error('No messages found');
-                }
-            } catch (error) {
-                console.error('Error in fetch request', error);
-            }
-        }
-        getNumberMessages(currentUserId)
-    </script>
 </body>
 
 </html>

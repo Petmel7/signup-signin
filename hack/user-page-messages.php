@@ -37,6 +37,7 @@ if (isset($_GET['username'])) {
     <script src="js/sendMessages.js"></script>
     <script src="js/loadMessages.js"></script>
     <script src="js/deleteMessage.js"></script>
+    <script src="js/markMessageAsViewed.js"></script>
 
 </body>
 

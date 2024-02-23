@@ -343,9 +343,48 @@ span {
     color: #fff;
 }
 
+.me-messages__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.me-messages {
+    margin-bottom: 10px;
+    background-color: #e0e0e0;
+    color: #000;
+    padding: 3px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 120px;
+}
+
+.me-messages:hover {
+    background-color: #555;
+    color: #fff;
+}
+
 .me-messages__span {
     font-weight: 700;
     color: #c82333;
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 295px;
+    right: 410px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
 }
 
 

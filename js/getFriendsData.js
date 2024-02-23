@@ -10,8 +10,6 @@ async function getFriendsData(loggedInUserId) {
             }),
         });
 
-        console.log('loggedInUserId', loggedInUserId);
-
         if (response.ok) {
             const friends = await response.json();
 
