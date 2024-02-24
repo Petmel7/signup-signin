@@ -347,6 +347,7 @@ span {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .me-messages {
@@ -369,13 +370,12 @@ span {
 .me-messages__span {
     font-weight: 700;
     color: #c82333;
-    position: relative;
 }
 
 .badge {
     position: absolute;
-    top: 295px;
-    right: 410px;
+    top: -5px;
+    right: 150px;
     background-color: red;
     color: white;
     border-radius: 50%;

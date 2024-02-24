@@ -50,9 +50,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
         <div class="me-messages__block">
             <button onclick="redirectToMyMtssages()" class="me-messages">Messages
-                <span class="me-messages__span"></span>
-                🔔
-                <span class="badge">3</span>
+                <span class="me-messages__span">🔔</span>
+                <span class="badge"></span>
             </button>
             <button class="friends" type="button" onclick="forwarding()">Search friends</button>
         </div>
