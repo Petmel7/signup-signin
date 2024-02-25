@@ -54,16 +54,23 @@ async function getMessageForAuthorizedUser(currentUserId) {
             });
 
             // Створення порожнього масиву для збереження унікальних sender_id
-            const uniqueUsers = [];
+            // const uniqueUsers = [];
 
-            // Прохід через кожне повідомлення
-            messagesWithUserData.forEach(message => {
-                // Перевірка, чи sender_id є унікальним і не міститься в uniqueUsers
-                if (!uniqueUsers.some(user => user.id === message.sender_id)) {
-                    // Додавання sender_id до uniqueUsers
-                    uniqueUsers.push(message);
-                }
-            });
+            // // Прохід через кожне повідомлення
+            // messagesWithUserData.forEach(message => {
+            //     // Перевірка, чи sender_id є унікальним і не міститься в uniqueUsers
+            //     if (!uniqueUsers.some(user => user.id === message.sender_id)) {
+            //         // Додавання sender_id до uniqueUsers
+            //         uniqueUsers.push(message);
+            //     }
+            // });
+
+            const uniqueUsers = messagesWithUserData.map(message => {
+                return message.sender_id;
+            })
+                .filter((sender_id, index, array) => array.indexOf(sender_id) === index)
+                .map(uniqueSenderId => messagesWithUserData.find(message => message.sender_id === uniqueSenderId));
+
 
             console.log("uniqueUsers", uniqueUsers)
 

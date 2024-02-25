@@ -31,6 +31,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
                     }),
                 });
 
+                console.log("response", await response)
+
                 getMessageForAuthorizedUser(currentUserId)
 
             } catch (error) {
