@@ -68,22 +68,22 @@ async function getMessageForAuthorizedUser(currentUserId) {
             console.log("uniqueUsers", uniqueUsers)
 
             // Відображення кількості непереглянутих повідомлень біля кожного користувача
-            const messagesHTML = uniqueUsers.map(user => {
-                const unreadCount = messageCounts[user.id] ?? 0; // Отримуємо кількість непереглянутих повідомлень
+            const messagesHTML = uniqueUsers.map(message => {
+                const unreadCount = messageCounts[message.id] ?? 0; // Отримуємо кількість непереглянутих повідомлень
 
                 console.log("unreadCount", unreadCount)
 
                 return `
             <li class="message-conteaner">
-                <a class="message-a" href='index.php?page=user-page-messages&username=${encodeURIComponent(user.name)}'>
-                    <img class="message-img__who-wrote message-img" src='hack/${user.avatar}' alt='${user.name}'>
+                <a class="message-a" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.name)}'>
+                    <img class="message-img__who-wrote message-img" src='hack/${message.avatar}' alt='${message.name}'>
                     <div class="message-div">
                         <div class="message-blk">
-                            <p class="message-name">${user.name}</p>
+                            <p class="message-name">${message.name}</p>
                             <p class="message-a__text">Sent you a message...</p>
                         </div>
                         <span class="message-badge" style="display: ${unreadCount > 0 ? 'block' : 'none'}">${unreadCount > 10 ? '9+' : unreadCount}</span>
-                        <button class="message-a__button" onclick="deleteMessage(${user.id}, event)">Delete</button>
+                        <button class="message-a__button" onclick="deleteUser(${message.id}, event)">Delete</button>
                     </div>
                 </a>
             </li>`;
