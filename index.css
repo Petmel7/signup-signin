@@ -379,12 +379,28 @@ span {
     background-color: red;
     color: white;
     border-radius: 50%;
-    width: 17px;
-    height: 17px;
+    padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 12px;
+    width: 13px;
+    height: 13px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.message-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px;
+    font-size: 12px;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -589,6 +605,8 @@ span {
 .message-conteaner {
     width: 400px;
     margin: 0 auto;
+    max-height: 300px;
+    padding: 10px;
 }
 
 .message-a {
@@ -631,8 +649,8 @@ span {
 }
 
 .message-a__text {
-    margin-right: auto;
     color: #272727;
+    word-wrap: break-word;
 }
 
 .message-a__button {
