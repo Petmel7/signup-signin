@@ -56,11 +56,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
             <button class="friends" type="button" onclick="forwarding()">Search friends</button>
         </div>
 
-        <form action=" hack/actions/logout.php" method="post">
-            <button class="account-button" type="submit">Logout</button>
-        </form>
-    </div>
+        <button class="account-button" onclick="logout(event)">Logout</button>
 
+    </div>
+    <script src="js/logout.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/photo-replacement.js"></script>
     <script src="js/delete-photo.js"></script>

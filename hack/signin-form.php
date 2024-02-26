@@ -11,7 +11,7 @@ checkGuest();
 
 <body>
     <h1 class="bamboo">Bamboo</h1>
-    <form class="form" action="php/signin.php" method="post">
+    <form id="signinForm" class="form">
         <p class="form-title">Signin</p>
 
         <?php if (hasMessage(key: 'error')) : ?>
@@ -37,12 +37,35 @@ checkGuest();
             <?php endif; ?>
         </label>
 
-        <button type=" submit">Continue</button>
+        <button type="button" onclick="signinSubmitForm()">Continue</button>
 
         <p class="form-account">I don't have an <a href="index.php?page=signup">account</a> yet</p>
     </form>
 
-    <script src="index.js"></script>
+    <script src="js/forwarding.js"></script>
+
+    <script>
+        async function signinSubmitForm() {
+            const form = document.getElementById("signinForm");
+            const formData = new FormData(form);
+            try {
+                const response = await fetch('php/signin.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) {
+                    redirectToHome();
+                } else {
+                    alert("Authentication failed");
+                    // Додаткова обробка помилки
+                }
+            } catch (error) {
+                console.error("Помилка при аутентифікації", error);
+            }
+        }
+    </script>
+
 </body>
 
 </html>

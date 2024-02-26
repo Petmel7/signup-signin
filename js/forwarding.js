@@ -25,3 +25,11 @@ function redirectionToMessages(username) {
 function redirectToMyMtssages() {
     window.location.href = 'index.php?page=message-page';
 }
+
+function redirectToSignin() {
+    window.location.href = 'index.php?page=signin';
+}
+
+function redirectToHome() {
+    window.location.href = 'index.php?page=home';
+}

@@ -4,6 +4,3 @@ require_once __DIR__ . '/helpers.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     logout();
 }
-
-$baseUrl = '/signup-signin';
-redirect($baseUrl . '/index.php?page=signin');
