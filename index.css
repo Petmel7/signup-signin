@@ -546,20 +546,21 @@ span {
 
 
 /* My friends */
-.search-friend {
+/* .search-friend {
     position: relative;
-}
+} */
 
 .my-friends__button {
-    position: absolute;
-    top: 40%;
-    right: 0px;
+    /* position: absolute; */
+    top: 10%;
+    right: 5%px;
     transform: translateY(-50%);
     border: none;
     padding: 3px 10px;
     border-radius: 4px;
     cursor: pointer;
     width: 110px;
+    /* margin: 0 auto; */
 }
 
 .my-friends__button:hover {

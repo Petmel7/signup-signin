@@ -10,8 +10,9 @@ require_once __DIR__ . '/actions/helpers.php';
 <body>
     <form class="search-friend" id="searchForm">
         <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="searchFriends()">
-        <button class="my-friends__button" type="button" onclick="redirectToMyFriends()">My friends &rarr;</button>
     </form>
+
+    <button class="my-friends__button" type="button" onclick="redirectToMyFriends()">My friends &rarr;</button>
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 

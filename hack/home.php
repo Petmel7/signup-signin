@@ -17,13 +17,13 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
 <body>
     <div class="account">
-
-        <form id="photoForm" action="hack/actions/change-photo.php" method="post" enctype="multipart/form-data">
+        <form id="photoForm" enctype="multipart/form-data">
             <div class="change">
                 <label class="change-photo">
-                    <input class="button-input" type="file" id="avatar" name="avatar" accept="image/*" <?php echo validationErrorAttr(fieldName: 'avatar'); ?>>
 
-                    <img class="account-img" src="hack/<?php echo $user['avatar']; ?>" width="200px" height="200px" alt="<?php echo $user['name']; ?>">
+                    <img id="userAvatar" class="account-img" src="hack/<?php echo $user['avatar']; ?>" width="200px" height="200px" alt="<?php echo $user['name']; ?>">
+
+                    <input class="button-input" onchange="changePhoto()" type="file" id="avatar" name="avatar" accept="image/*" <?php echo validationErrorAttr(fieldName: 'avatar'); ?>>
 
                     <p class="change-photo__text">Change photo</p>
 
@@ -59,9 +59,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
         <button class="account-button" onclick="logout(event)">Logout</button>
 
     </div>
+
     <script src="js/logout.js"></script>
     <script src="js/forwarding.js"></script>
-    <script src="js/photo-replacement.js"></script>
+    <script src="js/changePhoto.js"></script>
     <script src="js/delete-photo.js"></script>
     <script src="js/getNumberMessages.js"></script>
 

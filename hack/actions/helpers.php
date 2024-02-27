@@ -112,19 +112,6 @@ function currentUser(): array|bool
     return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
 }
 
-// function currentUserId(): int|bool
-// {
-//     $pdo = getPDO();
-
-//     if (!isset($_SESSION['user'])) {
-//         return false;
-//     }
-
-//     $userId = $_SESSION['user']['id'] ?? null;
-
-//     return $userId;
-// }
-
 function currentUserId(): ?int
 {
     $pdo = getPDO();
@@ -135,8 +122,6 @@ function currentUserId(): ?int
 
     return $_SESSION['user']['id'];
 }
-
-//===========================================
 
 function getUserDataByUsername($username): ?array
 {
@@ -161,16 +146,16 @@ function logout(): void
 function checkAuth(): void
 {
     if (!isset($_SESSION['user']['id'])) {
-        $baseUrl = '/signup-signin';
-        redirect($baseUrl . '/index.php?page=signin');
+
+        redirect('index.php?page=signin');
     }
 }
 
 function checkGuest(): void
 {
     if (isset($_SESSION['user']['id'])) {
-        $baseUrl = '/signup-signin';
-        redirect($baseUrl . '/index.php?page=home');
+
+        redirect('index.php?page=home');
     }
 }
 

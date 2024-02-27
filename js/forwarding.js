@@ -33,3 +33,7 @@ function redirectToSignin() {
 function redirectToHome() {
     window.location.href = 'index.php?page=home';
 }
+
+
+
+

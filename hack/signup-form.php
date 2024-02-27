@@ -11,7 +11,7 @@ checkGuest();
 
 <body>
     <h1 class="bamboo">Bamboo</h1>
-    <form class="form" action="php/signup.php" method="post" enctype="multipart/form-data">
+    <form id="signupForm" class="form" enctype="multipart/form-data">
         <p class="form-title">Signup</p>
 
         <label class="form-label" for="name">Name
@@ -53,12 +53,34 @@ checkGuest();
             <label class="custom-checkbox-label" for="customCheckbox">I accept all user terms</label>
         </div>
 
-        <button type="submit">Continue</button>
+        <button type="button" onclick="signupSubmitForm()">Continue</button>
 
         <p class="form-account">I already have an <a href="index.php?page=signin">account</a></p>
     </form>
 
-    <script src="index.js"></script>
+    <script src="js/forwarding.js"></script>
+
+    <script>
+        async function signupSubmitForm() {
+            const form = document.getElementById("signupForm");
+            const formData = new FormData(form);
+            try {
+                const response = await fetch('php/signup.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) {
+                    redirectToSignin();
+                } else {
+                    alert("Registration failed");
+                    // Додаткова обробка помилки
+                }
+            } catch (error) {
+                console.error("Помилка при реєстрації", error);
+            }
+        }
+    </script>
 </body>
 
 </html>
