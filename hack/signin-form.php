@@ -11,30 +11,19 @@ checkGuest();
 
 <body>
     <h1 class="bamboo">Bamboo</h1>
+
     <form id="signinForm" class="form">
         <p class="form-title">Signin</p>
 
-        <?php if (hasMessage(key: 'error')) : ?>
-            <small class="notise error"><?php echo getMessage(key: 'error'); ?></small>
-        <?php endif; ?>
-
         <label class="form-label" for="">E-mail
-            <input class="form-input" type="text" placeholder="MacaulayCulkin@gmail.com" name="email" <?php echo validationErrorAttr(fieldName: 'email'); ?> value="<?php echo old(key: 'email') ?>">
-
-            <?php if (hasValidationError(fieldName: 'email')) : ?>
-                <small class="notise"><?php echo validationErrorMessage(fieldName: 'email'); ?></small>
-            <?php endif; ?>
+            <input class="form-input req_" type="text" placeholder="MacaulayCulkin@gmail.com" name="email">
         </label>
 
         <label class="form-label" for="">Password
             <div class="custom-placeholder">
-                <input class="form-input" type="password" placeholder=" " name="password" <?php echo validationErrorAttr(fieldName: 'password'); ?>>
+                <input class="form-input req_" type="password" placeholder="" name="password">
                 <span class="placeholder-text">************</span>
             </div>
-
-            <?php if (hasValidationError(fieldName: 'password')) : ?>
-                <small class="notise"><?php echo validationErrorMessage(fieldName: 'password'); ?></small>
-            <?php endif; ?>
         </label>
 
         <button type="button" onclick="signinSubmitForm()">Continue</button>
@@ -58,13 +47,73 @@ checkGuest();
                     redirectToHome();
                 } else {
                     alert("Authentication failed");
-                    // Додаткова обробка помилки
+                    addErrorClassToRequiredInputs();
                 }
             } catch (error) {
                 console.error("Помилка при аутентифікації", error);
             }
         }
     </script>
+
+    <script>
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     let passwordInputs = document.querySelectorAll('input[type="password"]');
+        //     console.log("passwordInputs", passwordInputs)
+        //     passwordInputs.forEach(function(input) {
+        //         if (input.value.trim() !== '') {
+        //             input.nextElementSibling.style.display = 'none';
+        //         }
+        //     });
+        // });
+
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     let passwordInput = document.querySelector('input[type="password"]');
+        //     console.log("passwordInput", passwordInput)
+
+        //     let placeholderText = passwordInput.nextElementSibling;
+        //     console.log("placeholderText", placeholderText)
+
+        //     if (passwordInput.value.trim() !== '') {
+        //         placeholderText.style.display = 'none'; // ховаємо вказівник
+        //     }
+        // });
+
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var passwordInput = document.querySelector('input[type="password"]');
+        //     var placeholderText = passwordInput.nextElementSibling;
+
+        //     // Функція, яка перевіряє, чи поле вводу порожнє і застосовує стилі до вказівника
+        //     function togglePlaceholder() {
+        //         if (passwordInput.value.trim() !== '') {
+        //             placeholderText.style.display = 'none'; // ховаємо вказівник, якщо поле вводу не порожнє
+        //         } else {
+        //             placeholderText.style.display = 'inline-block'; // показуємо вказівник, якщо поле вводу порожнє
+        //         }
+        //     }
+
+        //     // Викликаємо функцію togglePlaceholder при завантаженні сторінки і при введенні тексту
+        //     togglePlaceholder();
+        //     passwordInput.addEventListener('input', togglePlaceholder);
+        // });
+
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var passwordInput = document.querySelector('input[type="password"]');
+        //     var placeholderText = passwordInput.nextElementSibling;
+
+        //     function togglePlaceholder() {
+        //         if (passwordInput.value.trim() !== '') {
+        //             placeholderText.classList.add('placeholder-hidden');
+        //         } else {
+        //             placeholderText.classList.remove('placeholder-hidden');
+        //         }
+        //     }
+
+        //     togglePlaceholder();
+        //     passwordInput.addEventListener('input', togglePlaceholder);
+        // });
+    </script>
+
+    <script src="js/validation.js"></script>
 
 </body>
 

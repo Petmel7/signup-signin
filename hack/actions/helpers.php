@@ -19,40 +19,6 @@ function redirect(string $path)
     die();
 }
 
-function addValidationError(string $fieldName, string $message): void
-{
-    $_SESSION['validation'][$fieldName] = $message;
-}
-
-function hasValidationError(string $fieldName): bool
-{
-    return isset($_SESSION['validation'][$fieldName]);
-}
-
-function validationErrorAttr(string $fieldName): string
-{
-    return isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
-}
-
-function validationErrorMessage(string $fieldName): string
-{
-    $message = $_SESSION['validation'][$fieldName] ?? '';
-    unset($_SESSION['validation'][$fieldName]);
-    return $message;
-}
-
-function addOldValue(string $key, mixed $value): void
-{
-    $_SESSION['old'][$key] = $value;
-}
-
-function old(string $key)
-{
-    $value = $_SESSION['old'][$key] ?? '';
-    unset($_SESSION['old'][$key]);
-    return $value;
-}
-
 function uploadFile(array $file, string $prefix = ''): string
 {
     $uploadPath = __DIR__ . '/../uploads';
@@ -69,23 +35,6 @@ function uploadFile(array $file, string $prefix = ''): string
     }
 
     return "uploads/$fileName";
-}
-
-function setMessage(string $key, string $message): void
-{
-    $_SESSION['message'][$key] = $message;
-}
-
-function hasMessage(string $key): bool
-{
-    return isset($_SESSION['message'][$key]);
-}
-
-function getMessage(string $key): string
-{
-    $message = $_SESSION['message'][$key] ?? '';
-    unset($_SESSION['message'][$key]);
-    return $message;
 }
 
 function findUser(string $email): array|bool

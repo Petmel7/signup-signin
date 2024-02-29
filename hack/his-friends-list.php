@@ -13,10 +13,12 @@ if (isset($_GET['username'])) {
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
-    <form class="search-friend" id="searchForm">
-        <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="hisSearchFriends(<?php echo $userData['id']; ?>)">
-        <button class="subscription-buttons" type="button" onclick="redirectionHisSubscribers('<?php echo $userData['name']; ?>')">His subscribers</button>
-    </form>
+    <section class="">
+        <form class="search-friend" id="searchForm">
+            <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="hisSearchFriends(<?php echo $userData['id']; ?>)">
+            <button class="subscription-buttons" type="button" onclick="redirectionHisSubscribers('<?php echo $userData['name']; ?>')">His subscribers</button>
+        </form>
+    </section>
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 

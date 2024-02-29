@@ -15,41 +15,29 @@ checkGuest();
         <p class="form-title">Signup</p>
 
         <label class="form-label" for="name">Name
-            <input class="form-input" type="text" placeholder="Macaulay Culkin" name="name" aria-invalid="true" <?php echo validationErrorAttr(fieldName: 'name'); ?> value="<?php echo old(key: 'name') ?>">
-
-            <?php if (hasValidationError(fieldName: 'name')) : ?>
-                <small class="notise"><?php echo validationErrorMessage(fieldName: 'name'); ?></small>
-            <?php endif; ?>
+            <input class="form-input req_" type="text" placeholder="Macaulay Culkin" name="name" aria-invalid="true">
         </label>
 
         <label class="form-label" for="">E-mail
-            <input class="form-input" type="text" placeholder="MacaulayCulkin@gmail.com" name="email" <?php echo validationErrorAttr(fieldName: 'email'); ?> value="<?php echo old(key: 'email') ?>">
-
-            <?php if (hasValidationError(fieldName: 'email')) : ?>
-                <small class="notise"><?php echo validationErrorMessage(fieldName: 'email'); ?></small>
-            <?php endif; ?>
+            <input class="form-input req_" type="text" placeholder="MacaulayCulkin@gmail.com" name="email">
         </label>
 
         <label class="form-label" for="">Password
             <div class="custom-placeholder">
-                <input class="form-input" type="text" placeholder=" " name="password" <?php echo validationErrorAttr(fieldName: 'password'); ?>>
+                <input class="form-input req_" type="password" placeholder=" " name="password">
                 <span class="placeholder-text">************</span>
             </div>
-
-            <?php if (hasValidationError(fieldName: 'password')) : ?>
-                <small class="notise"><?php echo validationErrorMessage(fieldName: 'password'); ?></small>
-            <?php endif; ?>
         </label>
 
         <label class="form-label" for="">Repeat password
             <div class="custom-placeholder">
-                <input class="form-input" type="text" placeholder=" " name="repeat-password">
+                <input class="form-input req_" type="password" placeholder=" " name="repeat-password">
                 <span class="placeholder-text">************</span>
             </div>
         </label>
 
         <div class="form-block">
-            <input class="form-checkbox" type="checkbox" id="customCheckbox" name="checkbox">
+            <input class="form-checkbox req_" type="checkbox" id="customCheckbox" name="checkbox">
             <label class="custom-checkbox-label" for="customCheckbox">I accept all user terms</label>
         </div>
 
@@ -74,13 +62,32 @@ checkGuest();
                     redirectToSignin();
                 } else {
                     alert("Registration failed");
-                    // Додаткова обробка помилки
+                    addErrorClassToRequiredInputs();
                 }
             } catch (error) {
                 console.error("Помилка при реєстрації", error);
             }
         }
     </script>
+
+    <script src="js/validation.js"></script>
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkbox = document.querySelector('.form-checkbox');
+
+            function validateCheckbox() {
+                if (!checkbox.checked) {
+                    checkbox.parentElement.classList.add('error');
+                } else {
+                    checkbox.parentElement.classList.remove('error');
+                }
+            }
+
+            validateCheckbox();
+            checkbox.addEventListener('change', validateCheckbox);
+        });
+    </script> -->
 </body>
 
 </html>

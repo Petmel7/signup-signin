@@ -23,13 +23,9 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
                     <img id="userAvatar" class="account-img" src="hack/<?php echo $user['avatar']; ?>" width="200px" height="200px" alt="<?php echo $user['name']; ?>">
 
-                    <input class="button-input" onchange="changePhoto()" type="file" id="avatar" name="avatar" accept="image/*" <?php echo validationErrorAttr(fieldName: 'avatar'); ?>>
+                    <input class="button-input" onchange="changePhoto()" type="file" id="avatar" name="avatar" accept="image/*">
 
                     <p class="change-photo__text">Change photo</p>
-
-                    <?php if (hasValidationError(fieldName: 'avatar')) : ?>
-                        <small class="notise"><?php echo validationErrorMessage(fieldName: 'avatar'); ?></small>
-                    <?php endif; ?>
                 </label>
             </div>
         </form>

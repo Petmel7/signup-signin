@@ -14,7 +14,9 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
 <body>
 
-    <ul class="message-block" id="messagesContainer"></ul>
+    <section class="container">
+        <ul class="message-block" id="messagesContainer"></ul>
+    </section>
 
     <script src="js/getMessageForAuthorizedUser.js"></script>
     <script>

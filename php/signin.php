@@ -5,21 +5,23 @@ $email = $_POST['email'] ?? null;
 $password = $_POST['password'] ?? null;
 $success = false;
 
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    addOldValue('email', $email);
-    addValidationError(fieldName: 'email', message: 'Неправильний формат пошти!');
-    setMessage(key: 'error', message: 'Помилка валідації');
-} else {
+if (isset($email) && isset($password)) {
     $user = findUser($email);
 
-    if (!$user) {
-        setMessage(key: 'error', message: "Користувача $email не знайдено!");
-    } elseif (!password_verify($password, $user['password'])) {
-        setMessage(key: 'error', message: "Неправильний пароль!");
+    if ($user) {
+        // Ви перевірили, що користувач з такою поштою існує
+        if (password_verify($password, $user['password'])) {
+            // Перевірка вірності пароля
+            $_SESSION['user']['id'] = $user['id'];
+            $_SESSION['user']['name'] = $user['name'];
+            $success = true;
+        } else {
+            // Неправильний пароль
+            // Можливо, ви також хочете встановити повідомлення про помилку
+        }
     } else {
-        $_SESSION['user']['id'] = $user['id'];
-        $_SESSION['user']['name'] = $user['name'];
-        $success = true;
+        // Користувача з такою поштою не знайдено
+        // Можливо, ви також хочете встановити повідомлення про помилку
     }
 }
 

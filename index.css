@@ -26,6 +26,12 @@ span {
     padding: 0;
 }
 
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
 
 
 /* Стилі для основного контейнера форми */
@@ -74,6 +80,18 @@ span {
     margin-top: 5px;
     padding: 8px;
 }
+
+.error {
+    border: 1px solid red;
+}
+
+.error::placeholder {
+    color: red;
+}
+
+/* .placeholder-hidden {
+    display: none;
+} */
 
 .form-input:focus {
     outline: 1px solid #68e2e4;
@@ -418,6 +436,7 @@ span {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -443,6 +462,7 @@ span {
 
 .account-button__delete {
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 
@@ -494,11 +514,13 @@ span {
 
 .search-friend {
     max-width: 50%;
+    padding-top: 20px;
+    text-align: center;
     margin: 0 auto;
 }
 
 .search-friend__input {
-    width: 100%;
+    width: 95%;
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -546,21 +568,13 @@ span {
 
 
 /* My friends */
-/* .search-friend {
-    position: relative;
-} */
 
 .my-friends__button {
-    /* position: absolute; */
-    top: 10%;
-    right: 5%px;
-    transform: translateY(-50%);
     border: none;
     padding: 3px 10px;
     border-radius: 4px;
     cursor: pointer;
-    width: 110px;
-    /* margin: 0 auto; */
+    margin-bottom: 20px;
 }
 
 .my-friends__button:hover {
@@ -573,12 +587,18 @@ span {
     max-height: 20px;
 } */
 
+.form-textarea {
+    display: flex;
+    flex-direction: column;
+}
+
 .message-textarea {
     resize: none;
     overflow-y: hidden;
     width: 100%;
     border-radius: 10px;
     padding: 10px;
+    margin-bottom: 10px;
 }
 
 .message-button {
@@ -586,6 +606,7 @@ span {
     cursor: pointer;
     padding: 10px 40px;
     border-radius: 4px;
+    max-width: 200px;
     margin: 0 auto;
     background: linear-gradient(to right, #68e2e4, #5545f4);
 }
@@ -603,22 +624,16 @@ span {
     margin-bottom: 20px;
 }
 
-/* .message-li {
-    
-} */
-
-.message-conteaner {
-    width: 400px;
-    margin: 0 auto;
-    max-height: 300px;
-    padding: 10px;
-}
-
 .message-a {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+.message-users {
+    display: flex;
+    justify-content: center;
 }
 
 .message-img {
@@ -639,7 +654,7 @@ span {
     align-items: center;
     justify-content: space-between;
     border: 1px solid #ccc;
-    width: 100%;
+    width: 60%;
     padding: 10px;
     border-radius: 0 10px 10px 10px;
 }

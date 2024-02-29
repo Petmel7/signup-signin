@@ -50,7 +50,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                                 <p class="message-name">${message.user.name}</p>
                                 <p class="message-a__text">${message.message_text}</p>
                             </div>
-                            <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">Delete</button>
+                            <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">🗑️</button>
                         </div>
                     </a>
                 </li>`;

@@ -3,6 +3,8 @@ require_once __DIR__ . '/actions/helpers.php';
 
 $loggedInUserId = currentUserId();
 
+echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script>";
+
 ?>
 
 <!DOCTYPE html>
@@ -10,16 +12,13 @@ $loggedInUserId = currentUserId();
 
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
-<script>
-    let loggedInUserId = <?php echo isset($loggedInUserId) ? json_encode($loggedInUserId) : 'null'; ?>;
-    console.log('loggedInUserId', loggedInUserId);
-</script>
-
 <body>
-    <form class="search-friend" id="searchForm">
-        <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="mySearchFriends()">
-        <button class="my-friends__button" type="button" onclick="redirectToMySubscribers()">Subscribers &rarr;</button>
-    </form>
+    <section class="">
+        <form class="search-friend" id="searchForm">
+            <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="mySearchFriends()">
+            <button class="my-friends__button" type="button" onclick="redirectToMySubscribers()">Subscribers</button>
+        </form>
+    </section>
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 

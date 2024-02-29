@@ -8,11 +8,12 @@ require_once __DIR__ . '/actions/helpers.php';
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
-    <form class="search-friend" id="searchForm">
-        <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="searchFriends()">
-    </form>
-
-    <button class="my-friends__button" type="button" onclick="redirectToMyFriends()">My friends &rarr;</button>
+    <section class="">
+        <form class="search-friend" id="searchForm">
+            <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="searchFriends()">
+            <button class="my-friends__button" type="button" onclick="redirectToMyFriends()">My friends</button>
+        </form>
+    </section>
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 
