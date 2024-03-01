@@ -19,27 +19,22 @@ checkGuest();
         </label>
 
         <label class="form-label" for="">E-mail
-            <input class="form-input req_" type="text" placeholder="MacaulayCulkin@gmail.com" name="email">
+            <input id="email" class="form-input req_" type="text" placeholder="MacaulayCulkin@gmail.com" name="email">
         </label>
 
         <label class="form-label" for="">Password
             <div class="custom-placeholder">
-                <input class="form-input req_" type="password" placeholder=" " name="password">
+                <input class="form-input password req_" type="password" placeholder=" " name="password">
                 <span class="placeholder-text">************</span>
             </div>
         </label>
 
         <label class="form-label" for="">Repeat password
             <div class="custom-placeholder">
-                <input class="form-input req_" type="password" placeholder=" " name="repeat-password">
+                <input class="form-input password req_" type="password" placeholder=" " name="repeat-password">
                 <span class="placeholder-text">************</span>
             </div>
         </label>
-
-        <div class="form-block">
-            <input class="form-checkbox req_" type="checkbox" id="customCheckbox" name="checkbox">
-            <label class="custom-checkbox-label" for="customCheckbox">I accept all user terms</label>
-        </div>
 
         <button type="button" onclick="signupSubmitForm()">Continue</button>
 
@@ -47,11 +42,30 @@ checkGuest();
     </form>
 
     <script src="js/forwarding.js"></script>
+    <script src="js/validation.js"></script>
 
     <script>
         async function signupSubmitForm() {
             const form = document.getElementById("signupForm");
             const formData = new FormData(form);
+            const emailInput = formData.get('email');
+            const password = formData.get('password');
+            const repeatPassword = formData.get('repeat-password');
+
+            if (!validateEmail(emailInput)) {
+                const input = document.getElementById("email");
+                alert("Email format is incorrect");
+                addRedBorderToInputEmail(input);
+                return;
+            }
+
+            if (password !== repeatPassword) {
+                const passwordInputs = document.querySelectorAll('.password');
+                alert("Passwords do not match");
+                addRedBorderToInputPassword(passwordInputs);
+                return;
+            }
+
             try {
                 const response = await fetch('php/signup.php', {
                     method: 'POST',
@@ -65,29 +79,11 @@ checkGuest();
                     addErrorClassToRequiredInputs();
                 }
             } catch (error) {
-                console.error("Помилка при реєстрації", error);
+                console.error("Error during registration", error);
             }
         }
     </script>
 
-    <script src="js/validation.js"></script>
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkbox = document.querySelector('.form-checkbox');
-
-            function validateCheckbox() {
-                if (!checkbox.checked) {
-                    checkbox.parentElement.classList.add('error');
-                } else {
-                    checkbox.parentElement.classList.remove('error');
-                }
-            }
-
-            validateCheckbox();
-            checkbox.addEventListener('change', validateCheckbox);
-        });
-    </script> -->
 </body>
 
 </html>

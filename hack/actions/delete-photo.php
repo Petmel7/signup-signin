@@ -20,6 +20,3 @@ if (isset($_SESSION['user']['id'])) {
 } else {
     echo "User session not found.";
 }
-
-$baseUrl = '/signup-signin';
-redirect($baseUrl . '/index.php?page=home');

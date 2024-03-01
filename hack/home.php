@@ -35,8 +35,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <p class="modal-content__text">Are you sure you want to delete this photo?</p>
-                <form action="hack/actions/delete-photo.php" method="post">
-                    <button class="account-button__delete" type="submit">Confirm</button>
+                <form>
+                    <button class="account-button__delete" type="button" onclick="comfirmSubmit()">Confirm</button>
                     <button class="account-button__delete" type="button" onclick="closeModal()">Cancel</button>
                 </form>
             </div>
@@ -55,7 +55,23 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
         <button class="account-button" onclick="logout(event)">Logout</button>
 
     </div>
-
+    <script>
+        async function comfirmSubmit() {
+            try {
+                const response = await fetch('hack/actions/delete-photo.php', {
+                    method: 'POST'
+                })
+                if (response.ok) {
+                    closeModal();
+                    redirectToHome();
+                } else {
+                    alert('There was an error deleting the photo')
+                }
+            } catch (error) {
+                console.log('error', error);
+            }
+        }
+    </script>
     <script src="js/logout.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/changePhoto.js"></script>

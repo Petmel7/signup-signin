@@ -277,6 +277,19 @@ span {
     background-color: #fff;
 }
 
+.custom-checkbox-label.errorCheckbox::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid red;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
 .custom-checkbox-label::after {
     content: '\2713';
     position: absolute;
@@ -363,6 +376,10 @@ span {
 .account-button__delete:hover {
     background-color: #c82333;
     color: #fff;
+}
+
+.no-messages__text {
+    text-align: center;
 }
 
 .me-messages__block {

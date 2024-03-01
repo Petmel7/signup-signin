@@ -12,10 +12,19 @@ async function getMessageForAuthorizedUser(currentUserId) {
             }),
         });
 
+        console.log('messagesResponse', messagesResponse)
+
         if (!messagesResponse.ok) {
             throw new Error('Failed to fetch messages');
         }
         const messagesData = await messagesResponse.json();
+
+        if (messagesData.message_authors = []) {
+            const noMessageContainer = document.getElementById('noMessageContainer');
+
+            noMessagesText = `<h3 class="no-messages__text" >No messages</h3>`;
+            noMessageContainer.innerHTML = noMessagesText;
+        }
 
         if (Array.isArray(messagesData.message_authors)) {
             const messages = messagesData.message_authors;
