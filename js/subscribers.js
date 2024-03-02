@@ -37,8 +37,6 @@ async function unsubscribe(targetUserId) {
             }),
         });
 
-        console.log('targetUserId', targetUserId);
-
         if (response.ok) {
             console.log('responseUnsubscribe', response);
             updateButtons(false);
@@ -68,7 +66,7 @@ async function getCurrentUserSubscriptions(targetUserId) {
             const subscriptions = await response.json();
 
             const subscribedUserIds = subscriptions.map(user => user.id);
-            
+
             const isSubscribed = subscribedUserIds.includes(targetUserId);
 
             updateButtons(isSubscribed);
@@ -88,12 +86,12 @@ function updateButtons(isSubscribed) {
     const subscribeButton = document.getElementById('subscribeButton');
     const unsubscribeButton = document.getElementById('unsubscribeButton');
 
-    if (isSubscribed) {
-        subscribeButton.style.display = 'none';
-        unsubscribeButton.style.display = 'block';
-    } else {
-        unsubscribeButton.style.display = 'none';
-        subscribeButton.style.display = 'block';
-    }
-    console.log('isSubscribed', isSubscribed)
-}
+    isSubscribed ? (
+        subscribeButton.style.display = 'none',
+        unsubscribeButton.style.display = 'block'
+    ) : (
+        unsubscribeButton.style.display = 'none',
+        subscribeButton.style.display = 'block'
+    );
+
+} 

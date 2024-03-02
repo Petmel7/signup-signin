@@ -459,6 +459,7 @@ span {
 
 .modal-content {
     position: absolute;
+    max-width: 200px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -466,7 +467,6 @@ span {
     padding: 20px;
     text-align: center;
     border-radius: 4px;
-    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -479,6 +479,9 @@ span {
 
 .account-button__delete {
     cursor: pointer;
+}
+
+.modal-content .account-button__delete:first-of-type {
     margin-bottom: 10px;
 }
 
@@ -691,8 +694,8 @@ span {
 }
 
 .message-a__button {
-    opacity: 0;
     border: none;
+    background: none;
     border-radius: 4px;
 }
 
@@ -701,10 +704,9 @@ span {
     color: #fff;
 }
 
-.message-a:hover .message-a__button {
-    opacity: 1;
+.modal-content .message-a__button:first-of-type {
+    margin-bottom: 10px;
 }
-
 
 .message-sender .message-a {
     display: flex;

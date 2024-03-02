@@ -29,8 +29,9 @@ if (isset($_GET['username'])) {
         </div>
     </section>
 
+    <script src="js/modal.js"></script>
     <script src="js/forwarding.js"></script>
-    <script src="js/аutoTextareaExpansion.js"></script>
+    <script src="js/autoTextareaExpansion.js"></script>
     <script src="js/sendMessages.js"></script>
     <script src="js/loadMessages.js"></script>
     <script src="js/deleteMessage.js"></script>

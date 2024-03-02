@@ -19,11 +19,11 @@ async function getMessageForAuthorizedUser(currentUserId) {
         }
         const messagesData = await messagesResponse.json();
 
-        if (messagesData.message_authors = []) {
+        if (messagesData.message_authors.length === 0) {
             const noMessageContainer = document.getElementById('noMessageContainer');
-
-            noMessagesText = `<h3 class="no-messages__text" >No messages</h3>`;
+            const noMessagesText = `<h3 class="no-messages__text" >There are no new messages</h3>`;
             noMessageContainer.innerHTML = noMessagesText;
+            return;
         }
 
         if (Array.isArray(messagesData.message_authors)) {

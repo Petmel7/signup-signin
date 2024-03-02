@@ -43,16 +43,23 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const messageClass = isSender ? 'message-sender' : 'message-recipient';
 
                 return `<li class="${messageClass}">
-                    <a class="message-a" href='index.php?page=user&username=${encodeURIComponent(message.user.name)}'>
-                        <img class="message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'> 
+                <div class="message-a">
+                    <a  href='index.php?page=user&username=${encodeURIComponent(message.user.name)}'>
+                        <img class="message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
+                    </a> 
                         <div class="message-div">
                             <div class="message-blk">
                                 <p class="message-name">${message.user.name}</p>
                                 <p class="message-a__text">${message.message_text}</p>
                             </div>
-                            <button class="message-a__button" onclick="deleteMessage(${message.id}, event)">🗑️</button>
+                            <button class="message-a__button" onclick="openModalDelete(${message.id})">🗑️</button>
+
+                            <div id="myModal" class="modal">
+                                <div class="modal-content" id="modalContent"></div>
+                            </div>
+
                         </div>
-                    </a>
+                    </div>
                 </li>`;
             }).join('');
 
@@ -67,3 +74,5 @@ async function loadMessages(loggedInUserId, recipientId) {
 }
 
 loadMessages(loggedInUserId, recipientId);
+
+
