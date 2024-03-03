@@ -1,11 +1,9 @@
 body {
     font-family: 'Roboto', sans-serif;
-    position: relative;
 }
 
 html,
 body {
-    height: 100%;
     margin: 0;
 }
 
@@ -628,6 +626,7 @@ span {
     border-radius: 4px;
     max-width: 200px;
     margin: 0 auto;
+    margin-bottom: 30px;
     background: linear-gradient(to right, #68e2e4, #5545f4);
 }
 
@@ -637,11 +636,12 @@ span {
 }
 
 .message-block {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .message-a {

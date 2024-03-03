@@ -39,6 +39,7 @@ async function loadMessages(loggedInUserId, recipientId) {
             const messagesHTML = messagesWithUserData.map(message => {
                 const senderId = message.sender_id;
                 const isSender = senderId === loggedInUserId;
+                console.log("loggedInUserId", loggedInUserId)
 
                 const messageClass = isSender ? 'message-sender' : 'message-recipient';
 

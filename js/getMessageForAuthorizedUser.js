@@ -68,8 +68,10 @@ async function getMessageForAuthorizedUser(currentUserId) {
 
                 return `
             <li class="message-conteaner">
-                <a class="message-users message-a" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.user.name)}'>
+                <div class="message-a">
+                    <a class="message-users" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.user.name)}'>
                     <img class="message-img__who-wrote message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
+                </a>
                     <div class="message-div">
                         <div class="message-blk">
                             <p class="message-name">${message.user.name}</p>
@@ -78,7 +80,7 @@ async function getMessageForAuthorizedUser(currentUserId) {
                         <span class="message-badge" style="display: ${unreadCount > 0 ? 'block' : 'none'}">${unreadCount > 10 ? '9+' : unreadCount}</span>
                         <button class="message-a__button" onclick="deleteUser(event)">🗑️</button>
                     </div>
-                </a>
+                </div>
             </li>`;
             }).join('');
 
