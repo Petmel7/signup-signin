@@ -636,17 +636,19 @@ span {
 }
 
 .message-block {
-    position: absolute;
     bottom: 0;
     width: 100%;
     max-width: 400px;
     max-height: 80vh;
-    overflow-y: auto;
+}
+
+.message {
+    padding-top: 50px;
+    margin: 0 auto;
 }
 
 .message-a {
     display: flex;
-    align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
 }
@@ -674,9 +676,13 @@ span {
     align-items: center;
     justify-content: space-between;
     border: 1px solid #ccc;
-    width: 60%;
+    max-width: 60%;
     padding: 10px;
     border-radius: 0 10px 10px 10px;
+}
+
+.message-div__name {
+    width: 100%;
 }
 
 .message-blk {
@@ -693,10 +699,18 @@ span {
     word-wrap: break-word;
 }
 
+.delete-chat {
+    margin-bottom: 20px;
+}
+
 .message-a__button {
     border: none;
     background: none;
     border-radius: 4px;
+}
+
+.delete-button {
+    margin-left: 10px;
 }
 
 .message-a__button:hover {

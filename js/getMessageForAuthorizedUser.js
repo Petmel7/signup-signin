@@ -1,6 +1,6 @@
 
 async function getMessageForAuthorizedUser(currentUserId) {
-    const messagesContainer = document.getElementById('messagesContainer');
+    const messagesContainer = document.getElementById('messagesContainerx');
     try {
         const messagesResponse = await fetch('hack/actions/get-message-for-authorized-user.php', {
             method: 'POST',
@@ -68,17 +68,22 @@ async function getMessageForAuthorizedUser(currentUserId) {
 
                 return `
             <li class="message-conteaner">
-                <div class="message-a">
+                <div class="message message-a">
                     <a class="message-users" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.user.name)}'>
                     <img class="message-img__who-wrote message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
                 </a>
-                    <div class="message-div">
+                    <div class="message-div__name message-div">
                         <div class="message-blk">
                             <p class="message-name">${message.user.name}</p>
                             <p class="message-a__text">Sent you a message...</p>
                         </div>
                         <span class="message-badge" style="display: ${unreadCount > 0 ? 'block' : 'none'}">${unreadCount > 10 ? '9+' : unreadCount}</span>
-                        <button class="message-a__button" onclick="deleteUser(event)">🗑️</button>
+
+                        <button class="message-a__button" data-userid="${message.user.id}" onclick="openModalDeleteAllChat(${message.user.id})">🗑️</button>
+
+                        <div id="myModal" class="modal">
+                            <div class="modal-content" id="modalContentAllChat"></div>
+                        </div>
                     </div>
                 </div>
             </li>`;
@@ -94,3 +99,4 @@ async function getMessageForAuthorizedUser(currentUserId) {
     }
 }
 getMessageForAuthorizedUser(currentUserId);
+

@@ -1,18 +1,10 @@
 <?php
 require_once __DIR__ . '/actions/helpers.php';
 
-// if (isset($_GET['username'])) {
-//     $username = $_GET['username'];
-//     $userData = getUserDataByUsername($username);
-//     $currentUserId = currentUserId();
-//     $recipientId = $userData['id'];
-
-// echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>";
-// echo "<script>let recipientId = " . json_encode($recipientId) . ";</script>";
-// }
-
 $currentUserId = currentUserId();
+
 echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>";
+
 ?>
 
 <!DOCTYPE html>
@@ -23,13 +15,15 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <body>
 
     <section class="container">
-        <ul class="message-block" id="messagesContainer"></ul>
+        <ul class="message-block" id="messagesContainerx"></ul>
         <div class="no-messages" id="noMessageContainer"></div>
     </section>
 
+    <script src="js/modal.js"></script>
     <script>
-        async function deleteUser(currentUserId, recipientId, event) {
+        async function deleteUserAllChat(currentUserId, recipientId, event) {
             event.preventDefault();
+            const clickedUserId = event.target.dataset.userid;
             try {
                 const response = await fetch('hack/messages/delete-all-messages.php', {
                     method: 'POST',
@@ -37,22 +31,27 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        // message_id: messageId,
                         sender_id: currentUserId,
-                        recipent_id: recipientId
+                        recipient_id: clickedUserId
                     }),
                 });
 
-                console.log("currentUserId", currentUserId)
-                console.log("recipientId", recipientId)
+                if (response.ok) {
+                    const result = await response.json();
 
-                getMessageForAuthorizedUser(currentUserId)
+                    refreshPage();
+                } else {
+                    console.log("response error");
+                }
 
             } catch (error) {
                 console.error('Error:', error);
             }
         }
-        // deleteUser(currentUserId, recipientId, event)
+
+        function refreshPage() {
+            window.location.reload();
+        }
     </script>
 
     <script src="js/getMessageForAuthorizedUser.js"></script>

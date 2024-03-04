@@ -53,7 +53,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                                 <p class="message-name">${message.user.name}</p>
                                 <p class="message-a__text">${message.message_text}</p>
                             </div>
-                            <button class="message-a__button" onclick="openModalDelete(${message.id})">🗑️</button>
+                            <button class="message-a__button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
 
                             <div id="myModal" class="modal">
                                 <div class="modal-content" id="modalContent"></div>
