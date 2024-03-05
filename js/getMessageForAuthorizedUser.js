@@ -1,6 +1,6 @@
 
 async function getMessageForAuthorizedUser(currentUserId) {
-    const messagesContainer = document.getElementById('messagesContainerx');
+    const messagesContainer = document.getElementById('messagesContainer');
     try {
         const messagesResponse = await fetch('hack/actions/get-message-for-authorized-user.php', {
             method: 'POST',
@@ -68,18 +68,18 @@ async function getMessageForAuthorizedUser(currentUserId) {
 
                 return `
             <li class="message-conteaner">
-                <div class="message message-a">
-                    <a class="message-users" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.user.name)}'>
-                    <img class="message-img__who-wrote message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
+                <div class="message messages">
+                    <a class="message-author" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.user.name)}'>
+                    <img class="message-author--avatar message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
                 </a>
-                    <div class="message-div__name message-div">
-                        <div class="message-blk">
-                            <p class="message-name">${message.user.name}</p>
-                            <p class="message-a__text">Sent you a message...</p>
+                    <div class="message-details">
+                        <div class="message-header">
+                            <p class="message-author--name">${message.user.name}</p>
+                            <p class="message-content">Sent you a message...</p>
                         </div>
                         <span class="message-badge" style="display: ${unreadCount > 0 ? 'block' : 'none'}">${unreadCount > 10 ? '9+' : unreadCount}</span>
 
-                        <button class="message-a__button" data-userid="${message.user.id}" onclick="openModalDeleteAllChat(${message.user.id})">🗑️</button>
+                        <button class="message-delete--button" data-userid="${message.user.id}" onclick="openModalDeleteAllChat(${message.user.id})">🗑️</button>
 
                         <div id="myModal" class="modal">
                             <div class="modal-content" id="modalContentAllChat"></div>

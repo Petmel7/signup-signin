@@ -15,7 +15,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <body>
 
     <section class="container">
-        <ul class="message-block" id="messagesContainerx"></ul>
+        <ul class="messages-container" id="messagesContainer"></ul>
         <div class="no-messages" id="noMessageContainer"></div>
     </section>
 

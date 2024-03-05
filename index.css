@@ -30,10 +30,7 @@ span {
     padding: 0 15px;
 }
 
-
-
 /* Стилі для основного контейнера форми */
-
 .bamboo {
     text-align: center;
     top: 40%;
@@ -86,10 +83,6 @@ span {
 .error::placeholder {
     color: red;
 }
-
-/* .placeholder-hidden {
-    display: none;
-} */
 
 .form-input:focus {
     outline: 1px solid #68e2e4;
@@ -145,13 +138,6 @@ span {
     /* Ховаємо стандартний інпут файлу */
 }
 
-/* .account-center {
-    margin: 0 auto;
-} */
-
-
-
-
 /* Стилізація для макету кнопки */
 .custom-file-upload {
     display: inline-block;
@@ -192,7 +178,7 @@ span {
 
 
 .account-title {
-    margin: 15px;
+    margin: 15 0px;
     font-size: 24px;
 }
 
@@ -214,12 +200,7 @@ span {
     background-color: #0056b3;
 }
 
-
-
-
-
 /* фгамщйурим */
-
 .custom-placeholder {
     position: relative;
 }
@@ -244,8 +225,6 @@ span {
 .form-input:focus+.placeholder-text {
     opacity: 0;
 }
-
-
 
 .form-block {
     display: flex;
@@ -309,9 +288,7 @@ span {
     opacity: 1;
 }
 
-
 /* change photo */
-
 .change-photo {
     text-align: center;
 }
@@ -351,15 +328,6 @@ span {
     opacity: 1;
 }
 
-
-
-
-/* Аccount button delete */
-/* .account-button__block {
-    display: flex;
-    flex-direction: column;
-} */
-
 .account-button__delete {
     background-color: #e0e0e0;
     color: #000;
@@ -378,6 +346,7 @@ span {
 
 .no-messages__text {
     text-align: center;
+    padding-top: 50px;
 }
 
 .me-messages__block {
@@ -427,9 +396,7 @@ span {
 }
 
 .message-badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: auto 0;
     background-color: red;
     color: white;
     border-radius: 50%;
@@ -440,8 +407,6 @@ span {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
-
-
 
 /* Modal delete cancel */
 .modal {
@@ -482,11 +447,6 @@ span {
 .modal-content .account-button__delete:first-of-type {
     margin-bottom: 10px;
 }
-
-
-
-
-
 
 .friends {
     margin-bottom: 20px;
@@ -529,7 +489,6 @@ span {
     font-weight: bold;
 }
 
-
 .search-friend {
     max-width: 50%;
     padding-top: 20px;
@@ -561,6 +520,7 @@ span {
     padding: 3px 10px;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 #subscribeButton {
@@ -584,9 +544,7 @@ span {
     background-color: #861924;
 }
 
-
 /* My friends */
-
 .my-friends__button {
     border: none;
     padding: 3px 10px;
@@ -600,14 +558,36 @@ span {
     color: #fff;
 }
 
-/* background: linear-gradient(to right, #68e2e4, #5545f4); */
-/* .message-textarea {
-    max-height: 20px;
-} */
-
-.form-textarea {
+.textarea-container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+
+    overflow-y: auto;
+    /* position: relative; */
+}
+
+.messages-container {
+    padding-top: 20px;
+    padding-bottom: 105px;
+
+    /* flex: 1; */
+    /* overflow-y: auto; */
+}
+
+.textarea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+
+    position: fixed;
+    bottom: 0;
+    width: 92%;
+    background-color: white;
+    z-index: 1;
+    max-width: 400px;
+    padding-bottom: 20px;
 }
 
 .message-textarea {
@@ -625,8 +605,8 @@ span {
     padding: 10px 40px;
     border-radius: 4px;
     max-width: 200px;
-    margin: 0 auto;
     margin-bottom: 30px;
+    margin: 0 auto;
     background: linear-gradient(to right, #68e2e4, #5545f4);
 }
 
@@ -635,25 +615,13 @@ span {
     background: linear-gradient(to right, #5545f4, #68e2e4);
 }
 
-.message-block {
-    bottom: 0;
-    width: 100%;
-    max-width: 400px;
-    max-height: 80vh;
-}
-
-.message {
-    padding-top: 50px;
-    margin: 0 auto;
-}
-
-.message-a {
+.messages {
     display: flex;
     margin-bottom: 10px;
     cursor: pointer;
 }
 
-.message-users {
+.message-author {
     display: flex;
     justify-content: center;
 }
@@ -666,12 +634,12 @@ span {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.message-img__who-wrote {
+.message-author--avatar {
     width: 50px;
     height: 50px;
 }
 
-.message-div {
+.message-body {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -681,20 +649,25 @@ span {
     border-radius: 0 10px 10px 10px;
 }
 
-.message-div__name {
+.message-details {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 0 10px 10px 10px;
 }
 
-.message-blk {
+.message-header {
     display: flex;
     flex-direction: column;
 }
 
-.message-name {
+.message-author--name {
     color: #000;
 }
 
-.message-a__text {
+.message-content {
     color: #272727;
     word-wrap: break-word;
 }
@@ -703,7 +676,7 @@ span {
     margin-bottom: 20px;
 }
 
-.message-a__button {
+.message-delete--button {
     border: none;
     background: none;
     border-radius: 4px;
@@ -713,21 +686,21 @@ span {
     margin-left: 10px;
 }
 
-.message-a__button:hover {
+.message-delete--button:hover {
     background-color: red;
     color: #fff;
 }
 
-.modal-content .message-a__button:first-of-type {
+.modal-content .message-delete--button:first-of-type {
     margin-bottom: 10px;
 }
 
-.message-sender .message-a {
+.message-sender .messages {
     display: flex;
     flex-direction: row-reverse;
 }
 
-.message-sender .message-div {
+.message-sender .message-body {
     border-radius: 10px 0 10px 10px;
     margin-right: 10px;
 }
@@ -736,6 +709,6 @@ span {
     margin: 0;
 }
 
-.message-recipient .message-div {
+.message-recipient .message-body {
     background-color: #eeeeee;
 }

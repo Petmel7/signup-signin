@@ -13,7 +13,7 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
-    <section class="">
+    <section>
         <form class="search-friend" id="searchForm">
             <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="mySearchSubscribers()">
         </form>

@@ -20,14 +20,12 @@ if (isset($_GET['username'])) {
 
 <body>
 
-    <section class="container">
-        <div class="message-block">
-            <ul id="messagesContainer"></ul>
+    <section class="container textarea-container">
+        <ul class="messages-container" id="messagesContainer"></ul>
 
-            <div class="form-textarea">
-                <textarea class="message-textarea search-friend__input" id="messageTextarea" placeholder="Write your message" rows="1"></textarea>
-                <button class="message-button" type="button" onclick="sendMessages('<?php echo $userData['id']; ?>', event)">Send</button>
-            </div>
+        <div class="textarea">
+            <textarea class="message-textarea search-friend__input" id="messageTextarea" placeholder="Write your message" rows="1"></textarea>
+            <button class="message-button" type="button" onclick="sendMessages('<?php echo $userData['id']; ?>', event)">Send</button>
         </div>
     </section>
 

@@ -44,21 +44,20 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const messageClass = isSender ? 'message-sender' : 'message-recipient';
 
                 return `<li class="${messageClass}">
-                <div class="message-a">
+                <div class="messages">
                     <a  href='index.php?page=user&username=${encodeURIComponent(message.user.name)}'>
                         <img class="message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
                     </a> 
-                        <div class="message-div">
-                            <div class="message-blk">
-                                <p class="message-name">${message.user.name}</p>
-                                <p class="message-a__text">${message.message_text}</p>
+                        <div class="message-body">
+                            <div class="message-header">
+                                <p class="message-author--name">${message.user.name}</p>
+                                <p class="message-content">${message.message_text}</p>
                             </div>
-                            <button class="message-a__button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
+                            <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
 
                             <div id="myModal" class="modal">
                                 <div class="modal-content" id="modalContent"></div>
                             </div>
-
                         </div>
                     </div>
                 </li>`;
