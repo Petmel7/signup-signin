@@ -21,7 +21,7 @@ if (isset($_GET['username'])) {
 <body>
 
     <section class="container textarea-container">
-        <ul class="messages-container" id="messagesContainer"></ul>
+        <ul class="messages-container" id="messagesContainer" id="myElement"></ul>
 
         <div class="textarea">
             <textarea class="message-textarea search-friend__input" id="messageTextarea" placeholder="Write your message" rows="1"></textarea>

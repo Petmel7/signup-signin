@@ -9,32 +9,15 @@ async function sendMessages(recipientId, event) {
         return;
     }
 
-    // try {
-    //     const response = await fetch('hack/messages/messages.php', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             sender_id: loggedInUserId,
-    //             recipient_id: recipientId,
-    //             message_text: messageText
-    //         }),
-    //     });
-
-    //     if (response.ok) {
-    //         loadMessages(loggedInUserId, recipientId);
-
-    //         messageTextarea.value = '';
-    //     } else {
-    //         alert('Failed to message');
-    //     }
-    // } catch (error) {
-    //     console.log(error);
-    //     alert('Error in fetch request');
-    // }
-
     try {
+        const messageTextarea = document.getElementById('messageTextarea');
+        const messageText = messageTextarea.value.trim();
+
+        if (messageText === '') {
+            alert('Please enter the text of the message.');
+            return;
+        }
+
         const response = await fetch('hack/messages/messages.php', {
             method: 'POST',
             headers: {
@@ -48,15 +31,13 @@ async function sendMessages(recipientId, event) {
         });
 
         if (response.ok) {
-            // Завантаження повідомлень
+            messageTextarea.value = '';
+
+            const messagesContainer = document.getElementById('messagesContainer');
+
             await loadMessages(loggedInUserId, recipientId);
 
-            // Прокручування контейнера у верхню позицію
-            const messagesContainer = document.getElementById('messagesContainer');
-            messagesContainer.scrollTop = 0;
-
-            // Очищення текстового поля повідомлення
-            messageTextarea.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         } else {
             alert('Failed to send message');
         }

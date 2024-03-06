@@ -561,18 +561,13 @@ span {
 .textarea-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-
-    overflow-y: auto;
-    /* position: relative; */
+    height: 85vh;
 }
 
 .messages-container {
     padding-top: 20px;
-    padding-bottom: 105px;
 
-    /* flex: 1; */
-    /* overflow-y: auto; */
+    overflow-y: auto;
 }
 
 .textarea {
@@ -584,7 +579,6 @@ span {
     position: fixed;
     bottom: 0;
     width: 92%;
-    background-color: white;
     z-index: 1;
     max-width: 400px;
     padding-bottom: 20px;
