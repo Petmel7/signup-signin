@@ -28,39 +28,32 @@ async function loadMessages(loggedInUserId, recipientId) {
         if (Array.isArray(messagesData.success)) {
             const messages = messagesData.success;
 
-            const messagesWithUserData = messages.map(message => {
+            const messagesHTML = messages.map(message => {
                 const sender = userData.find(user => user.id === message.sender_id);
-                return {
-                    ...message,
-                    user: sender
-                };
-            });
-
-            const messagesHTML = messagesWithUserData.map(message => {
-                const senderId = message.sender_id;
-                const isSender = senderId === loggedInUserId;
-                console.log("loggedInUserId", loggedInUserId)
-
+                const isSender = sender.id === loggedInUserId;
                 const messageClass = isSender ? 'message-sender' : 'message-recipient';
 
-                return `<li class="${messageClass}">
-                <div class="messages">
-                    <a  href='index.php?page=user&username=${encodeURIComponent(message.user.name)}'>
-                        <img class="message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
-                    </a> 
-                        <div class="message-body">
-                            <div class="message-header">
-                                <p class="message-author--name">${message.user.name}</p>
-                                <p class="message-content">${message.message_text}</p>
-                            </div>
-                            <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
+                const encodedUsername = encodeURIComponent(sender.name);
+                const avatarSrc = `hack/${sender.avatar}`;
 
-                            <div id="myModal" class="modal">
-                                <div class="modal-content" id="modalContent"></div>
+                return `
+                    <li class="${messageClass}">
+                        <div class="messages">
+                            <a href='index.php?page=user&username=${encodedUsername}'>
+                                <img class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+                            </a>
+                            <div class="message-body">
+                                <div class="message-header">
+                                    <p class="message-author--name">${sender.name}</p>
+                                    <p class="message-content">${message.message_text}</p>
+                                </div>
+                                <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
+                                <div id="myModal" class="modal">
+                                    <div class="modal-content" id="modalContent"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>`;
+                    </li>`;
             }).join('');
 
             messagesContainer.innerHTML = messagesHTML;
@@ -74,5 +67,3 @@ async function loadMessages(loggedInUserId, recipientId) {
 }
 
 loadMessages(loggedInUserId, recipientId);
-
-
