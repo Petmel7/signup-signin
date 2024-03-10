@@ -33,6 +33,10 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const isSender = sender.id === loggedInUserId;
                 const messageClass = isSender ? 'message-sender' : 'message-recipient';
 
+                const messageImg = document.getElementById("messageImg");
+                messageImg.style.display = isSender ? 'none' : 'block';
+
+
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
 
@@ -40,7 +44,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                     <li class="${messageClass}">
                         <div class="messages">
                             <a href='index.php?page=user&username=${encodedUsername}'>
-                                <img class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+                                <img id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
                             </a>
                             <div class="message-body">
                                 <div class="message-header">
