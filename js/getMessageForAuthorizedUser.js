@@ -158,6 +158,9 @@ async function getMessageForAuthorizedUser(currentUserId) {
 
                 console.log("shortMessageText", shortMessageText)
 
+                const visibilityStyle = unreadCount > 0 ? 'block' : 'none'
+                const unreadDisplay = unreadCount > 10 ? '9+' : unreadCount
+
                 return `
             <li class="message-conteaner">
                 <div class="message messages">
@@ -169,7 +172,7 @@ async function getMessageForAuthorizedUser(currentUserId) {
                             <p class="message-author--name">${message.user.name}</p>
                             <p class="message-content">${shortMessageText}</p>
                         </div>
-                        <span class="message-badge" style="display: ${unreadCount > 0 ? 'block' : 'none'}">${unreadCount > 10 ? '9+' : unreadCount}</span>
+                        <span class="message-badge" style="display: ${visibilityStyle}">${unreadDisplay}</span>
 
                         <button class="message-delete--button" data-userid="${message.user.id}" onclick="openModalDeleteAllChat(${message.user.id})">🗑️</button>
 
