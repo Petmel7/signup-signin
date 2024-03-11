@@ -20,7 +20,12 @@ if (isset($_GET['username'])) {
 
 <body>
 
+    <header class="user-header">
+        <h1 class="user-name"><?php echo $userData['name'] ?></h1>
+    </header>
+
     <section class="container textarea-container">
+
         <ul class="messages-container" id="messagesContainer" id="myElement"></ul>
 
         <div class="textarea">

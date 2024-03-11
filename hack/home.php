@@ -16,6 +16,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
+    <header class="user-header">
+        <h1 class="user-name">Home</h1>
+    </header>
+
     <div class="account">
         <form id="photoForm" enctype="multipart/form-data">
             <div class="change">
@@ -52,23 +56,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
         <button class="account-button" onclick="logout(event)">Logout</button>
 
     </div>
-    <script>
-        async function comfirmSubmit() {
-            try {
-                const response = await fetch('hack/actions/delete-photo.php', {
-                    method: 'POST'
-                })
-                if (response.ok) {
-                    closeModal();
-                    redirectToHome();
-                } else {
-                    alert('There was an error deleting the photo')
-                }
-            } catch (error) {
-                console.log('error', error);
-            }
-        }
-    </script>
+
+    <script src="js/comfirmSubmit.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/changePhoto.js"></script>

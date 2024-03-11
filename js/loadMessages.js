@@ -37,20 +37,31 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const isSender = sender.id === loggedInUserId;
                 const messageClass = isSender ? 'message-sender' : 'message-recipient';
                 const displayStyle = isSender ? 'none' : 'block';
-                const displayName = isSender ? 'none' : 'block';
 
                 const currentTime = new Date(message.timestamp).getTime();
 
                 // Перевіряємо, чи це новий відправник або чи минула хвилина з останнього відображення аватара
                 const showAvatar = message.sender_id !== lastSenderId ?? (currentTime - lastMessageTime > 60000);
+                const avatarDisplayStyle = showAvatar ? displayStyle : 'none';
                 const marginLeftStyle = showAvatar ? '0px' : '50px';
-                console.log("marginLeftStyle", marginLeftStyle);
+                const borderStyle = showAvatar ? '0 10px 10px 10px' : '10px';
+                const borderStyleSender = showAvatar ? '10px 0 10px 10px' : '10px';
+                const dynamicBorderStyle = isSender ? borderStyleSender : borderStyle;
 
-                // Якщо це новий відправник або минула хвилина, зберігаємо нові дані для порівняння з наступним повідомленням
                 if (showAvatar) {
                     lastSenderId = message.sender_id;
                     lastMessageTime = currentTime;
                 }
+
+                // Перетворення рядка в об'єкт дати
+                const sentAtDate = new Date(message.sent_at);
+
+                // Отримання годин і хвилин
+                const hours = sentAtDate.getHours();
+                const minutes = sentAtDate.getMinutes();
+
+                // Форматування годин і хвилин у рядок
+                const formattedTime = `${hours}:${minutes}`;
 
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
@@ -59,12 +70,12 @@ async function loadMessages(loggedInUserId, recipientId) {
         <li class="${messageClass}">
             <div class="messages">
                 <a href='index.php?page=user&username=${encodedUsername}'>
-                    <img style="display: ${showAvatar ? displayStyle : 'none'}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+                    <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
                 </a>
-                <div class="message-body" style="margin-left: ${marginLeftStyle}">
+                <div class="message-body" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
                     <div class="message-header">
-                        <p style="display: ${showAvatar ? displayName : 'none'}" class="message-author--name">${sender.name}</p>
                         <p class="message-content">${message.message_text}</p>
+                        <span class="message-date">${formattedTime}</span>
                     </div>
                     <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
                     <div id="myModal" class="modal">
@@ -74,7 +85,6 @@ async function loadMessages(loggedInUserId, recipientId) {
             </div>
         </li>`;
             }).join('');
-
 
             messagesContainer.innerHTML = messagesHTML;
 

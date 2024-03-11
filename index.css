@@ -186,7 +186,7 @@ span {
     display: block;
     margin-top: 15px;
     padding: 5px 20px;
-    background-color: #007bff;
+    background: linear-gradient(to right, #68e2e4, #5545f4);
     color: #fff;
     text-decoration: none;
     border: transparent;
@@ -197,7 +197,7 @@ span {
 }
 
 .account-button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(to right, #5545f4, #68e2e4);
 }
 
 /* фгамщйурим */
@@ -406,6 +406,7 @@ span {
     height: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     text-align: center;
+    margin-right: 10px;
 }
 
 /* Modal delete cancel */
@@ -561,7 +562,17 @@ span {
 .textarea-container {
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    height: 76vh;
+}
+
+.user-header {
+    padding: 10px 15px;
+    background: linear-gradient(to right, #68e2e4, #5545f4);
+}
+
+.user-name {
+    font-size: larger;
+    text-align: center;
 }
 
 .messages-container {
@@ -579,7 +590,6 @@ span {
     position: fixed;
     bottom: 0;
     width: 92%;
-    z-index: 1;
     max-width: 400px;
     padding-bottom: 20px;
 }
@@ -611,7 +621,7 @@ span {
 
 .messages {
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
@@ -640,13 +650,13 @@ span {
     border: 1px solid #ccc;
     max-width: 60%;
     padding: 10px;
-    border-radius: 0 10px 10px 10px;
 }
 
 .message-details {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 0 10px 10px 10px;
@@ -658,12 +668,24 @@ span {
 }
 
 .message-author--name {
-    color: #000;
+    color: black;
+    font-size: 17px;
+    font-weight: 500;
 }
 
 .message-content {
     color: #272727;
     word-wrap: break-word;
+}
+
+.message-date {
+    color: #000;
+    font-size: 12px;
+}
+
+.message-actions {
+    display: flex;
+    align-items: center;
 }
 
 .delete-chat {
@@ -674,6 +696,8 @@ span {
     border: none;
     background: none;
     border-radius: 4px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .delete-button {
@@ -685,8 +709,20 @@ span {
     color: #fff;
 }
 
-.modal-content .message-delete--button:first-of-type {
-    margin-bottom: 10px;
+.custom-delete--button {
+    border: none;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custom-delete--button:hover {
+    background-color: red;
+    color: #fff;
+}
+
+.modal-content .custom-delete--button:first-of-type {
+    margin-bottom: 7px;
 }
 
 .message-sender .messages {
@@ -695,7 +731,6 @@ span {
 }
 
 .message-sender .message-body {
-    border-radius: 10px 0 10px 10px;
     margin-right: 10px;
 }
 
