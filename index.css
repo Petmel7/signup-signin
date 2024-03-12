@@ -491,10 +491,10 @@ span {
 }
 
 .search-friend {
-    max-width: 50%;
+    /* max-width: 50%; */
     padding-top: 20px;
     text-align: center;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
 .search-friend__input {
@@ -592,6 +592,10 @@ span {
     width: 92%;
     max-width: 400px;
     padding-bottom: 20px;
+}
+
+.close-update--form {
+    border: none;
 }
 
 .message-textarea {
@@ -702,11 +706,6 @@ span {
 
 .delete-button {
     margin-left: 10px;
-}
-
-.message-delete--button:hover {
-    background-color: red;
-    color: #fff;
 }
 
 .custom-delete--button {

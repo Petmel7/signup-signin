@@ -60,6 +60,8 @@ async function getMessageForAuthorizedUser(currentUserId) {
                 const visibilityStyle = unreadCount > 0 ? 'block' : 'none';
                 const unreadDisplay = unreadCount > 10 ? '9+' : unreadCount;
 
+                const formattedTime = formatTime(message.sent_at);
+
                 return `
             <li class="message-conteaner">
                 <div class="message messages">
@@ -70,6 +72,7 @@ async function getMessageForAuthorizedUser(currentUserId) {
                         <div class="message-header">
                             <p class="message-author--name">${message.user.name}</p>
                             <p class="message-content">${shortMessageText}</p>
+                            <span class="message-date">${formattedTime}</span>
                         </div>
                         
                         <div class="message-actions">

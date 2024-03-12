@@ -53,15 +53,8 @@ async function loadMessages(loggedInUserId, recipientId) {
                     lastMessageTime = currentTime;
                 }
 
-                // Перетворення рядка в об'єкт дати
-                const sentAtDate = new Date(message.sent_at);
-
-                // Отримання годин і хвилин
-                const hours = sentAtDate.getHours();
-                const minutes = sentAtDate.getMinutes();
-
-                // Форматування годин і хвилин у рядок
-                const formattedTime = `${hours}:${minutes}`;
+                // Використання функції для форматування часу
+                const formattedTime = formatTime(message.sent_at);
 
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
@@ -77,7 +70,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                         <p class="message-content">${message.message_text}</p>
                         <span class="message-date">${formattedTime}</span>
                     </div>
-                    <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id})">🗑️</button>
+                    <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id})">&#8942;</button>
                     <div id="myModal" class="modal">
                         <div class="modal-content" id="modalContent"></div>
                     </div>

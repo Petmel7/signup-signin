@@ -20,6 +20,7 @@ function openModalDelete(messageId) {
     modalContent.innerHTML = `
         <button class="custom-delete--button" onclick="deleteMessage(${messageId}, event)">Delete</button>
         <button class="custom-delete--button" onclick="closeModal()">Cancel</button>
+        <button class="custom-delete--button" onclick="openUpdateForm(${messageId})">Update</button>
     `;
 }
 
@@ -32,3 +33,14 @@ function openModalDeleteAllChat(messageUserId) {
         <button class="custom-delete--button" onclick="closeModal()">Cancel</button>
     `;
 }
+
+// function openModalDeleteAllChat(messageUserId) {
+//     document.getElementById('myModal').style.display = 'block';
+//     const modalContent = document.getElementById('modalContentAllChat');
+//     modalContent.innerHTML = `
+//         <h3 class="delete-chat">Delete this chat?</h3>
+//         <button class="custom-delete--button" data-userid="${messageUserId}" onclick="deleteUserAllChat(${currentUserId}, ${messageUserId}, event)">Delete</button>
+//         <button class="custom-delete--button" onclick="closeModal()">Cancel</button>
+//     `;
+// }
+
