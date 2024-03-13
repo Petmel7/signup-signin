@@ -41,12 +41,49 @@ if (isset($_GET['username'])) {
     </section>
 
     <script>
-        function openUpdateForm() {
+        // function openUpdateFormAndCloseModal(messageId) {
+        //     openUpdateForm(messageId);
+        //     closeModal();
+        // }
+
+        async function openUpdateFormAndCloseModal(messageId) {
+
+            try {
+                const response = await fetch('hack/messages/get_update_messages.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: messageId,
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("data", data)
+                    const messageText = data.message_text.message_text;
+                    console.log("messageText->", messageText)
+                    openUpdateForm(messageId, messageText);
+                    closeModal();
+                } else {
+                    console.error('Не вдалося отримати дані з сервера');
+                }
+            } catch (error) {
+                console.error('Помилка:', error);
+            }
+        }
+
+        function openUpdateForm(messageId, messageText) {
             const openEditForm = document.getElementById("openEditForm");
             const hideForm = document.getElementById("hideForm");
+            const updateTextarea = document.getElementById('updateTextarea');
 
             openEditForm.style.display = 'block';
             hideForm.style.display = 'none';
+
+            updateTextarea.value = messageText;
+            console.log("messageText", messageText)
         }
 
         function closeUpdateForm() {
@@ -88,7 +125,6 @@ if (isset($_GET['username'])) {
                 console.log("error", error);
             }
         }
-        // updateMessages(messageId, event)
     </script>
     <script src="js/modal.js"></script>
     <script src="js/forwarding.js"></script>

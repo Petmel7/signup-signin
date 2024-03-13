@@ -720,9 +720,13 @@ span {
     color: #fff;
 }
 
-.modal-content .custom-delete--button:first-of-type {
+.custom-delete--button:not(:last-child) {
     margin-bottom: 7px;
 }
+
+/* .modal-content .custom-delete--button:first-of-type {
+    margin-bottom: 7px;
+} */
 
 .message-sender .messages {
     display: flex;
