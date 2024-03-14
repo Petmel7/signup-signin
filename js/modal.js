@@ -15,7 +15,6 @@ window.onclick = function (event) {
 }
 
 function openModalDelete(messageId, isSender) {
-    console.log("messageId-->", messageId)
     document.getElementById('myModal').style.display = 'block';
     const modalContent = document.getElementById('modalContent');
     modalContent.innerHTML = `
@@ -25,9 +24,7 @@ function openModalDelete(messageId, isSender) {
     `;
 
     const updateId = document.getElementById('updateId');
-
     isSender ? updateId.style.display = 'block' : updateId.style.display = 'none';
-    console.log("isSender", isSender)
 }
 
 function openModalDeleteAllChat(messageUserId) {

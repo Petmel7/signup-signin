@@ -28,33 +28,32 @@ async function loadMessages(loggedInUserId, recipientId) {
         if (Array.isArray(messagesData.success)) {
             const messages = messagesData.success;
 
-            // Зберігаємо id відправника останнього відображеного повідомлення і мітку часу
             let lastSenderId = null;
             let lastMessageTime = null;
 
             const messagesHTML = messages.map(message => {
                 const sender = userData.find(user => user.id === message.sender_id);
                 const isSender = sender.id === loggedInUserId;
-                const messageClass = isSender ? 'message-sender' : 'message-recipient';
-                const displayStyle = isSender ? 'none' : 'block';
+
+                const { messageClass, displayStyle } = getMessageStyles(isSender);
 
                 const currentTime = new Date(message.timestamp).getTime();
 
-                // Перевіряємо, чи це новий відправник або чи минула хвилина з останнього відображення аватара
                 const showAvatar = message.sender_id !== lastSenderId ?? (currentTime - lastMessageTime > 60000);
-                const avatarDisplayStyle = showAvatar ? displayStyle : 'none';
-                const marginLeftStyle = showAvatar ? '0px' : '50px';
-                const borderStyle = showAvatar ? '0 10px 10px 10px' : '10px';
-                const borderStyleSender = showAvatar ? '10px 0 10px 10px' : '10px';
-                const dynamicBorderStyle = isSender ? borderStyleSender : borderStyle;
+
+                const { avatarDisplayStyle, marginLeftStyle, dynamicBorderStyle } = calculateStyles(showAvatar, isSender, displayStyle);
 
                 if (showAvatar) {
                     lastSenderId = message.sender_id;
                     lastMessageTime = currentTime;
                 }
 
-                // Використання функції для форматування часу
                 const formattedTime = formatTime(message.sent_at);
+
+                // const dateElement = document.getElementById('dateElement'); // Замість 'dateElement' вкажіть ідентифікатор елемента, де потрібно відобразити дату
+                // const messageDate = new Date('2024-03-17'); // Припустимо, що у вас є дата повідомлення
+
+                // dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
 
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;

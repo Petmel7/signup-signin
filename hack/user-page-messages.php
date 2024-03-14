@@ -34,20 +34,20 @@ if (isset($_GET['username'])) {
         </div>
 
         <div class="textarea" id="openEditForm" style="display: none">
-            <button class="close-update--form" type="button" onclick="closeUpdateForm()">&times;</button>
-            <textarea class="message-textarea search-friend__input" id="updateTextarea" placeholder="Write your message" rows="1"></textarea>
-            <button class="message-button" type="button" onclick="updateMessages(messageId, event)">Update</button>
+            <div class="update-container">
+                <button class="close-update--form" type="button" onclick="closeUpdateForm()">&times;</button>
+                <textarea class="message-textarea search-friend__input" id="updateTextarea" placeholder="" rows="1"></textarea>
+            </div>
+
+            <div class="update-button" id="updateButton"></div>
+
         </div>
     </section>
 
     <script>
-        // function openUpdateFormAndCloseModal(messageId) {
-        //     openUpdateForm(messageId);
-        //     closeModal();
-        // }
+        let initialMessageText;
 
         async function openUpdateFormAndCloseModal(messageId) {
-
             try {
                 const response = await fetch('hack/messages/get_update_messages.php', {
                     method: 'POST',
@@ -55,23 +55,45 @@ if (isset($_GET['username'])) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        id: messageId,
+                        id: messageId
                     }),
                 });
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("data", data)
                     const messageText = data.message_text.message_text;
-                    console.log("messageText->", messageText)
+
+                    initialMessageText = messageText;
+
                     openUpdateForm(messageId, messageText);
                     closeModal();
+
+                    const updateButton = document.getElementById('updateButton');
+
+                    updateButton.innerHTML = `
+                        <button id="disabledButton" class="message-button" type="..." disabled onclick="updateMessages(${messageId}, event)">Update</button>
+                    `;
                 } else {
-                    console.error('Не вдалося отримати дані з сервера');
+                    console.error('Failed to get data from server');
                 }
             } catch (error) {
                 console.error('Помилка:', error);
             }
+        }
+
+        const updateTextarea = document.getElementById('updateTextarea');
+        updateTextarea.addEventListener('input', updateUpdateButtonState);
+
+        function updateUpdateButtonState() {
+            const disabledButton = document.getElementById('disabledButton')
+
+            const updatedMessageText = updateTextarea.value.trim();
+
+            const isMessageChanged = updatedMessageText !== initialMessageText;
+
+            isMessageChanged ?
+                disabledButton.removeAttribute('disabled') :
+                disabledButton.setAttribute('disabled', true);
         }
 
         function openUpdateForm(messageId, messageText) {
@@ -83,7 +105,6 @@ if (isset($_GET['username'])) {
             hideForm.style.display = 'none';
 
             updateTextarea.value = messageText;
-            console.log("messageText", messageText)
         }
 
         function closeUpdateForm() {
@@ -100,6 +121,7 @@ if (isset($_GET['username'])) {
             event.preventDefault();
             try {
                 const updateTextarea = document.getElementById('updateTextarea');
+
                 const updateMessageText = updateTextarea.value.trim();
 
                 const response = await fetch("hack/messages/update_messages.php", {
@@ -113,23 +135,23 @@ if (isset($_GET['username'])) {
                     }),
                 });
 
-                console.log("mesageId", mesageId);
-                console.log("updateMessageText", updateMessageText);
-
-
                 if (response.ok) {
                     const result = await response.json();
-                    console.log("result", result);
+
+                    closeUpdateForm();
+                    loadMessages(loggedInUserId, recipientId);
                 }
             } catch (error) {
                 console.log("error", error);
             }
         }
     </script>
+
     <script src="js/modal.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/autoTextareaExpansion.js"></script>
     <script src="utils/utilities.js"></script>
+    <script src="utils/style.js"></script>
     <script src="js/sendMessages.js"></script>
     <script src="js/loadMessages.js"></script>
     <script src="js/deleteMessage.js"></script>

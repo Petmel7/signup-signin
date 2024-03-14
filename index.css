@@ -594,8 +594,16 @@ span {
     padding-bottom: 20px;
 }
 
+.update-container {
+    position: relative;
+}
+
 .close-update--form {
     border: none;
+    position: absolute;
+    left: 95%;
+    bottom: 18px;
+    transform: translateX(-50%);
 }
 
 .message-textarea {
@@ -614,6 +622,7 @@ span {
     border-radius: 4px;
     max-width: 200px;
     margin-bottom: 30px;
+    display: block;
     margin: 0 auto;
     background: linear-gradient(to right, #68e2e4, #5545f4);
 }
@@ -621,6 +630,12 @@ span {
 .message-button:hover {
     color: #fff;
     background: linear-gradient(to right, #5545f4, #68e2e4);
+}
+
+.update-button .message-button[disabled] {
+    color: #ccc;
+    background: #f5f5f5;
+    cursor: not-allowed;
 }
 
 .messages {
