@@ -30,6 +30,7 @@ if (isset($_GET['username'])) {
         <button class="subscription-buttons" type="button" onclick="redirectionHisFriends('<?php echo $userData['name']; ?>')">His friends</button>
     </div>
 
+    <script src="js/toggleDarkMode.js"></script>
     <script src="js/subscribers.js"></script>
     <script src="js/forwarding.js"></script>
     <script>

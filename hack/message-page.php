@@ -22,6 +22,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
         <div class="no-messages" id="noMessageContainer"></div>
     </section>
 
+    <script src="js/toggleDarkMode.js"></script>
     <script src="js/modal.js"></script>
     <script src="utils/utilities.js"></script>
     <script src="js/deleteUserAllChat.js"></script>

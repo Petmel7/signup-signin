@@ -18,6 +18,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <body>
     <header class="user-header">
         <h1 class="user-name">Home</h1>
+        <span class="modeButton" id="whiteModeButton" onclick="toggleDarkMode()">&#127769;</span>
+        <span class="modeButton" id="darkModeButton" onclick="toggleDarkMode()">&#9728;</span>
     </header>
 
     <div class="account">
@@ -57,6 +59,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
     </div>
 
+    <script src="js/toggleDarkMode.js"></script>
     <script src="js/comfirmSubmit.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/forwarding.js"></script>

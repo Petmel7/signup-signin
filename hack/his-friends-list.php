@@ -22,6 +22,7 @@ if (isset($_GET['username'])) {
 
     <ul class="friend-list" id="friendsDataContainer"></ul>
 
+    <script src="js/toggleDarkMode.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/hisGetFriendsData.js"></script>
     <script src="js/generateFriendListItem.js"></script>

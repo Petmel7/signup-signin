@@ -21,6 +21,7 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
         <ul class="friend-list" id="friendsDataContainer"></ul>
     </section>
 
+    <script src="js/toggleDarkMode.js"></script>
     <script src="js/mySubscribersList.js"></script>
     <script src="js/generateFriendListItem.js"></script>
     <script src="js/mySearchFriends.js"></script>

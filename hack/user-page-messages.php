@@ -147,6 +147,7 @@ if (isset($_GET['username'])) {
         }
     </script>
 
+    <script src="js/toggleDarkMode.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/autoTextareaExpansion.js"></script>
