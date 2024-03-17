@@ -55,6 +55,11 @@ async function loadMessages(loggedInUserId, recipientId) {
 
                 // dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
 
+                const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
+                const backgroundSenderClass = isDarkModeEnabled ? 'background-sender--class' : '';
+                const backgroundClassMessages = isDarkModeEnabled ? 'background-messages' : '';
+                const recipientWhiteText = isDarkModeEnabled ? 'recipient-white-text' : '';
+
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
 
@@ -64,9 +69,9 @@ async function loadMessages(loggedInUserId, recipientId) {
                 <a href='index.php?page=user&username=${encodedUsername}'>
                     <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
                 </a>
-                <div class="message-body" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
+                <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
                     <div class="message-header">
-                        <p class="message-content">${message.message_text}</p>
+                        <p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>
                         <span class="message-date">${formattedTime}</span>
                     </div>
                     <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>

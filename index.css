@@ -17,9 +17,13 @@ body {
     /* color: #fff; */
 }
 
-.modeButton {
+.icon-block {
+    cursor: pointer;
+}
+
+.mode-icon {
     color: yellow;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 h1,
@@ -197,12 +201,16 @@ span {
     font-size: 24px;
 }
 
+/* .white-text {
+    color: #fff;
+} */
+
 .account-button {
     display: block;
     margin-top: 15px;
     padding: 5px 20px;
     background: linear-gradient(to right, #68e2e4, #5545f4);
-    color: #fff;
+    color: black;
     text-decoration: none;
     border: transparent;
     border-radius: 5px;
@@ -213,6 +221,7 @@ span {
 
 .account-button:hover {
     background: linear-gradient(to right, #5545f4, #68e2e4);
+    color: #fff;
 }
 
 /* фгамщйурим */
@@ -525,20 +534,47 @@ span {
     outline: 1px solid #68e2e4;
 }
 
+/* .background-input {
+    background-color: #555;
+    border: none;
+} */
+
+.background-input:focus {
+    outline: 1px solid #000;
+}
+
 .subscription {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
+.subscription-friends {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================= */
 .subscription-buttons {
-    border: none;
+    background-color: #e0e0e0;
+    color: #000;
     padding: 3px 10px;
-    border-radius: 4px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
+    width: 120px;
     margin-bottom: 20px;
 }
 
+.subscription-buttons:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+/* ============================== */
 #subscribeButton {
     color: #000;
     background-color: silver;
@@ -560,19 +596,26 @@ span {
     background-color: #861924;
 }
 
+/* ==================================== */
 /* My friends */
 .my-friends__button {
-    border: none;
+    background-color: #e0e0e0;
+    color: #000;
     padding: 3px 10px;
-    border-radius: 4px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
+    width: 120px;
     margin-bottom: 20px;
 }
 
 .my-friends__button:hover {
-    background-color: #ccc;
+    background-color: #555;
     color: #fff;
 }
+
+/* ========================================= */
 
 .textarea-container {
     display: flex;
@@ -581,6 +624,9 @@ span {
 }
 
 .user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     padding: 10px 15px;
     background: linear-gradient(to right, #68e2e4, #5545f4);
 }
@@ -717,6 +763,10 @@ span {
     font-size: 12px;
 }
 
+.white-text {
+    color: #fff;
+}
+
 .message-actions {
     display: flex;
     align-items: center;
@@ -773,4 +823,27 @@ span {
 
 .message-recipient .message-body {
     background-color: #eeeeee;
+}
+
+.message-sender .background-sender--class {
+    background: linear-gradient(to right, #68e2e4, #5545f4);
+    border: none;
+}
+
+.background-input {
+    background-color: #555;
+    border: none;
+}
+
+.background-messages {
+    border: none;
+}
+
+.message-recipient .background-messages {
+    background-color: #353535;
+    border: none;
+}
+
+.message-recipient .recipient-white-text {
+    color: #fff;
 }

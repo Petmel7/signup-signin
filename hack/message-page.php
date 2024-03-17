@@ -15,6 +15,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <body>
     <header class="user-header">
         <h1 class="user-name">Chats</h1>
+        <div class="icon-block">
+            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
+            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
+        </div>
     </header>
 
     <section class="container">

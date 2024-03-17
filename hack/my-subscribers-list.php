@@ -13,9 +13,17 @@ echo "<script>let loggedInUserId = " . json_encode($loggedInUserId) . ";</script
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
+    <header class="user-header">
+        <h1 class="user-name">My subscribers</h1>
+        <div class="icon-block">
+            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
+            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
+        </div>
+    </header>
+
     <section class="container">
         <form class="search-friend" id="searchForm">
-            <input class="search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="mySearchSubscribers()">
+            <input class="search-friend--add search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="mySearchSubscribers()">
         </form>
 
         <ul class="friend-list" id="friendsDataContainer"></ul>

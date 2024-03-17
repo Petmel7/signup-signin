@@ -22,6 +22,10 @@ if (isset($_GET['username'])) {
 
     <header class="user-header">
         <h1 class="user-name"><?php echo $userData['name'] ?></h1>
+        <div class="icon-block">
+            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
+            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
+        </div>
     </header>
 
     <section class="container textarea-container">
@@ -29,14 +33,14 @@ if (isset($_GET['username'])) {
         <ul class="messages-container" id="messagesContainer"></ul>
 
         <div class="textarea" id="hideForm">
-            <textarea class="message-textarea search-friend__input" id="messageTextarea" placeholder="Write your message" rows="1"></textarea>
+            <textarea class="search-friend--add message-textarea search-friend__input" id="messageTextarea" placeholder="Write your message" rows="1"></textarea>
             <button class="message-button" type="button" onclick="sendMessages('<?php echo $userData['id']; ?>', event)">Send</button>
         </div>
 
         <div class="textarea" id="openEditForm" style="display: none">
             <div class="update-container">
                 <button class="close-update--form" type="button" onclick="closeUpdateForm()">&times;</button>
-                <textarea class="message-textarea search-friend__input" id="updateTextarea" placeholder="" rows="1"></textarea>
+                <textarea class="search-friend--add message-textarea search-friend__input" id="updateTextarea" placeholder="" rows="1"></textarea>
             </div>
 
             <div class="update-button" id="updateButton"></div>

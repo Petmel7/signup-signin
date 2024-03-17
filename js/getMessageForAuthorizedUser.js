@@ -62,16 +62,21 @@ async function getMessageForAuthorizedUser(currentUserId) {
 
                 const formattedTime = formatTime(message.sent_at);
 
+                const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
+                const backgroundClassMessages = isDarkModeEnabled ? 'background-messages' : '';
+                const textColorClass = isDarkModeEnabled ? 'white-text' : '';
+                console.log('textColorClass', textColorClass);
+
                 return `
             <li class="message-conteaner">
                 <div class="message messages">
                     <a class="message-author" href='index.php?page=user-page-messages&username=${encodeURIComponent(message.user.name)}'>
                         <img class="message-author--avatar message-img" src='hack/${message.user.avatar}' alt='${message.user.name}'>
                     </a>
-                    <div class="message-details">
+                    <div class="search-friend--add message-details ${backgroundClassMessages}">
                         <div class="message-header">
-                            <p class="message-author--name">${message.user.name}</p>
-                            <p class="message-content">${shortMessageText}</p>
+                            <p class="${textColorClass} change-color--title message-author--name">${message.user.name}</p>
+                            <p class="${textColorClass} change-color--title message-content">${shortMessageText}</p>
                             <span class="message-date">${formattedTime}</span>
                         </div>
                         

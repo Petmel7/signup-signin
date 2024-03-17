@@ -18,8 +18,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <body>
     <header class="user-header">
         <h1 class="user-name">Home</h1>
-        <span class="modeButton" id="whiteModeButton" onclick="toggleDarkMode()">&#127769;</span>
-        <span class="modeButton" id="darkModeButton" onclick="toggleDarkMode()">&#9728;</span>
+        <div class="icon-block">
+            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
+            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
+        </div>
     </header>
 
     <div class="account">
@@ -45,7 +47,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
             </div>
         </div>
 
-        <h1 class="account-title"><?php echo $user['name']; ?></h1>
+        <h1 id="accountTitle" class="change-color--title account-title"><?php echo $user['name']; ?></h1>
 
         <div class="me-messages__block">
             <button onclick="redirectToMyMtssages()" class="me-messages">Messages
