@@ -65,7 +65,6 @@ async function getMessageForAuthorizedUser(currentUserId) {
                 const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
                 const backgroundClassMessages = isDarkModeEnabled ? 'background-messages' : '';
                 const textColorClass = isDarkModeEnabled ? 'white-text' : '';
-                console.log('textColorClass', textColorClass);
 
                 return `
             <li class="message-conteaner">

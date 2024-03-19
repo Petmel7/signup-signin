@@ -50,6 +50,8 @@ async function loadMessages(loggedInUserId, recipientId) {
 
                 const formattedTime = formatTime(message.sent_at);
 
+                const messageSentAtStyle = message.message_text.length < 15 ? 'message-heder--sent_at' : 'message-header';
+
                 // const dateElement = document.getElementById('dateElement'); // Замість 'dateElement' вкажіть ідентифікатор елемента, де потрібно відобразити дату
                 // const messageDate = new Date('2024-03-17'); // Припустимо, що у вас є дата повідомлення
 
@@ -70,7 +72,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                     <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
                 </a>
                 <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
-                    <div class="message-header">
+                    <div class="${messageSentAtStyle}">
                         <p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>
                         <span class="message-date">${formattedTime}</span>
                     </div>
@@ -90,6 +92,9 @@ async function loadMessages(loggedInUserId, recipientId) {
         }
     } catch (error) {
         console.error('Error in fetch request', error);
+    }
+    return {
+
     }
 }
 

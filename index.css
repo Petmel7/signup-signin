@@ -461,6 +461,10 @@ span {
     align-items: center;
 }
 
+.modal-change--theme {
+    background-color: #353535;
+}
+
 .modal-content__text {
     margin-bottom: 20px;
 }
@@ -638,7 +642,6 @@ span {
 
 .messages-container {
     padding-top: 20px;
-
     overflow-y: auto;
 }
 
@@ -747,6 +750,15 @@ span {
     flex-direction: column;
 }
 
+.message-heder--sent_at {
+    display: flex;
+    align-items: baseline;
+}
+
+.message-heder--sent_at .message-content {
+    margin-right: 5px;
+}
+
 .message-author--name {
     color: black;
     font-size: 17px;
@@ -837,6 +849,7 @@ span {
 
 .background-messages {
     border: none;
+    background-color: #353535;
 }
 
 .message-recipient .background-messages {

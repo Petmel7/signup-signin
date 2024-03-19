@@ -61,6 +61,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
     </div>
 
+    </script>
     <script src="js/toggleDarkMode.js"></script>
     <script src="js/comfirmSubmit.js"></script>
     <script src="js/logout.js"></script>
