@@ -56,15 +56,16 @@ async function getMessageForAuthorizedUser(currentUserId) {
             const messagesHTML = uniqueFilterUsers.reverse().map(message => {
                 const unreadCount = messageCounts[message.sender_id] ?? 0;
                 const shortMessageText = message.message_text.length > 25 ? message.message_text.substring(0, 25) + '...' : message.message_text;
+                const formattedTime = formatTime(message.sent_at);
 
                 const visibilityStyle = unreadCount > 0 ? 'block' : 'none';
                 const unreadDisplay = unreadCount > 10 ? '9+' : unreadCount;
 
-                const formattedTime = formatTime(message.sent_at);
-
-                const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
-                const backgroundClassMessages = isDarkModeEnabled ? 'background-messages' : '';
-                const textColorClass = isDarkModeEnabled ? 'white-text' : '';
+                const {
+                    textColorClass,
+                    backgroundClassMessages,
+                    modalThemeStyle
+                } = calculateStylesLocalStorage();
 
                 return `
             <li class="message-conteaner">
@@ -76,7 +77,7 @@ async function getMessageForAuthorizedUser(currentUserId) {
                         <div class="message-header">
                             <p class="${textColorClass} change-color--title message-author--name">${message.user.name}</p>
                             <p class="${textColorClass} change-color--title message-content">${shortMessageText}</p>
-                            <span class="message-date">${formattedTime}</span>
+                            <span class="message-date--style">${formattedTime}</span>
                         </div>
                         
                         <div class="message-actions">
@@ -85,7 +86,7 @@ async function getMessageForAuthorizedUser(currentUserId) {
                         </div>
 
                         <div id="myModal" class="modal">
-                            <div class="modal-content" id="modalContentAllChat"></div>
+                            <div class="modal-content ${modalThemeStyle}" id="modalContentAllChat"></div>
                         </div>
                     </div>
                 </div>

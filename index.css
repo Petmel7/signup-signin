@@ -451,7 +451,7 @@ span {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: 20px;
     text-align: center;
     border-radius: 4px;
@@ -461,7 +461,11 @@ span {
     align-items: center;
 }
 
-.modal-change--theme {
+.modal-content--white {
+    background-color: #fff;
+}
+
+.modal-content--dark {
     background-color: #353535;
 }
 
@@ -772,6 +776,11 @@ span {
 
 .message-date {
     color: #000;
+    font-size: 12px;
+}
+
+.message-date--style {
+    color: #aaaaaa;
     font-size: 12px;
 }
 

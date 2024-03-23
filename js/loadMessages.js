@@ -34,6 +34,7 @@ async function loadMessages(loggedInUserId, recipientId) {
             const messagesHTML = messages.map(message => {
                 const sender = userData.find(user => user.id === message.sender_id);
                 const isSender = sender.id === loggedInUserId;
+                const formattedTime = formatTime(message.sent_at);
 
                 const { messageClass, displayStyle } = getMessageStyles(isSender);
 
@@ -41,14 +42,16 @@ async function loadMessages(loggedInUserId, recipientId) {
 
                 const showAvatar = message.sender_id !== lastSenderId ?? (currentTime - lastMessageTime > 60000);
 
-                const { avatarDisplayStyle, marginLeftStyle, dynamicBorderStyle } = calculateStyles(showAvatar, isSender, displayStyle);
+                const {
+                    avatarDisplayStyle,
+                    marginLeftStyle,
+                    dynamicBorderStyle
+                } = calculateStyles(showAvatar, isSender, displayStyle);
 
                 if (showAvatar) {
                     lastSenderId = message.sender_id;
                     lastMessageTime = currentTime;
                 }
-
-                const formattedTime = formatTime(message.sent_at);
 
                 const messageSentAtStyle = message.message_text.length < 15 ? 'message-heder--sent_at' : 'message-header';
 
@@ -57,10 +60,13 @@ async function loadMessages(loggedInUserId, recipientId) {
 
                 // dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
 
-                const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
-                const backgroundSenderClass = isDarkModeEnabled ? 'background-sender--class' : '';
-                const backgroundClassMessages = isDarkModeEnabled ? 'background-messages' : '';
-                const recipientWhiteText = isDarkModeEnabled ? 'recipient-white-text' : '';
+                const {
+                    backgroundSenderClass,
+                    backgroundClassMessages,
+                    recipientWhiteText,
+                    messageDateStyleDisplay,
+                    modalThemeStyle
+                } = calculateStylesLocalStorage(isSender);
 
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
@@ -74,11 +80,11 @@ async function loadMessages(loggedInUserId, recipientId) {
                 <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
                     <div class="${messageSentAtStyle}">
                         <p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>
-                        <span class="message-date">${formattedTime}</span>
+                        <span class="${messageDateStyleDisplay}">${formattedTime}</span>
                     </div>
                     <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
                     <div id="myModal" class="modal">
-                        <div class="modal-content" id="modalContent"></div>
+                        <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
                     </div>
                 </div>
             </div>

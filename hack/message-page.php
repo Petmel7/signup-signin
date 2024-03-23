@@ -16,8 +16,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
     <header class="user-header">
         <h1 class="user-name">Chats</h1>
         <div class="icon-block">
-            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
-            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
+            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkModeAndRefresh()">&#9728;</span>
+            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkModeAndRefresh()">&#127769;</span>
         </div>
     </header>
 
@@ -26,12 +26,11 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
         <div class="no-messages" id="noMessageContainer"></div>
     </section>
 
-    <!-- <script src="js/toggleDarkMode.js"></script> -->
     <script src="js/modal.js"></script>
     <script src="utils/utilities.js"></script>
     <script src="js/deleteUserAllChat.js"></script>
-    <script src="js/loadMessages.js"></script>
-    <script type="module" src="js/getMessageForAuthorizedUser.js"></script>
+    <script src="js/getMessageForAuthorizedUser.js"></script>
+    <script src="utils/style.js"></script>
     <script src="js/toggleDarkMode.js"></script>
 
 </body>
