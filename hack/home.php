@@ -40,12 +40,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
         <button class="account-button__delete" onclick="openModal()">Delete photo</button>
 
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <button class="account-button__delete" type="button" onclick="comfirmSubmit()">Confirm</button>
-                <button class="account-button__delete" type="button" onclick="closeModal()">Cancel</button>
-            </div>
-        </div>
+        <div id="myModal" class="modal"></div>
 
         <h1 id="accountTitle" class="change-color--title account-title"><?php echo $user['name']; ?></h1>
 
@@ -61,6 +56,7 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 
     </div>
 
+    <!-- <script src="utils/style.js"></script> -->
     <script src="js/toggleDarkMode.js"></script>
     <script src="js/comfirmSubmit.js"></script>
     <script src="js/logout.js"></script>

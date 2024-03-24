@@ -1,6 +1,20 @@
 
+const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
+const modalThemeStyle = isDarkModeEnabled ? 'modal-content--dark' : 'modal-content--white';
+const textColorClass = isDarkModeEnabled ? 'white-text' : '';
+
+// const { modalThemeStyle, textColorClass } = calculateStylesLocalStorage();
+
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
+    const modal = document.querySelector('.modal');
+
+    modal.innerHTML = `
+        <div id="modalContent" class="modal-content ${modalThemeStyle}">
+            <button class="account-button__delete" type="button" onclick="comfirmSubmit()">Confirm</button>
+            <button class="account-button__delete" type="button" onclick="closeModal()">Cancel</button>
+        </div>
+    `;
 }
 
 function closeModal() {
@@ -13,9 +27,6 @@ window.onclick = function (event) {
         modal.style.display = 'none';
     }
 }
-
-const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
-const textColorClass = isDarkModeEnabled ? 'white-text' : '';
 
 function openModalDelete(messageId, isSender) {
     document.getElementById('myModal').style.display = 'block';

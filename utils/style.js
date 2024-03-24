@@ -44,13 +44,3 @@ function calculateStylesLocalStorage(isSender) {
         modalThemeStyle
     }
 }
-
-// const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
-
-// const textColorClass = isDarkModeEnabled ? 'white-text' : '';
-// const backgroundSenderClass = isDarkModeEnabled ? 'background-sender--class' : '';
-// const backgroundClassMessages = isDarkModeEnabled ? 'background-messages' : '';
-// const recipientWhiteText = isDarkModeEnabled ? 'recipient-white-text' : '';
-// const messageDateStyle = isDarkModeEnabled ? 'message-date--style' : 'message-date';
-// const messageDateStyleDisplay = isSender ? 'message-date' : messageDateStyle;
-// const modalThemeStyle = isDarkModeEnabled ? 'modal-content--dark' : 'modal-content--white';

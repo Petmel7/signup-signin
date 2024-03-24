@@ -13,6 +13,15 @@ if (isset($_GET['username'])) {
 <?php include_once __DIR__ . '/../components/head.php'; ?>
 
 <body>
+
+    <header class="user-header">
+        <h1 class="user-name">His subscribers</h1>
+        <div class="icon-block">
+            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
+            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
+        </div>
+    </header>
+
     <section class="container">
         <form class="search-friend" id="searchForm">
             <input class="search-friend--add search-friend__input" type="text" id="searchInput" name="searchInput" placeholder="Search" required oninput="hisSearchSubscribers(<?php echo $userData['id']; ?>)">

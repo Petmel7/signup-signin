@@ -2,13 +2,28 @@
 function changeInputStyle(isDarkModeEnabled) {
     const searchFriendAdd = document.querySelector('.search-friend--add');
     if (searchFriendAdd) {
-        if (isDarkModeEnabled) {
-            searchFriendAdd.classList.add('background-input');
-        } else {
-            searchFriendAdd.classList.remove('background-input');
-        }
+        isDarkModeEnabled ? (
+            searchFriendAdd.classList.add('background-input')
+        ) : (
+            searchFriendAdd.classList.remove('background-input')
+        );
+
     }
 }
+
+// function cangeModalStyle() {
+//     const modalContent = document.getElementById('modalContent');
+//     if (modalContent) {
+//         isDarkModeEnabled ? (
+//             modalContent.classList.add('modal-content--dark'),
+//             modalContent.classList.remove('modal-content--white')
+//         ) : (
+//             modalContent.classList.remove('modal-content--dark'),
+//             modalContent.classList.add('modal-content--white')
+//         );
+
+//     }
+// }
 
 function toggleDarkMode() {
     const body = document.body;
@@ -39,6 +54,7 @@ function toggleDarkMode() {
 
     // Зміна стилю введення
     changeInputStyle(isDarkModeEnabled);
+    // cangeModalStyle(isDarkModeEnabled);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -63,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Зміна стилю введення
     changeInputStyle(isDarkModeEnabled);
+    // cangeModalStyle(isDarkModeEnabled);
 });
 
 function toggleDarkModeAndRefresh() {

@@ -61,6 +61,21 @@ function currentUser(): array|bool
     return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
 }
 
+// function currentUserTest(): array|bool
+// {
+//     $pdo = getPDO();
+
+//     if (!isset($_SESSION['user'])) {
+//         return false;
+//     }
+
+//     $userId = $_SESSION['user']['id'] ?? null;
+
+//     $stmt = $pdo->prepare("SELECT * FROM messages WHERE id = :id");
+//     $stmt->execute(['id' => $userId]);
+//     return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+// }
+
 function currentUserId(): ?int
 {
     $pdo = getPDO();

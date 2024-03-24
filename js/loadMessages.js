@@ -79,6 +79,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                 </a>
                 <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
                     <div class="${messageSentAtStyle}">
+                        <div id="imageHtml"></div>
                         <p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>
                         <span class="${messageDateStyleDisplay}">${formattedTime}</span>
                     </div>
