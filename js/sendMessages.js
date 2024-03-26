@@ -1,4 +1,3 @@
-// import { loadMessages } from './loadMessages.js';
 
 async function sendMessages(recipientId, event) {
     event.preventDefault();
@@ -50,3 +49,5 @@ async function sendMessages(recipientId, event) {
 
     return;
 }
+
+

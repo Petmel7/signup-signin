@@ -56,84 +56,6 @@ if (isset($_GET['username'])) {
         </div>
     </section>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("imagesButton").addEventListener("click", function() {
-                addImages();
-            });
-        });
-
-        async function addImages() {
-
-            const imagesForm = document.getElementById('imagesForm');
-            const formData = new FormData(imagesForm);
-
-            try {
-                const response = await fetch('hack/messages/add_images.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        sender_id: loggedInUserId,
-                        recipient_id: recipientId,
-                        image_url: formData
-                    })
-                });
-
-                console.log('loggedInUserId', loggedInUserId);
-                console.log('recipientId', recipientId);
-                console.log('formData', formData);
-
-                const result = await response.json();
-
-                if (result) {
-                    // const imageHtml = document.getElementById('imageHtml');
-                    // imageHtml.innerHTML = `
-                    //     <img style="" id="userImge" class="" ${mesage.image_url} ?>" alt="image">
-                    // `;
-                    console.log('result', result);
-                } else {
-                    alert("Failed to add image");
-                }
-
-            } catch (error) {
-                console.log("error", error);
-            }
-        }
-
-
-
-
-        // document.getElementById('imagesButton').addEventListener('click', function() {
-        //     var imageInput = document.getElementById('addImages');
-        //     var imageFile = imageInput.files[0]; // Отримання першого обраного файлу
-
-        //     if (imageFile) {
-        //         var formData = new FormData();
-        //         formData.append('image', imageFile);
-        //         formData.append('sender_id', loggedInUserId);
-        //         formData.append('recipient_id', recipientId);
-
-        //         // Відправлення formData на сервер за допомогою fetch
-        //         fetch('hack/messages/add_images.php', {
-        //                 method: 'POST',
-        //                 body: formData
-        //             })
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 console.log(data); // Результат з сервера
-        //                 // Тут ви можете виконати додаткові дії в залежності від відповіді сервера
-        //             })
-        //             .catch(error => {
-        //                 console.error('Error:', error);
-        //             });
-        //     } else {
-        //         console.error('No image selected');
-        //     }
-        // });
-    </script>
-
     <script src="js/updateMessages.js"></script>
     <script src="js/toggleDarkMode.js"></script>
     <script src="js/modal.js"></script>
@@ -145,6 +67,44 @@ if (isset($_GET['username'])) {
     <script src="js/sendMessages.js"></script>
     <script src="js/deleteMessage.js"></script>
     <script src="js/markMessageAsViewed.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("imagesButton").addEventListener("click", function() {
+                addImages();
+            });
+        });
+
+        async function addImages() {
+            const imagesForm = document.getElementById('imagesForm');
+            const formData = new FormData(imagesForm);
+
+            formData.append('sender_id', loggedInUserId);
+            formData.append('recipient_id', recipientId);
+
+            try {
+                const response = await fetch('hack/messages/add_images.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result) {
+                    console.log('result', result);
+                    // const imageHtml = document.getElementById('imageHtml');
+                    // imageHtml.innerHTML = `
+                    //     <img style="" id="userImge" class="" ${message.image_url} ?>" alt="image">
+                    // `;
+                } else {
+                    alert("Failed to add image");
+                }
+
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
+    </script>
 
 </body>
 

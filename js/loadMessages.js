@@ -36,6 +36,8 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const isSender = sender.id === loggedInUserId;
                 const formattedTime = formatTime(message.sent_at);
 
+                console.log('sender', sender);
+
                 const { messageClass, displayStyle } = getMessageStyles(isSender);
 
                 const currentTime = new Date(message.timestamp).getTime();
@@ -52,13 +54,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                     lastSenderId = message.sender_id;
                     lastMessageTime = currentTime;
                 }
-
-                const messageSentAtStyle = message.message_text.length < 15 ? 'message-heder--sent_at' : 'message-header';
-
-                // const dateElement = document.getElementById('dateElement'); // Замість 'dateElement' вкажіть ідентифікатор елемента, де потрібно відобразити дату
-                // const messageDate = new Date('2024-03-17'); // Припустимо, що у вас є дата повідомлення
-
-                // dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
+                const messageSentAtClass = message.message_text && message.message_text.length < 15 ? 'message-heder--sent_at' : 'message-header';
 
                 const {
                     backgroundSenderClass,
@@ -72,24 +68,24 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const avatarSrc = `hack/${sender.avatar}`;
 
                 return `
-        <li class="${messageClass}">
-            <div class="messages">
-                <a href='index.php?page=user&username=${encodedUsername}'>
-                    <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
-                </a>
-                <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
-                    <div class="${messageSentAtStyle}">
-                        <div id="imageHtml"></div>
-                        <p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>
-                        <span class="${messageDateStyleDisplay}">${formattedTime}</span>
-                    </div>
-                    <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
-                    <div id="myModal" class="modal">
-                        <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
+            <li class="${messageClass}">
+                <div class="messages">
+                    <a href='index.php?page=user&username=${encodedUsername}'>
+                        <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+                    </a>
+                    <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}">
+                        <div class="${messageSentAtClass}">
+                            <img style="" id="userImge" class="" ${message.image_url} ?>" alt="image">
+                            <p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>
+                            <span class="${messageDateStyleDisplay}">${formattedTime}</span>
+                        </div>
+                        <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>`;
+            </li>`;
             }).join('');
 
             messagesContainer.innerHTML = messagesHTML;
@@ -106,3 +102,9 @@ async function loadMessages(loggedInUserId, recipientId) {
 }
 
 loadMessages(loggedInUserId, recipientId);
+
+
+// const dateElement = document.getElementById('dateElement'); // Замість 'dateElement' вкажіть ідентифікатор елемента, де потрібно відобразити дату
+// const messageDate = new Date('2024-03-17'); // Припустимо, що у вас є дата повідомлення
+
+// dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
