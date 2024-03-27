@@ -55,7 +55,11 @@ async function getMessageForAuthorizedUser(currentUserId) {
 
             const messagesHTML = uniqueFilterUsers.reverse().map(message => {
                 const unreadCount = messageCounts[message.sender_id] ?? 0;
-                const shortMessageText = message.message_text.length > 25 ? message.message_text.substring(0, 25) + '...' : message.message_text;
+
+                const shortMessageText = message.message_text !== null ?
+                    (message.message_text.length > 25 ? message.message_text.substring(0, 25) + '...' : message.message_text)
+                    : 'image';
+
                 const formattedTime = formatTime(message.sent_at);
 
                 const visibilityStyle = unreadCount > 0 ? 'block' : 'none';

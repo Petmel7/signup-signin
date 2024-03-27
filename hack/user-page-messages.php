@@ -90,12 +90,9 @@ if (isset($_GET['username'])) {
 
                 const result = await response.json();
 
-                if (result) {
+                if ('success' in result) {
                     console.log('result', result);
-                    // const imageHtml = document.getElementById('imageHtml');
-                    // imageHtml.innerHTML = `
-                    //     <img style="" id="userImge" class="" ${message.image_url} ?>" alt="image">
-                    // `;
+                    loadMessages(loggedInUserId, recipientId);
                 } else {
                     alert("Failed to add image");
                 }

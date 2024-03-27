@@ -37,7 +37,7 @@ function saveMessageWithImage($targetFile, $senderId, $recipientId)
 
         $stmt->execute();
 
-        return ['success' => 'Message sent successfully'];
+        return ['success' => ['Message sent successfully']];
     } catch (PDOException $e) {
         return ['error' => $e->getMessage()];
     } finally {
@@ -46,3 +46,38 @@ function saveMessageWithImage($targetFile, $senderId, $recipientId)
         }
     }
 }
+
+
+
+
+
+
+
+// function saveMessageWithImage($targetFile, $senderId, $recipientId)
+// {
+//     try {
+//         $conn = getPDO();
+
+//         $sentAt = date('Y-m-d H:i:s');
+
+//         $sql = "INSERT INTO messages (sender_id, recipient_id, image_url, sent_at) 
+//         VALUES (:sender_id, :recipient_id, :image_url, :sent_at)";
+
+//         $stmt = $conn->prepare($sql);
+
+//         $stmt->bindParam(':sender_id', $senderId, PDO::PARAM_INT);
+//         $stmt->bindParam(':recipient_id', $recipientId, PDO::PARAM_INT);
+//         $stmt->bindParam(':image_url', $targetFile, PDO::PARAM_STR);
+//         $stmt->bindParam(':sent_at', $sentAt, PDO::PARAM_STR);
+
+//         $stmt->execute();
+
+//         return ['success' => 'Message sent successfully'];
+//     } catch (PDOException $e) {
+//         return ['error' => $e->getMessage()];
+//     } finally {
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
+// }

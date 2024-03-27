@@ -37,29 +37,6 @@ function uploadFile(array $file, string $prefix = ''): string
     return "uploads/$fileName";
 }
 
-// function uploadFile(string $file, string $prefix = ''): string
-// {
-//     $uploadPath = __DIR__ . '/../uploads';
-
-//     if (!is_dir($uploadPath)) {
-//         mkdir($uploadPath, 0777, true);
-//     }
-
-//     // Отримання розширення файлу з ім'ям файлу
-//     $ext = pathinfo($file, PATHINFO_EXTENSION);
-
-//     // Формування нового унікального імені файлу
-//     $fileName = $prefix . '_' . time() . ".$ext";
-
-//     // Переміщення файлу в директорію завантажень
-//     if (!move_uploaded_file($file, "{$uploadPath}/{$fileName}")) {
-//         die('Помилка при загрузці файла на сервер!');
-//     }
-
-//     // Повернення шляху до завантаженого файлу
-//     return "uploads/$fileName";
-// }
-
 function findUser(string $email): array|bool
 {
     $pdo = getPDO();

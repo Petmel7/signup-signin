@@ -773,6 +773,13 @@ span {
     word-wrap: break-word;
 }
 
+.image-url {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
 .message-date {
     color: #000;
     font-size: 12px;
@@ -850,7 +857,7 @@ span {
     border: none;
 }
 
-.background-input {
+.message-sender .background-input {
     background-color: #555;
     border: none;
 }
