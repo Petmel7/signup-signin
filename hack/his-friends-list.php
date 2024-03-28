@@ -16,10 +16,8 @@ if (isset($_GET['username'])) {
 
     <header class="user-header">
         <h1 class="user-name">His friends</h1>
-        <div class="icon-block">
-            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
-            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
-        </div>
+
+        <?php include_once __DIR__ . '/../components/html.php'; ?>
     </header>
 
     <section class="container">

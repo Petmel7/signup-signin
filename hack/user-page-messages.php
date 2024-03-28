@@ -22,9 +22,10 @@ if (isset($_GET['username'])) {
 
     <header class="user-header">
         <h1 class="user-name"><?php echo $userData['name'] ?></h1>
+
         <div class="icon-block">
-            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkModeAndRefresh()">&#9728;</span>
-            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkModeAndRefresh()">&#127769;</span>
+            <span class="mode-icon material-symbols-outlined" id="whiteModeIcon" onclick="toggleDarkModeAndRefresh()">wb_sunny</span>
+            <span class="mode-icon--dark material-symbols-outlined" id="darkModeIcon" onclick="toggleDarkModeAndRefresh()">brightness_3</span>
         </div>
     </header>
 
@@ -35,14 +36,14 @@ if (isset($_GET['username'])) {
         <div class="textarea" id="hideForm">
             <form id="imagesForm" enctype="multipart/form-data">
                 <label class="add-images">
-                    <input id="addImages" class="" type="file" name="image" accept="image/*">
-
-                    <button id="imagesButton" class="images-button" type="button">Send</button>
+                    <span class="material-symbols-outlined custom-file--uploadImage">cloud_upload</span>
+                    <input id="addImages" type="file" name="image" accept="image/*" style="display: none;" onchange="handleImageChange()">
                 </label>
             </form>
 
             <textarea class="search-friend--add message-textarea search-friend__input" id="messageTextarea" placeholder="Write your message" rows="1"></textarea>
-            <button class="message-button" type="button" onclick="sendMessages('<?php echo $userData['id']; ?>', event)">Send</button>
+            <button id="messageButton" class="message-button" type="button" onclick="sendMessages('<?php echo $userData['id']; ?>', event)">Send</button>
+            <button id="imagesButton" class="message-button images-button" type="button" style="display: none;">Send</button>
         </div>
 
         <div class="textarea" id="openEditForm" style="display: none">
@@ -91,14 +92,52 @@ if (isset($_GET['username'])) {
                 const result = await response.json();
 
                 if ('success' in result) {
-                    console.log('result', result);
-                    loadMessages(loggedInUserId, recipientId);
+                    const messagesContainer = document.getElementById('messagesContainer');
+                    await loadMessages(loggedInUserId, recipientId);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 } else {
                     alert("Failed to add image");
                 }
 
             } catch (error) {
                 console.log("error", error);
+            }
+        }
+    </script>
+
+    <script>
+        function handleImageChange() {
+            const fileInput = document.getElementById('addImages');
+            const imagesButton = document.getElementById('imagesButton');
+            const messageButton = document.getElementById('messageButton');
+            const messageTextarea = document.getElementById('messageTextarea');
+
+            if (fileInput.files.length > 0) {
+                imagesButton.style.display = 'block';
+                messageButton.style.display = 'none';
+            } else {
+                imagesButton.style.display = 'none';
+                messageButton.style.display = 'block';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('messageTextarea').addEventListener('click', function() {
+                handleMesageChange()
+            })
+        })
+
+        function handleMesageChange() {
+            const imagesButton = document.getElementById('imagesButton');
+            const messageButton = document.getElementById('messageButton');
+            const messageTextarea = document.getElementById('messageTextarea');
+
+            if (messageTextarea.value.trim() !== '') {
+                messageButton.style.display = 'none';
+                imagesButton.style.display = 'block';
+            } else {
+                messageButton.style.display = 'block';
+                imagesButton.style.display = 'none';
             }
         }
     </script>

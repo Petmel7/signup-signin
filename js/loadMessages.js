@@ -65,34 +65,12 @@ async function loadMessages(loggedInUserId, recipientId) {
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
 
-                //     const imageSrc = `${message.image_url}`;
-
-                //     const messageContent = message.image_url ? '' : `<p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>`;
-                //     const backgroundImage = message.image_url ? imageSrc : '';
-
-                //     return `
-                // <li class="${messageClass}">
-                //     <div class="messages">
-                //         <a href='index.php?page=user&username=${encodedUsername}'>
-                //             <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
-                //         </a>
-                //         <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}" style="background-image: url(${backgroundImage}>
-                //             <div class="${messageSentAtClass}">
-                //                 ${messageContent}
-                //                 <span class="${messageDateStyleDisplay}">${formattedTime}</span>
-                //             </div>
-                //             <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
-                //             <div id="myModal" class="modal">
-                //                 <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
-                //             </div>
-                //         </div>
-                //     </div>
-                // </li>`;
-                // }).join('');
-
                 const imageSrc = `hack/${message.image_url}`;
                 const messageContent = message.image_url ? '' : `<p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>`;
-                const backgroundImage = message.image_url ? `background-image: url(${imageSrc});` : '';
+                const backgroundImage = message.image_url ? `background-image: url(${imageSrc})` : '';
+
+                const backgroundImageSize = message.image_url ? 'max-width: 60%; width: 100%; max-height: 60%; height: 200px;' : '';
+                const backgroundSizeCover = message.image_url ? 'background-size: cover; background-position: center center;' : ''
 
                 return `
     <li class="${messageClass}">
@@ -100,7 +78,8 @@ async function loadMessages(loggedInUserId, recipientId) {
             <a href='index.php?page=user&username=${encodedUsername}'>
                 <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
             </a>
-            <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; background-size: cover;">
+            <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; ${backgroundImageSize}; ${backgroundSizeCover}">
+            
                 <div class="${messageSentAtClass}">
                     ${messageContent}
                     <span class="${messageDateStyleDisplay}">${formattedTime}</span>
@@ -109,6 +88,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                 <div id="myModal" class="modal">
                     <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
                 </div>
+                
             </div>
         </div>
     </li>`;
@@ -134,3 +114,5 @@ loadMessages(loggedInUserId, recipientId);
 // const messageDate = new Date('2024-03-17'); // Припустимо, що у вас є дата повідомлення
 
 // dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
+
+// &#8942;

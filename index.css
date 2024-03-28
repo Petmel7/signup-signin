@@ -26,6 +26,11 @@ body {
     font-size: 18px;
 }
 
+.mode-icon--dark {
+    color: #ccc;
+    font-size: 18px;
+}
+
 h1,
 h2,
 h3,
@@ -541,10 +546,10 @@ span {
     outline: 1px solid #68e2e4;
 }
 
-/* .background-input {
+.background-input {
     background-color: #555;
     border: none;
-} */
+}
 
 .background-input:focus {
     outline: 1px solid #000;
@@ -629,6 +634,39 @@ span {
     flex-direction: column;
     height: 76vh;
 }
+
+.add-images {
+    position: relative;
+}
+
+.custom-file--uploadImage {
+
+    color: #ccc;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+.add-images {
+    position: absolute;
+    right: 10px;
+    bottom: 72px;
+}
+
+.message-textarea {
+    padding-right: 40px;
+}
+
+/* .images-button {
+    
+} */
 
 .user-header {
     display: flex;
@@ -735,7 +773,8 @@ span {
     justify-content: space-between;
     border: 1px solid #ccc;
     max-width: 60%;
-    padding: 10px;
+    padding: 7px;
+    padding-left: 10px;
 }
 
 .message-details {

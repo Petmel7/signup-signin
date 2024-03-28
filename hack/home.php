@@ -18,10 +18,8 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
 <body>
     <header class="user-header">
         <h1 class="user-name">Home</h1>
-        <div class="icon-block">
-            <span class="mode-icon" id="whiteModeIcon" onclick="toggleDarkMode()">&#9728;</span>
-            <span class="mode-icon--dark" id="darkModeIcon" onclick="toggleDarkMode()">&#127769;</span>
-        </div>
+
+        <?php include_once __DIR__ . '/../components/html.php'; ?>
     </header>
 
     <div class="account">
@@ -52,11 +50,10 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
             <button class="friends" type="button" onclick="forwarding()">Search friends</button>
         </div>
 
-        <button class="account-button" onclick="logout(event)">Logout</button>
+        <button class="account-button material-symbols-outlined" onclick="logout(event)">logout</button>
 
     </div>
 
-    <!-- <script src="utils/style.js"></script> -->
     <script src="js/toggleDarkMode.js"></script>
     <script src="js/comfirmSubmit.js"></script>
     <script src="js/logout.js"></script>
