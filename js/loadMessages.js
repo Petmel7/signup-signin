@@ -59,8 +59,11 @@ async function loadMessages(loggedInUserId, recipientId) {
                     backgroundClassMessages,
                     recipientWhiteText,
                     messageDateStyleDisplay,
-                    modalThemeStyle
+                    modalThemeStyle,
+                    mesageButtonStyle
                 } = calculateStylesLocalStorage(isSender);
+
+                console.log('mesageButtonStyle', mesageButtonStyle);
 
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
@@ -84,7 +87,7 @@ async function loadMessages(loggedInUserId, recipientId) {
                     ${messageContent}
                     <span class="${messageDateStyleDisplay}">${formattedTime}</span>
                 </div>
-                <button class="message-delete--button delete-button" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
+                <button class="message-delete--button delete-button ${mesageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
                 <div id="myModal" class="modal">
                     <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
                 </div>

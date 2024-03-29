@@ -3,16 +3,21 @@ const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
 const modalThemeStyle = isDarkModeEnabled ? 'modal-content--dark' : 'modal-content--white';
 const textColorClass = isDarkModeEnabled ? 'white-text' : '';
 
-// const { modalThemeStyle, textColorClass } = calculateStylesLocalStorage();
-
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
     const modal = document.querySelector('.modal');
 
     modal.innerHTML = `
         <div id="modalContent" class="modal-content ${modalThemeStyle}">
-            <button class="account-button__delete" type="button" onclick="comfirmSubmit()">Confirm</button>
-            <button class="account-button__delete" type="button" onclick="closeModal()">Cancel</button>
+            <form class="custom-form" id="photoForm" enctype="multipart/form-data">
+                <label for="avatar" class="">
+                    <span class="custom-change custom-delete--button ${textColorClass}">Change</span>
+                </label>
+                <input class="button-input" onchange="changePhoto()" type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
+            </form>
+
+            <button class="custom-delete--button ${textColorClass}" type="button" onclick="comfirmSubmit()">Delete</button>
+            <button class="custom-delete--button ${textColorClass}" type="button" onclick="closeModal()">Cancel</button>
         </div>
     `;
 }

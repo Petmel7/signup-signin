@@ -23,28 +23,20 @@ echo "<script>let currentUserId = " . json_encode($currentUserId) . ";</script>"
     </header>
 
     <div class="account">
-        <form id="photoForm" enctype="multipart/form-data">
-            <div class="change">
-                <label class="change-photo">
+        <div class="account-block">
+            <img id="userAvatar" class="account-img" src="hack/<?php echo $user['avatar']; ?>" width="200px" height="200px" alt="<?php echo $user['name']; ?>">
+        </div>
 
-                    <img id="userAvatar" class="account-img" src="hack/<?php echo $user['avatar']; ?>" width="200px" height="200px" alt="<?php echo $user['name']; ?>">
-
-                    <input class="button-input" onchange="changePhoto()" type="file" id="avatar" name="avatar" accept="image/*">
-
-                    <p class="change-photo__text">Change photo</p>
-                </label>
-            </div>
-        </form>
-
-        <button class="account-button__delete" onclick="openModal()">Delete photo</button>
+        <button class="material-symbols-outlined photo-camera" onclick="openModal()">photo_camera</button>
 
         <div id="myModal" class="modal"></div>
 
         <h1 id="accountTitle" class="change-color--title account-title"><?php echo $user['name']; ?></h1>
 
         <div class="me-messages__block">
-            <button onclick="redirectToMyMtssages()" class="me-messages">Messages
-                <span class="me-messages__span">🔔</span>
+            <button onclick="redirectToMyMtssages()" class="me-messages">
+                <p class="me-messages--text">Messages</p>
+                <span class="material-symbols-outlined" style="font-size: 18px;">notifications</span>
                 <span class="badge"></span>
             </button>
             <button class="friends" type="button" onclick="forwarding()">Search friends</button>

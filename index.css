@@ -9,12 +9,10 @@ body {
 
 body {
     background-color: #fff;
-    /* color: #000 */
 }
 
 .dark-mode {
     background-color: #272727;
-    /* color: #fff; */
 }
 
 .icon-block {
@@ -41,7 +39,9 @@ p,
 a,
 svg,
 use,
-span {
+span,
+label,
+form {
     list-style-type: none;
     text-decoration: none;
     margin: 0;
@@ -159,7 +159,6 @@ span {
 /* Загальні стилі для інпута файлу */
 .button-input {
     display: none;
-    /* Ховаємо стандартний інпут файлу */
 }
 
 /* Стилізація для макету кнопки */
@@ -205,10 +204,6 @@ span {
     margin: 15 0px;
     font-size: 24px;
 }
-
-/* .white-text {
-    color: #fff;
-} */
 
 .account-button {
     display: block;
@@ -318,57 +313,37 @@ span {
 }
 
 /* change photo */
-.change-photo {
-    text-align: center;
-}
 
-.change {
-    position: relative;
-    overflow: hidden;
-}
-
-.change:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 25%;
-    width: 200px;
-    height: 200px;
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    border-radius: 50%;
-}
-
-.change-photo__text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    color: #fff;
-    font-size: 24px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    cursor: pointer;
-}
-
-.change:hover .change-photo__text {
-    opacity: 1;
+.account-block {
+    margin-bottom: 10px;
 }
 
 .account-button__delete {
     background-color: #e0e0e0;
     color: #000;
-    padding: 3px 10px;
+    padding: 0px 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    width: 110px;
+    background: none;
 }
 
 .account-button__delete:hover {
+    background-color: #c82333;
+    color: #fff;
+}
+
+.photo-camera {
+    background-color: #e0e0e0;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.photo-camera:hover {
     background-color: #c82333;
     color: #fff;
 }
@@ -386,6 +361,9 @@ span {
 }
 
 .me-messages {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
     background-color: #e0e0e0;
     color: #000;
@@ -402,15 +380,12 @@ span {
     color: #fff;
 }
 
-.me-messages__span {
-    font-weight: 700;
-    color: #c82333;
-}
+/* .me-messages--text {} */
 
 .badge {
     position: absolute;
     top: -5px;
-    right: 150px;
+    right: 145px;
     background-color: red;
     color: white;
     border-radius: 50%;
@@ -527,10 +502,8 @@ span {
 }
 
 .search-friend {
-    /* max-width: 50%; */
     padding-top: 20px;
     text-align: center;
-    /* margin: 0 auto; */
 }
 
 .search-friend__input {
@@ -568,7 +541,6 @@ span {
     align-items: center;
 }
 
-/* ============================= */
 .subscription-buttons {
     background-color: #e0e0e0;
     color: #000;
@@ -586,7 +558,6 @@ span {
     color: #fff;
 }
 
-/* ============================== */
 #subscribeButton {
     color: #000;
     background-color: silver;
@@ -608,8 +579,6 @@ span {
     background-color: #861924;
 }
 
-/* ==================================== */
-/* My friends */
 .my-friends__button {
     background-color: #e0e0e0;
     color: #000;
@@ -626,8 +595,6 @@ span {
     background-color: #555;
     color: #fff;
 }
-
-/* ========================================= */
 
 .textarea-container {
     display: flex;
@@ -663,10 +630,6 @@ span {
 .message-textarea {
     padding-right: 40px;
 }
-
-/* .images-button {
-    
-} */
 
 .user-header {
     display: flex;
@@ -850,6 +813,10 @@ span {
     cursor: pointer;
 }
 
+.message-button--light {
+    color: #aaaaaa;
+}
+
 .delete-button {
     margin-left: 10px;
 }
@@ -870,9 +837,14 @@ span {
     margin-bottom: 7px;
 }
 
-/* .modal-content .custom-delete--button:first-of-type {
+.custom-form {
     margin-bottom: 7px;
-} */
+}
+
+.custom-change {
+    font-size: 13.5px;
+    padding: 2px 5px;
+}
 
 .message-sender .messages {
     display: flex;

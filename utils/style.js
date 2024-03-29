@@ -34,6 +34,7 @@ function calculateStylesLocalStorage(isSender) {
     const messageDateStyle = isDarkModeEnabled ? 'message-date--style' : 'message-date';
     const messageDateStyleDisplay = isSender ? 'message-date' : messageDateStyle;
     const modalThemeStyle = isDarkModeEnabled ? 'modal-content--dark' : 'modal-content--white';
+    const mesageButtonStyle = (isSender && isDarkModeEnabled) ? '' : 'message-button--light';
 
     return {
         textColorClass,
@@ -41,6 +42,7 @@ function calculateStylesLocalStorage(isSender) {
         backgroundClassMessages,
         recipientWhiteText,
         messageDateStyleDisplay,
-        modalThemeStyle
+        modalThemeStyle,
+        mesageButtonStyle
     }
 }
