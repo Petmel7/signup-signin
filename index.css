@@ -817,6 +817,18 @@ form {
     color: #aaaaaa;
 }
 
+/* .image-time--style {
+    vertical-align: bottom;
+} */
+
+/* .message-header .image-time--style {
+    vertical-align: bottom;
+} */
+
+.image-button--style {
+    color: #000;
+}
+
 .delete-button {
     margin-left: 10px;
 }

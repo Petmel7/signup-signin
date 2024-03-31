@@ -63,8 +63,6 @@ async function loadMessages(loggedInUserId, recipientId) {
                     mesageButtonStyle
                 } = calculateStylesLocalStorage(isSender);
 
-                console.log('mesageButtonStyle', mesageButtonStyle);
-
                 const encodedUsername = encodeURIComponent(sender.name);
                 const avatarSrc = `hack/${sender.avatar}`;
 
@@ -74,6 +72,8 @@ async function loadMessages(loggedInUserId, recipientId) {
 
                 const backgroundImageSize = message.image_url ? 'max-width: 60%; width: 100%; max-height: 60%; height: 200px;' : '';
                 const backgroundSizeCover = message.image_url ? 'background-size: cover; background-position: center center;' : ''
+                const imageButtonStyle = message.image_url ? 'image-button--style' : '';
+                // const imageTimeStyle = message.image_url ? 'image-time--style' : '';
 
                 return `
     <li class="${messageClass}">
@@ -85,9 +85,9 @@ async function loadMessages(loggedInUserId, recipientId) {
             
                 <div class="${messageSentAtClass}">
                     ${messageContent}
-                    <span class="${messageDateStyleDisplay}">${formattedTime}</span>
+                    <span class="${messageDateStyleDisplay} ${imageButtonStyle}">${formattedTime}</span>
                 </div>
-                <button class="message-delete--button delete-button ${mesageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
+                <button class="message-delete--button delete-button ${mesageButtonStyle} ${imageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
                 <div id="myModal" class="modal">
                     <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
                 </div>
