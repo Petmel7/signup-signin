@@ -1,21 +1,17 @@
 <?php
 require_once '../actions/helpers.php';
 
-// Отримати дані з AJAX-запиту
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (isset($data['name']) && isset($data['user_id'])) {
     $name = $data['name'];
     $user_id = $data['user_id'];
 
-    // Викликати функцію для пошуку підписок в базі даних
     $hisSubscriptions = searchSubscribersByName($name, $user_id);
 
-    // Вивести результати у форматі JSON
     header('Content-Type: application/json');
     echo json_encode($hisSubscriptions);
 } else {
-    // Обробка помилок, якщо не отримано ім'я та ідентифікатор користувача з AJAX-запиту
     echo json_encode(['error' => 'Invalid request']);
 }
 

@@ -63,17 +63,15 @@ async function loadMessages(loggedInUserId, recipientId) {
                     mesageButtonStyle
                 } = calculateStylesLocalStorage(isSender);
 
-                const encodedUsername = encodeURIComponent(sender.name);
-                const avatarSrc = `hack/${sender.avatar}`;
-
-                const imageSrc = `hack/${message.image_url}`;
-                const messageContent = message.image_url ? '' : `<p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>`;
-                const backgroundImage = message.image_url ? `background-image: url(${imageSrc})` : '';
-
-                const backgroundImageSize = message.image_url ? 'max-width: 60%; width: 100%; max-height: 60%; height: 200px;' : '';
-                const backgroundSizeCover = message.image_url ? 'background-size: cover; background-position: center center;' : ''
-                const imageButtonStyle = message.image_url ? 'image-button--style' : '';
-                // const imageTimeStyle = message.image_url ? 'image-time--style' : '';
+                const { encodedUsername,
+                    avatarSrc,
+                    messageContent,
+                    backgroundImage,
+                    backgroundImageSize,
+                    backgroundSizeCover,
+                    imageButtonStyle
+                    // imageTimeStyle
+                } = processMessageData(sender, message, recipientWhiteText);
 
                 return `
     <li class="${messageClass}">

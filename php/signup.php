@@ -40,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $stmt->execute($params);
-        echo json_encode(['success' => true, 'message' => 'Реєстрація пройшла успішно']);
+        echo json_encode(['success' => true, 'message' => 'Registration was successful']);
     } catch (\Exception $e) {
-        echo json_encode(['success' => false, 'message' => 'Помилка: ' . $e->getMessage()]);
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
     }
 } else {
-    echo json_encode(['success' => false, 'message' => 'Недопустимий метод запиту']);
+    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
 }
