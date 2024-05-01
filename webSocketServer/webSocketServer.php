@@ -1,107 +1,105 @@
 <?php
+
+use Workerman\Worker;
+
 require_once __DIR__ . '../../vendor/autoload.php';
+
+// Include your database helpers file
 require_once __DIR__ . '../../hack/actions/helpers.php';
 
-use Ratchet\MessageComponentInterface;
-use Ratchet\ConnectionInterface;
+// Create a Websocket server
+$ws_worker = new Worker('websocket://0.0.0.0:2346');
 
-// Make sure composer dependencies have been installed
-// require __DIR__ . '/vendor/autoload.php';
+// Emitted when new connection come
+$ws_worker->onConnect = function ($connection) {
+    echo "New connection\n";
+};
 
-/**
- * chat.php
- * Send any incoming messages to all connected clients (except sender)
- */
-class MyChat implements MessageComponentInterface
-{
-    protected $clients;
+// Emitted when data received
+$ws_worker->onMessage = function ($connection, $data) {
+    // Here you can process the data, for example, store it in the database
+    // Convert JSON data to array
+    $message = json_decode($data, true);
 
-    public function __construct()
-    {
-        $this->clients = new \SplObjectStorage;
-    }
+    // Save the message to the database
+    $result = saveMessage($message['sender_id'], $message['recipient_id'], $message['message_text']);
 
-    public function onOpen(ConnectionInterface $conn)
-    {
-        $this->clients->attach($conn);
-    }
+    // Send response back to the client
+    $connection->send(json_encode($result));
+    var_dump($result);
+};
 
-    public function onMessage(ConnectionInterface $from, $msg)
-    {
-        foreach ($this->clients as $client) {
-            if ($from != $client) {
-                $client->send($msg);
-            }
-        }
-    }
+// Emitted when connection closed
+$ws_worker->onClose = function ($connection) {
+    echo "Connection closed\n";
+};
 
-    public function onClose(ConnectionInterface $conn)
-    {
-        $this->clients->detach($conn);
-    }
-
-    public function onError(ConnectionInterface $conn, \Exception $e)
-    {
-        $conn->close();
-    }
-}
-
-// Run the server application through the WebSocket protocol on port 8080
-$app = new Ratchet\App('localhost', 8080);
-$app->route('/chat', new MyChat, array('*'));
-$app->route('/echo', new Ratchet\Server\EchoServer, array('*'));
-$app->run();
+// Run worker
+Worker::runAll();
 
 
-// use Ratchet\Server\IoServer;
-// use Ratchet\Http\HttpServer;
-// use Ratchet\WebSocket\WsServer;
 
-// use Ratchet\MessageComponentInterface;
-// use Ratchet\ConnectionInterface;
 
-// class YourWebSocketHandler implements MessageComponentInterface
-// {
-//     protected $db;
+// use Workerman\Worker;
 
-//     public function __construct()
-//     {
-//         $this->db = getPDO();
-//     }
+// require_once __DIR__ . '../../vendor/autoload.php';
 
-//     public function onOpen(ConnectionInterface $conn)
-//     {
-//         // Логіка, яка виконується при відкритті з'єднання
-//         $this->db->query("INSERT INTO connections (connection_id) VALUES ('{$conn->resourceId}')");
-//     }
+// // Include your database helpers file
+// require_once __DIR__ . '../../hack/actions/helpers.php';
 
-//     public function onMessage(ConnectionInterface $from, $msg)
-//     {
-//         // Логіка, яка виконується при отриманні повідомлення від клієнта
-//         echo "Received message from {$from->resourceId}: $msg\n";
-//     }
+// // Create a Websocket server
+// $ws_worker = new Worker('websocket://0.0.0.0:2346');
 
-//     public function onClose(ConnectionInterface $conn)
-//     {
-//         // Логіка, яка виконується при закритті з'єднання
-//         echo "Connection {$conn->resourceId} has disconnected\n";
-//     }
+// // Emitted when new connection come
+// $ws_worker->onConnect = function ($connection) {
+//     echo "New connection\n";
+// };
 
-//     public function onError(ConnectionInterface $conn, \Exception $e)
-//     {
-//         // Логіка, яка виконується при виникненні помилки
-//         echo "An error has occurred: {$e->getMessage()}\n";
-//         $conn->close();
-//     }
-// }
+// // Emitted when data received
+// $ws_worker->onMessage = function ($connection, $data) {
+//     // Here you can process the data, for example, store it in the database
+//     // Convert JSON data to array
+//     $message = json_decode($data, true);
 
-// $server = IoServer::factory(
-//     new HttpServer(
-//         new WsServer(
-//             new YourWebSocketHandler()
-//         )
-//     ),
-//     9090 // Порт, на якому запускається сервер
-// );
+//     // Save the message to the database
+//     $result = saveMessage($message['sender_id'], $message['recipient_id'], $message['message_text']);
 
-// $server->run();
+//     // Send response back to the client
+//     $connection->send(json_encode($result));
+// };
+
+// // Emitted when connection closed
+// $ws_worker->onClose = function ($connection) {
+//     echo "Connection closed\n";
+// };
+
+// // Run worker
+// Worker::runAll();
+
+
+
+// use Workerman\Worker;
+
+// require_once __DIR__ . '../../vendor/autoload.php';
+
+// // Create a Websocket server
+// $ws_worker = new Worker('websocket://0.0.0.0:2346');
+
+// // Emitted when new connection come
+// $ws_worker->onConnect = function ($connection) {
+//     echo "New connection\n";
+// };
+
+// // Emitted when data received
+// $ws_worker->onMessage = function ($connection, $data) {
+//     // Send hello $data
+//     $connection->send('Hello ' . $data);
+// };
+
+// // Emitted when connection closed
+// $ws_worker->onClose = function ($connection) {
+//     echo "Connection closed\n";
+// };
+
+// // Run worker
+// Worker::runAll();

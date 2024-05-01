@@ -1,6 +1,6 @@
 {
     "require": {
         "monolog/monolog": "^3.5",
-        "cboden/ratchet": "^0.4.4"
+        "workerman/workerman": "^4.1"
     }
 }
