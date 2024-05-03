@@ -40,21 +40,13 @@ async function sendMessages(recipientId, event) {
             };
 
             socket.send(JSON.stringify(message));
+            console.log('message', message)
         };
 
         socket.onmessage = async function (event) {
             console.log('Received message from server:', event.data);
 
             await loadAndScrollMessages(recipientId);
-
-            // const receivedMessage = JSON.parse(event.data);
-            // console.log('receivedMessage', receivedMessage)
-            // console.log('receivedMessage.recipient_id', receivedMessage.recipient_id)
-
-            // Тут можна додати перевірку, чи користувач є отримувачем цього повідомлення
-            // if (receivedMessage.recipient_id === loggedInUserId) {
-            //     await loadAndScrollMessages(loggedInUserId); // Оновлюємо повідомлення та прокручуємо вниз для отримувача
-            // }
 
         };
 
@@ -113,4 +105,17 @@ async function sendMessages(recipientId, event) {
 //         console.log(error);
 //         alert('Error in fetch request');
 //     }
+// }
+
+
+
+
+
+// const receivedMessage = JSON.parse(event.data);
+// console.log('receivedMessage', receivedMessage)
+// console.log('receivedMessage.recipient_id', receivedMessage.recipient_id)
+
+// Тут можна додати перевірку, чи користувач є отримувачем цього повідомлення
+// if (receivedMessage.recipient_id === loggedInUserId) {
+//     await loadAndScrollMessages(loggedInUserId); // Оновлюємо повідомлення та прокручуємо вниз для отримувача
 // }

@@ -192,3 +192,50 @@ function saveMessage($senderId, $recipientId, $messageText)
         }
     }
 }
+
+//==================================
+
+// function getMessagesByRecipient($senderId, $recipientId)
+// {
+//     try {
+//         $conn = getPDO();
+
+//         $sql = "SELECT * FROM messages WHERE (sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)";
+//         $stmt = $conn->prepare($sql);
+//         $stmt->execute([$senderId, $recipientId, $recipientId, $senderId]);
+
+//         $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         return $messages;
+//     } catch (PDOException $e) {
+
+//         return 'Error: ' . $e->getMessage();
+//     } finally {
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
+// }
+
+// function getUserById($message)
+// {
+//     try {
+//         $conn = getPDO();
+
+//         $sql = "SELECT * FROM users";
+//         $stmt = $conn->prepare($sql);
+//         $stmt->execute();
+
+//         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//         header('Content-Type: application/json');
+//         echo json_encode($users);
+//     } catch (PDOException $e) {
+
+//         echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+//     } finally {
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
+// }

@@ -1,4 +1,104 @@
 
+// async function loadMessages(loggedInUserId, recipientId) {
+//     const messagesContainer = document.getElementById('messagesContainer');
+//     try {
+//         // Отримуємо WebSocket підключення
+//         const socket = new WebSocket('ws://localhost:2346');
+//         console.log('socketLoadMessages', socket)
+//         // Відправляємо запит на отримання повідомлень
+//         socket.onopen = function () {
+//             const requestData = {
+//                 loggedInUserId: loggedInUserId,
+//                 recipientId: recipientId
+//             };
+//             socket.send(JSON.stringify(requestData));
+//         };
+
+//         // Обробляємо отримані повідомлення
+//         socket.onmessage = async function (event) {
+//             const messagesData = JSON.parse(event.data);
+//             if (Array.isArray(messagesData.success)) {
+//                 const messages = messagesData.success;
+
+//                 let lastSenderId = null;
+//                 let lastMessageTime = null;
+
+//                 const messagesHTML = messages.map(message => {
+//                     const sender = message.sender_id === loggedInUserId ? loggedInUserId : recipientId;
+//                     const isSender = sender === loggedInUserId;
+//                     const formattedTime = formatTime(message.sent_at);
+
+//                     const { messageClass, displayStyle } = getMessageStyles(isSender);
+
+//                     const currentTime = new Date(message.timestamp).getTime();
+
+//                     const showAvatar = message.sender_id !== lastSenderId ?? (currentTime - lastMessageTime > 60000);
+
+//                     const {
+//                         avatarDisplayStyle,
+//                         marginLeftStyle,
+//                         dynamicBorderStyle
+//                     } = calculateStyles(showAvatar, isSender, displayStyle);
+
+//                     if (showAvatar) {
+//                         lastSenderId = message.sender_id;
+//                         lastMessageTime = currentTime;
+//                     }
+//                     const messageSentAtClass = message.message_text && message.message_text.length < 15 ? 'message-heder--sent_at' : 'message-header';
+
+//                     const {
+//                         backgroundSenderClass,
+//                         backgroundClassMessages,
+//                         recipientWhiteText,
+//                         messageDateStyleDisplay,
+//                         modalThemeStyle,
+//                         mesageButtonStyle
+//                     } = calculateStylesLocalStorage(isSender);
+
+//                     const { encodedUsername,
+//                         avatarSrc,
+//                         messageContent,
+//                         backgroundImage,
+//                         backgroundImageSize,
+//                         backgroundSizeCover,
+//                         imageButtonStyle
+//                         // imageTimeStyle
+//                     } = processMessageData(sender, message, recipientWhiteText);
+
+//                     return `
+//     <li class="${messageClass}">
+//         <div class="messages">
+//             <a href='index.php?page=user&username=${encodedUsername}'>
+//                 <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+//             </a>
+//             <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; ${backgroundImageSize}; ${backgroundSizeCover}">
+
+//                 <div class="${messageSentAtClass}">
+//                     ${messageContent}
+//                     <span class="${messageDateStyleDisplay} ${imageButtonStyle}">${formattedTime}</span>
+//                 </div>
+//                 <button class="message-delete--button delete-button ${mesageButtonStyle} ${imageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
+//                 <div id="myModal" class="modal">
+//                     <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
+//                 </div>
+
+//             </div>
+//         </div>
+//     </li>`;
+//                 }).join('');
+//                 messagesContainer.innerHTML = messagesHTML;
+
+//             } else {
+//                 console.error('No messages found');
+//             }
+//         };
+
+//     } catch (error) {
+//         console.error('Error in WebSocket request', error);
+//     }
+// }
+
+
 async function loadMessages(loggedInUserId, recipientId) {
     const messagesContainer = document.getElementById('messagesContainer');
     try {
@@ -109,11 +209,3 @@ async function loadMessages(loggedInUserId, recipientId) {
 }
 
 loadMessages(loggedInUserId, recipientId);
-
-//<img style="" id="userImge" class="" src="${message.image_url}" alt="image"></img>
-// const dateElement = document.getElementById('dateElement'); // Замість 'dateElement' вкажіть ідентифікатор елемента, де потрібно відобразити дату
-// const messageDate = new Date('2024-03-17'); // Припустимо, що у вас є дата повідомлення
-
-// dateElement.textContent = formatDate(messageDate); // Відображаємо дату з використанням функції formatDate
-
-// &#8942;
