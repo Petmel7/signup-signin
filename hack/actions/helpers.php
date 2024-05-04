@@ -195,27 +195,27 @@ function saveMessage($senderId, $recipientId, $messageText)
 
 //==================================
 
-// function getMessagesByRecipient($senderId, $recipientId)
-// {
-//     try {
-//         $conn = getPDO();
+function getMessagesByRecipient($senderId, $recipientId)
+{
+    try {
+        $conn = getPDO();
 
-//         $sql = "SELECT * FROM messages WHERE (sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)";
-//         $stmt = $conn->prepare($sql);
-//         $stmt->execute([$senderId, $recipientId, $recipientId, $senderId]);
+        $sql = "SELECT * FROM messages WHERE (sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$senderId, $recipientId, $recipientId, $senderId]);
 
-//         $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//         return $messages;
-//     } catch (PDOException $e) {
+        return $messages;
+    } catch (PDOException $e) {
 
-//         return 'Error: ' . $e->getMessage();
-//     } finally {
-//         if ($conn !== null) {
-//             $conn = null;
-//         }
-//     }
-// }
+        return 'Error: ' . $e->getMessage();
+    } finally {
+        if ($conn !== null) {
+            $conn = null;
+        }
+    }
+}
 
 // function getUserById($message)
 // {
@@ -239,3 +239,27 @@ function saveMessage($senderId, $recipientId, $messageText)
 //         }
 //     }
 // }
+
+function getUserById()
+{
+    try {
+        $conn = getPDO();
+
+        $sql = "SELECT * FROM users";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Перенести header перед echo
+        header('Content-Type: application/json');
+        echo json_encode($users);
+    } catch (PDOException $e) {
+        // Вивід помилки в форматі JSON
+        echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+    } finally {
+        if ($conn !== null) {
+            $conn = null;
+        }
+    }
+}
