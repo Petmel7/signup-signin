@@ -195,6 +195,7 @@ function saveMessage($senderId, $recipientId, $messageText)
 
 //==================================
 
+
 function getMessagesByRecipient($senderId, $recipientId)
 {
     try {
@@ -240,26 +241,26 @@ function getMessagesByRecipient($senderId, $recipientId)
 //     }
 // }
 
-function getUserById()
-{
-    try {
-        $conn = getPDO();
+// function getUserById()
+// {
+//     try {
+//         $conn = getPDO();
 
-        $sql = "SELECT * FROM users";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
+//         $sql = "SELECT * FROM users";
+//         $stmt = $conn->prepare($sql);
+//         $stmt->execute();
 
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Перенести header перед echo
-        header('Content-Type: application/json');
-        echo json_encode($users);
-    } catch (PDOException $e) {
-        // Вивід помилки в форматі JSON
-        echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
-    } finally {
-        if ($conn !== null) {
-            $conn = null;
-        }
-    }
-}
+//         // Перенести header перед echo
+//         header('Content-Type: application/json');
+//         echo json_encode($users);
+//     } catch (PDOException $e) {
+//         // Вивід помилки в форматі JSON
+//         echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+//     } finally {
+//         if ($conn !== null) {
+//             $conn = null;
+//         }
+//     }
+// }
