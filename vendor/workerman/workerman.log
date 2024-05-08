@@ -1,0 +1,22 @@
+2024-05-08 13:47:14 pid:1 Error: Object of class Workerman\Connection\TcpConnection could not be converted to string in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:15
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2579): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(64): Workerman\Worker::runAll()
+#6 {main}
+2024-05-08 13:47:14 pid:1 Error: Object of class Workerman\Connection\TcpConnection could not be converted to string in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:60
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2532): Workerman\Connection\TcpConnection->close()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1970): Workerman\Worker->stop()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2583): Workerman\Worker::stopAll(250, Object(Error))
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#8 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#9 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(64): Workerman\Worker::runAll()
+#10 {main}

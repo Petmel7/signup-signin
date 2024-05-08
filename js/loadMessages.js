@@ -8,15 +8,16 @@
 //         // Відправляємо запит на отримання повідомлень
 //         socket.onopen = function () {
 //             const requestData = {
-//                 action: 'load_messages',
-//                 loggedInUserId: loggedInUserId,
-//                 recipientId: recipientId
+//                 sender_id: loggedInUserId,
+//                 recipient_id: recipientId
 //             };
 //             socket.send(JSON.stringify(requestData));
+//             console.log('requestData', requestData)
 //         };
 
 //         // Обробляємо отримані повідомлення
 //         socket.onmessage = async function (event) {
+//             console.log('event.data', event.data);
 //             const messagesData = JSON.parse(event.data);
 //             console.log('messagesData', messagesData);
 //             if (messagesData && Array.isArray(messagesData.success)) {
@@ -69,25 +70,25 @@
 //                     } = processMessageData(sender, message, recipientWhiteText);
 
 //                     return `
-//     <li class="${messageClass}">
-//         <div class="messages">
-//             <a href='index.php?page=user&username=${encodedUsername}'>
-//                 <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
-//             </a>
-//             <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; ${backgroundImageSize}; ${backgroundSizeCover}">
+//             <li class="${messageClass}">
+//                 <div class="messages">
+//                     <a href='index.php?page=user&username=${encodedUsername}'>
+//                         <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+//                     </a>
+//                     <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; ${backgroundImageSize}; ${backgroundSizeCover}">
 
-//                 <div class="${messageSentAtClass}">
-//                     ${messageContent}
-//                     <span class="${messageDateStyleDisplay} ${imageButtonStyle}">${formattedTime}</span>
-//                 </div>
-//                 <button class="message-delete--button delete-button ${mesageButtonStyle} ${imageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
-//                 <div id="myModal" class="modal">
-//                     <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
-//                 </div>
+//                         <div class="${messageSentAtClass}">
+//                             ${messageContent}
+//                             <span class="${messageDateStyleDisplay} ${imageButtonStyle}">${formattedTime}</span>
+//                         </div>
+//                         <button class="message-delete--button delete-button ${mesageButtonStyle} ${imageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
+//                         <div id="myModal" class="modal">
+//                             <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
+//                         </div>
 
-//             </div>
-//         </div>
-//     </li>`;
+//                     </div>
+//                 </div>
+//             </li>`;
 //                 }).join('');
 //                 messagesContainer.innerHTML = messagesHTML;
 
@@ -241,13 +242,15 @@ loadMessages(loggedInUserId, recipientId);
 //                 recipientId: recipientId
 //             };
 //             socket.send(JSON.stringify(requestData));
-//             console.log('requestData', socket);
+//             console.log('requestData', requestData);
 //         };
 
 //         // Обробляємо отримані повідомлення
 //         const messagesPromise = new Promise((resolve, reject) => {
 //             socket.onmessage = function (event) {
 //                 const messagesData = JSON.parse(event.data);
+//                 console.log('messagesData', messagesData);
+
 //                 if (messagesData && Array.isArray(messagesData.success)) {
 //                     resolve(messagesData.success);
 //                 } else {
