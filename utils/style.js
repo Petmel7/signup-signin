@@ -49,7 +49,7 @@ function calculateStylesLocalStorage(isSender) {
 
 function processMessageData(sender, message, recipientWhiteText) {
     const encodedUsername = encodeURIComponent(sender.name);
-    const avatarSrc = `hack/${sender.avatar}`;
+    const avatarSrc = sender ? `hack/${sender.avatar}` : '';
     const imageSrc = `hack/${message.image_url}`;
     const messageContent = message.image_url ? '' : `<p class="change-color--title message-content ${recipientWhiteText}">${message.message_text}</p>`;
     const backgroundImage = message.image_url ? `background-image: url(${imageSrc})` : '';

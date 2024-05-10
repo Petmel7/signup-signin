@@ -66,7 +66,29 @@
 // }
 
 
+async function loadAndScrollMessages(recipientId) {
+    try {
+        messageTextarea.value = '';
+        const messagesContainer = document.getElementById('messagesContainer');
+        console.log('messagesContainer', messagesContainer);
 
+        console.log('loadMessages', await loadMessages(loggedInUserId, recipientId));
+        // await loadMessages(loggedInUserId, recipientId);
+
+        console.log('loggedInUserId', loggedInUserId);
+        console.log('recipientId', recipientId);
+
+        // messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        console.log('scroll', messagesContainer.scrollTop = messagesContainer.scrollHeight);
+    } catch (error) {
+        console.error('Error loading messages:', error);
+    }
+}
+
+window.onload = function () {
+    loadAndScrollMessages(recipientId);
+};
 
 async function sendMessages(recipientId, event) {
     event.preventDefault();
@@ -94,12 +116,13 @@ async function sendMessages(recipientId, event) {
         });
 
         if (response.ok) {
-            messageTextarea.value = '';
 
+            // await loadAndScrollMessages(recipientId);
+
+            messageTextarea.value = '';
             const messagesContainer = document.getElementById('messagesContainer');
 
             await loadMessages(loggedInUserId, recipientId);
-
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
         } else {
@@ -110,16 +133,3 @@ async function sendMessages(recipientId, event) {
         alert('Error in fetch request');
     }
 }
-
-
-
-
-
-// const receivedMessage = JSON.parse(event.data);
-// console.log('receivedMessage', receivedMessage)
-// console.log('receivedMessage.recipient_id', receivedMessage.recipient_id)
-
-// Тут можна додати перевірку, чи користувач є отримувачем цього повідомлення
-// if (receivedMessage.recipient_id === loggedInUserId) {
-//     await loadAndScrollMessages(loggedInUserId); // Оновлюємо повідомлення та прокручуємо вниз для отримувача
-// }

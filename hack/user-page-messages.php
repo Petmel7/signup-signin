@@ -30,6 +30,7 @@ if (isset($_GET['username'])) {
     </header>
 
     <section class="container textarea-container">
+        <!-- <button id="refreshButton">Оновити повідомлення</button> -->
 
         <ul class="messages-container" id="messagesContainer"></ul>
 
