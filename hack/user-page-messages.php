@@ -63,10 +63,10 @@ if (isset($_GET['username'])) {
     <script src="js/modal.js"></script>
     <script src="js/forwarding.js"></script>
     <script src="js/autoTextareaExpansion.js"></script>
-    <script src="js/loadMessages.js"></script>
     <script src="utils/utilities.js"></script>
     <script src="utils/style.js"></script>
     <script src="js/sendMessages.js"></script>
+    <script src="js/loadMessages.js"></script>
     <script src="js/deleteMessage.js"></script>
     <script src="js/markMessageAsViewed.js"></script>
     <script src="js/addImages.js"></script>
