@@ -113,6 +113,12 @@ function getLoggedInUsername(): string|null
     return isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : null;
 }
 
+// function getUserIdFromConnection($connection)
+// {
+//     $userId = $_SESSION['user']['id'] ?? null;
+//     return $userId;
+// }
+
 function getSubscriptions($user_id)
 {
     try {
@@ -218,7 +224,7 @@ function getMessagesByRecipient($senderId, $recipientId)
     }
 }
 
-// function getUserById($message)
+// function getUserById()
 // {
 //     try {
 //         $conn = getPDO();

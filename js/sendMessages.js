@@ -58,10 +58,10 @@
 // async function loadAndScrollMessages(recipientId) {
 //     try {
 //         messageTextarea.value = '';
-//         const messagesContainer = document.getElementById('messagesContainer');
-//         await loadMessages(loggedInUserId, recipientId);
 
-//         messagesContainer.scrollTop = messagesContainer.scrollHeight;
+//         const { container } = await loadMessages(loggedInUserId, recipientId);
+
+//         container.scrollTop = container.scrollHeight;
 //     } catch (error) {
 //         console.error('Error loading messages:', error);
 //     }
@@ -126,14 +126,21 @@
 async function loadAndScrollMessages(recipientId) {
     try {
         messageTextarea.value = '';
-        const messagesContainer = document.getElementById('messagesContainer');
-        await loadMessages(loggedInUserId, recipientId);
 
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        const { container } = await loadMessages(loggedInUserId, recipientId);
+        console.log('container', container)
+
+        const scroll = container.scrollTop = container.scrollHeight;
+        console.log('scroll', scroll)
+
     } catch (error) {
         console.error('Error loading messages:', error);
     }
 }
+
+window.onload = function () {
+    loadAndScrollMessages(recipientId);
+};
 
 // Create a WebSocket connection
 const socket = new WebSocket('ws://localhost:2346');
@@ -148,7 +155,9 @@ socket.onmessage = async function (event) {
     const message = JSON.parse(event.data);
     // Display the received message on the page (for example, in a chat box)
     console.log('Received message:', message);
-    await loadAndScrollMessages(recipientId);
+
+    const result = await loadAndScrollMessages(recipientId);
+    console.log('resul->tloadAndScrollMessages', result)
 };
 
 // Function to send a message to the server

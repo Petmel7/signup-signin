@@ -12,6 +12,21 @@ $ws_worker = new Worker('websocket://0.0.0.0:2346');
 // Збереження підключених користувачів з їхніми ідентифікаторами
 $connectedUsers = [];
 
+// // Емітовано, коли новий користувач підключається
+// $ws_worker->onConnect = function ($connection, $data) use (&$connectedUsers) {
+//     echo "New connection\n";
+//     $message = json_decode($data, true);
+//     if (isset($message['sender_id'], $message['recipient_id'])) {
+//         $senderId = $message['sender_id'];
+//         $recipientId = $message['recipient_id'];
+//         // Отримати ID підключеного користувача з даних підключення
+//         $userId = getMessagesByRecipient($senderId, $recipientId);
+//         var_dump($userId);
+//         // Додати підключеного користувача до списку підключених
+//         $connectedUsers[$userId] = $connection;
+//     }
+// };
+
 // Емітовано, коли новий користувач підключається
 $ws_worker->onConnect = function ($connection) {
     echo "New connection\n";
@@ -23,16 +38,25 @@ $ws_worker->onMessage = function ($connection, $data) use ($connectedUsers) {
 
     // Перевірте, чи є призначення та відправте повідомлення лише конкретному користувачеві
     if (isset($message['sender_id'], $message['recipient_id'], $message['message_text'])) {
+        $senderId = $message['sender_id'];
         $recipientId = $message['recipient_id'];
+        $messageText = $message['message_text'];
 
-        // Перевірте, чи існує підключений користувач з вказаним ідентифікатором
-        if (isset($connectedUsers[$recipientId])) {
-            // Отримайте з'єднання отримувача і відправте йому повідомлення
-            $recipientConnection = $connectedUsers[$recipientId];
-            $recipientConnection->send(json_encode($message));
+        // Зберегти повідомлення в базу даних і перевірити, чи воно успішно збережено
+        if (saveMessage($senderId, $recipientId, $messageText)) {
+            // Повідомлення успішно збережено, надіслати його отримувачу
+            if (isset($connectedUsers[$recipientId])) {
+                // Отримайте з'єднання отримувача і відправте йому повідомлення
+                $recipientConnection = $connectedUsers[$recipientId];
+                $recipientConnection->send(json_encode($message));
+            } else {
+                // Обробте випадок, коли отримувач не підключений
+                echo "Recipient with ID $recipientId is not connected\n";
+            }
         } else {
-            // Обробте випадок, коли отримувач не підключений
-            echo "Recipient with ID $recipientId is not connected\n";
+            // Обробити випадок, коли повідомлення не було збережено
+            // Наприклад, вивести повідомлення про помилку або відправити сповіщення про помилку
+            echo "Failed to save message\n";
         }
     }
 };
@@ -44,7 +68,6 @@ $ws_worker->onClose = function ($connection) {
 
 // Run worker
 Worker::runAll();
-
 
 
 
@@ -111,6 +134,62 @@ Worker::runAll();
 //     ];
 //     // Send the combined response data back to the client
 //     $connection->send(json_encode($responseData));
+// };
+
+// // Emitted when connection closed
+// $ws_worker->onClose = function ($connection) {
+//     echo "Connection closed\n";
+// };
+
+// // Run worker
+// Worker::runAll();
+
+
+
+
+
+
+
+
+// use Workerman\Worker;
+
+// require_once __DIR__ . '../../vendor/autoload.php';
+
+// require_once __DIR__ . '../../hack/actions/helpers.php';
+
+// // Create a Websocket server
+// $ws_worker = new Worker('websocket://0.0.0.0:2346');
+
+// // Збереження підключених користувачів з їхніми ідентифікаторами
+// $connectedUsers = [];
+
+// // Емітовано, коли новий користувач підключається
+// $ws_worker->onConnect = function ($connection) {
+//     // Автентифікуйте користувача та отримайте його ідентифікатор
+//     $userId = authenticateUser($connection);
+
+//     // Збережіть з'єднання користувача разом з його ідентифікатором
+//     $connectedUsers[$userId] = $connection;
+// };
+
+// // Емітовано, коли отримано повідомлення
+// $ws_worker->onMessage = function ($connection, $data) use ($connectedUsers) {
+//     $message = json_decode($data, true);
+
+//     // Перевірте, чи є призначення та відправте повідомлення лише конкретному користувачеві
+//     if (isset($message['sender_id'], $message['recipient_id'], $message['message_text'])) {
+//         $recipientId = $message['recipient_id'];
+
+//         // Перевірте, чи існує підключений користувач з вказаним ідентифікатором
+//         if (isset($connectedUsers[$recipientId])) {
+//             // Отримайте з'єднання отримувача і відправте йому повідомлення
+//             $recipientConnection = $connectedUsers[$recipientId];
+//             $recipientConnection->send(json_encode($message));
+//         } else {
+//             // Обробте випадок, коли отримувач не підключений
+//             echo "Recipient with ID $recipientId is not connected\n";
+//         }
+//     }
 // };
 
 // // Emitted when connection closed

@@ -20,3 +20,12 @@ Stack trace:
 #8 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
 #9 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(64): Workerman\Worker::runAll()
 #10 {main}
+2024-05-13 10:12:13 pid:1 Error: Call to undefined function authenticateUser() in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:157
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2579): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(189): Workerman\Worker::runAll()
+#6 {main}
