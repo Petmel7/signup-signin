@@ -29,3 +29,83 @@ Stack trace:
 #4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
 #5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(189): Workerman\Worker::runAll()
 #6 {main}
+2024-05-14 10:32:57 pid:1 ArgumentCountError: Too few arguments to function {closure}(), 1 passed in C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php on line 2579 and exactly 2 expected in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:31
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2579): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(69): Workerman\Worker::runAll()
+#6 {main}
+2024-05-14 11:11:05 pid:1 Error: Call to undefined method Workerman\Connection\TcpConnection::getBuffer() in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:18
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2579): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(65): Workerman\Worker::runAll()
+#6 {main}
+2024-05-14 12:11:10 pid:1 TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:18
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(450): {closure}(Object(Workerman\Connection\TcpConnection), 'GET / HTTP/1.1\r...')
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(73): Workerman\Protocols\Websocket::dealHandshake('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#7 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(64): Workerman\Worker::runAll()
+#8 {main}
+2024-05-14 12:56:20 pid:1 TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:18
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(450): {closure}(Object(Workerman\Connection\TcpConnection), 'GET / HTTP/1.1\r...')
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(73): Workerman\Protocols\Websocket::dealHandshake('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#7 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(67): Workerman\Worker::runAll()
+#8 {main}
+2024-05-14 13:02:20 pid:1 ArgumentCountError: Too few arguments to function {closure}(), 1 passed in C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php on line 2579 and exactly 2 expected in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:33
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2579): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(79): Workerman\Worker::runAll()
+#6 {main}
+2024-05-14 13:20:07 pid:1 ArgumentCountError: Too few arguments to function {closure}(), 1 passed in C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php on line 2579 and exactly 2 expected in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:33
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2579): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #21)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(81): Workerman\Worker::runAll()
+#6 {main}
+2024-05-14 13:22:05 pid:1 TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:18
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(450): {closure}(Object(Workerman\Connection\TcpConnection), 'GET / HTTP/1.1\r...')
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(73): Workerman\Protocols\Websocket::dealHandshake('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#7 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(67): Workerman\Worker::runAll()
+#8 {main}
+2024-05-14 13:26:03 pid:1 TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:18
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(450): {closure}(Object(Workerman\Connection\TcpConnection), 'GET / HTTP/1.1\r...')
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(73): Workerman\Protocols\Websocket::dealHandshake('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('GET / HTTP/1.1\r...', Object(Workerman\Connection\TcpConnection))
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#7 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(67): Workerman\Worker::runAll()
+#8 {main}

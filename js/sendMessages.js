@@ -143,7 +143,8 @@ window.onload = function () {
 };
 
 // Create a WebSocket connection
-const socket = new WebSocket('ws://localhost:2346');
+// const socket = new WebSocket('ws://localhost:2346');
+const socket = new WebSocket(`ws://localhost:2346/?recipient_id=${recipientId}`);
 
 // Emitted when the WebSocket connection is opened
 socket.onopen = function () {
@@ -156,11 +157,9 @@ socket.onmessage = async function (event) {
     // Display the received message on the page (for example, in a chat box)
     console.log('Received message:', message);
 
-    const result = await loadAndScrollMessages(recipientId);
-    console.log('resul->tloadAndScrollMessages', result)
+    await loadAndScrollMessages(recipientId);
 };
 
-// Function to send a message to the server
 async function sendMessages(recipientId, event) {
     event.preventDefault();
 
@@ -178,10 +177,20 @@ async function sendMessages(recipientId, event) {
             recipient_id: recipientId,
             message_text: messageText
         };
-        // Convert the message to JSON and send it to the server
-        socket.send(JSON.stringify(message));
+
+        socket.send(JSON.stringify(message));;
 
     } catch (error) {
         console.log('sendMessage-Error', error);
     }
 }
+
+
+// // Емітовано, коли WebSocket-з'єднання відкрите
+// socket.onopen = function () {
+//     // Відправити ідентифікатор користувача на сервер
+//     const userId = recipientId; // Замініть це на ідентифікатор вашого користувача
+//     console.log('userId', userId);
+//     console.log('recipientId', recipientId);
+//     socket.send(JSON.stringify({ recipient_id: userId }));
+// };
