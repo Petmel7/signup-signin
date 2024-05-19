@@ -19,6 +19,10 @@ async function loadMessages(loggedInUserId, recipientId) {
         const messagesData = await response.json();
         console.log('Messages data:', messagesData);
 
+        if (!Array.isArray(messagesData.success.messages)) {
+            throw new TypeError('Expected an array of messages');
+        }
+
         const messages = messagesData.success.messages;
         const users = messagesData.success.users;
 

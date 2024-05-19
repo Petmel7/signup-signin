@@ -225,9 +225,9 @@ function getMessagesByRecipient($senderId, $recipientId)
 function getUserById($userId)
 {
     try {
-        $conn = getPDO(); // Функція для отримання з'єднання з базою даних
+        $conn = getPDO();
 
-        $sql = "SELECT * FROM users WHERE id = :userId"; // Припустимо, що у вас є поле 'id' для ідентифікатора користувача
+        $sql = "SELECT * FROM users WHERE id = :userId";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
         $stmt->execute();
@@ -236,7 +236,7 @@ function getUserById($userId)
 
         return $user;
     } catch (PDOException $e) {
-        // Обробка помилок бази даних
+
         return ['error' => 'Database error: ' . $e->getMessage()];
     } finally {
         if ($conn !== null) {
