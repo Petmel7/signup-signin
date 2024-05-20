@@ -86,9 +86,9 @@ window.onload = function () {
     loadAndScrollMessages(recipientId);
 };
 
-// const socket = new WebSocket('ws://localhost:2346/?id=' + loggedInUserId);
 const socket = new WebSocket('ws://localhost:2346/?sender_id=' + loggedInUserId + '&recipient_id=' + recipientId);
-
+// const socket = new WebSocket('ws://localhost:2346/?sender_id=' + loggedInUserId + '&recipient_id=' + recipientId + '&message_text=' + messageText);
+console.log('socket', socket)
 
 socket.onopen = function () {
     console.log('WebSocket connection opened');
