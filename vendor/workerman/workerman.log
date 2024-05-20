@@ -156,3 +156,87 @@ Stack trace:
 #6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
 #7 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(124): Workerman\Worker::runAll()
 #8 {main}
+2024-05-20 14:39:39 pid:1 TypeError: Illegal offset type in unset in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:164
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(118): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('\x88\x82n\x97\xF9Ym~', Object(Workerman\Connection\TcpConnection))
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#8 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(173): Workerman\Worker::runAll()
+#9 {main}
+2024-05-20 14:39:40 pid:1 TypeError: Illegal offset type in unset in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:164
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2532): Workerman\Connection\TcpConnection->close()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1970): Workerman\Worker->stop()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(932): Workerman\Worker::stopAll(250, Object(TypeError))
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(118): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('\x88\x82n\x97\xF9Ym~', Object(Workerman\Connection\TcpConnection))
+#8 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#9 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#10 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#11 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#12 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(173): Workerman\Worker::runAll()
+#13 {main}
+2024-05-20 14:42:17 pid:1 TypeError: Illegal offset type in unset in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:164
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(118): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('\x88\x82iWo\xFDj\xBE', Object(Workerman\Connection\TcpConnection))
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #25)
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#8 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(173): Workerman\Worker::runAll()
+#9 {main}
+2024-05-20 14:42:18 pid:1 TypeError: Illegal offset type in unset in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:164
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2532): Workerman\Connection\TcpConnection->close()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1970): Workerman\Worker->stop()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(932): Workerman\Worker::stopAll(250, Object(TypeError))
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(118): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('\x88\x82iWo\xFDj\xBE', Object(Workerman\Connection\TcpConnection))
+#8 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #25)
+#9 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#10 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#11 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#12 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(173): Workerman\Worker::runAll()
+#13 {main}
+2024-05-20 14:48:21 pid:1 TypeError: Illegal offset type in unset in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:148
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(118): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('\x88\x82Y\x01\xCE\x8AZ\xE8', Object(Workerman\Connection\TcpConnection))
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#8 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(157): Workerman\Worker::runAll()
+#9 {main}
+2024-05-20 14:48:21 pid:1 TypeError: Illegal offset type in unset in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:148
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(928): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(2532): Workerman\Connection\TcpConnection->close()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1970): Workerman\Worker->stop()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(932): Workerman\Worker::stopAll(250, Object(TypeError))
+#5 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(835): Workerman\Connection\TcpConnection->destroy()
+#6 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Protocols\Websocket.php(118): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#7 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(609): Workerman\Protocols\Websocket::input('\x88\x82Y\x01\xCE\x8AZ\xE8', Object(Workerman\Connection\TcpConnection))
+#8 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#9 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#10 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#11 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#12 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(157): Workerman\Worker::runAll()
+#13 {main}
