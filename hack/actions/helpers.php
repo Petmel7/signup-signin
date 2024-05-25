@@ -244,3 +244,22 @@ function getUserById($userId)
         }
     }
 }
+
+function getAllUsers()
+{
+    $users = [];
+    try {
+        $conn = getPDO();
+        $sql = "SELECT * FROM users";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        $users['error'] = 'Database error: ' . $e->getMessage();
+    } finally {
+        if ($conn !== null) {
+            $conn = null;
+        }
+    }
+    return $users;
+}

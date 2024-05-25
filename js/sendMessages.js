@@ -86,9 +86,53 @@ async function sendMessages(recipientId, event) {
 
 // socket.onmessage = async function (event) {
 //     const message = JSON.parse(event.data);
-//     console.log('Received message:', message);
+//     console.log('send->message:', message);
 
-//     loadAndScrollMessages(recipientId);
+//     if (message.echo_message) {
+//         const echoMessage = message.echo_message;
+//         console.log('echoMessage', echoMessage);
+
+//         if (Array.isArray(echoMessage)) {
+//             await loadAndScrollMessages(echoMessage[0].recipient_id);
+//         } else {
+//             console.error('Expected an array of messages');
+//         }
+//     } else {
+//         console.error('Invalid message format');
+//     }
+// };
+
+// async function sendMessages(recipientId, event) {
+//     event.preventDefault();
+
+//     const recipientIdNumber = parseInt(recipientId, 10);
+//     const messageTextarea = document.getElementById('messageTextarea');
+//     const messageText = messageTextarea.value.trim();
+
+//     if (messageText === '') {
+//         alert('Please enter the text of the message.');
+//         return;
+//     }
+
+//     try {
+//         const message = {
+//             sender_id: loggedInUserId,
+//             recipient_id: recipientIdNumber,
+//             message_text: messageText
+//         };
+//         console.log('message', message);
+//         socket.send(JSON.stringify(message));
+//         // Очистка текстової області
+//         messageTextarea.value = '';
+//     } catch (error) {
+//         console.log('sendMessage-Error', error);
+//     }
+// }
+
+
+
+
+
 
 // if (message.echo_message) {
 //     const echoMessage = message.echo_message;
@@ -151,23 +195,23 @@ async function sendMessages(recipientId, event) {
 //             } = processMessageData(sender, message, recipientWhiteText);
 
 //             return `
-//                 <li class="${messageClass}">
-//                     <div class="messages">
-//                         <a href='index.php?page=user&username=${encodedUsername}'>
-//                             <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
-//                         </a>
-//                         <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; ${backgroundImageSize}; ${backgroundSizeCover}">
-//                             <div class="${messageSentAtClass}">
-//                                 ${messageContent}
-//                                 <span class="${messageDateStyleDisplay} ${imageButtonStyle}">${formattedTime}</span>
-//                             </div>
-//                             <button class="message-delete--button delete-button ${messageButtonStyle} ${imageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
-//                             <div id="myModal" class="modal">
-//                                 <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
-//                             </div>
+//             <li class="${messageClass}">
+//                 <div class="messages">
+//                     <a href='index.php?page=user&username=${encodedUsername}'>
+//                         <img style="display: ${avatarDisplayStyle}" id="messageImg" class="message-img" src='${avatarSrc}' alt='${sender.name}'>
+//                     </a>
+//                     <div class="search-friend--add message-body ${backgroundSenderClass} ${backgroundClassMessages}" style="margin-left: ${marginLeftStyle}; border-radius: ${dynamicBorderStyle}; ${backgroundImage}; ${backgroundImageSize}; ${backgroundSizeCover}">
+//                         <div class="${messageSentAtClass}">
+//                             ${messageContent}
+//                             <span class="${messageDateStyleDisplay} ${imageButtonStyle}">${formattedTime}</span>
+//                         </div>
+//                         <button class="message-delete--button delete-button ${messageButtonStyle} ${imageButtonStyle}" onclick="openModalDelete(${message.id}, ${isSender})">&#8942;</button>
+//                         <div id="myModal" class="modal">
+//                             <div class="modal-content ${modalThemeStyle}" id="modalContent"></div>
 //                         </div>
 //                     </div>
-//                 </li>`;
+//                 </div>
+//             </li>`;
 //         }).join('');
 
 //         const messagesContainer = document.getElementById('messagesContainer');
@@ -178,47 +222,3 @@ async function sendMessages(recipientId, event) {
 // } else {
 //     console.error('Invalid message format');
 // }
-// };
-
-// async function sendMessages(recipientId, event) {
-//     event.preventDefault();
-
-//     const recipientIdNumber = parseInt(recipientId, 10);
-//     const messageTextarea = document.getElementById('messageTextarea');
-//     const messageText = messageTextarea.value.trim();
-
-//     if (messageText === '') {
-//         alert('Please enter the text of the message.');
-//         return;
-//     }
-
-//     try {
-//         const message = {
-//             sender_id: loggedInUserId,
-//             recipient_id: recipientIdNumber,
-//             message_text: messageText
-//         };
-//         console.log('message', message);
-//         socket.send(JSON.stringify(message));
-//         // Очистка текстової області
-//         messageTextarea.value = '';
-//     } catch (error) {
-//         console.log('sendMessage-Error', error);
-//     }
-// }
-
-// async function loadAndScrollMessages(recipientId) {
-//     try {
-//         const { container } = await loadMessages(loggedInUserId, recipientId);
-//         container.scrollTop = container.scrollHeight;
-//     } catch (error) {
-//         console.error('Error loading messages:', error);
-//     }
-// }
-
-// window.onload = function () {
-//     loadAndScrollMessages(recipientId);
-// };
-
-
-
