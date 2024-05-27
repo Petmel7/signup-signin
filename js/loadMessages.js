@@ -17,7 +17,7 @@ async function loadMessages(loggedInUserId, recipientId) {
         }
 
         const messagesData = await response.json();
-        console.log('Messages data:', messagesData);
+        console.log('loadMessagesData:', messagesData);
 
         const messages = messagesData.success.messages;
         const users = messagesData.success.users;
@@ -109,7 +109,7 @@ loadMessages(loggedInUserId, recipientId);
 // async function loadMessages(loggedInUserId, recipientId) {
 //     const messagesContainer = document.getElementById('messagesContainer');
 //     try {
-//         const socket = new WebSocket('ws://localhost:2346/?sender_id=' + loggedInUserId + '&recipient_id=' + recipientId);
+//         const socket = new WebSocket(`ws://localhost:2346/?sender_id=${loggedInUserId}&recipient_id=${recipientId}`);
 
 //         socket.onopen = function () {
 //             const requestData = {
