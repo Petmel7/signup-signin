@@ -1,21 +1,21 @@
 <?php
 
-require_once '../actions/helpers.php';
+// require_once '../actions/helpers.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+// $data = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['sender_id'], $data['recipient_id'], $data['message_text'])) {
-    $senderId = $data['sender_id'];
-    $recipientId = $data['recipient_id'];
-    $messageText = $data['message_text'];
+// if (isset($data['sender_id'], $data['recipient_id'], $data['message_text'])) {
+//     $senderId = $data['sender_id'];
+//     $recipientId = $data['recipient_id'];
+//     $messageText = $data['message_text'];
 
-    $result = saveMessage($senderId, $recipientId, $messageText);
+//     $result = saveMessage($senderId, $recipientId, $messageText);
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
-} else {
-    echo json_encode(['error' => 'Invalid request']);
-}
+//     header('Content-Type: application/json');
+//     echo json_encode($result);
+// } else {
+//     echo json_encode(['error' => 'Invalid request']);
+// }
 
 // function saveMessage($senderId, $recipientId, $messageText)
 // {
