@@ -6,17 +6,22 @@ socket.onopen = function () {
     console.log('WebSocket connection opened');
 };
 
-socket.onmessage = async function (event) {
+socket.onmessage = async function (event, loggedInUserId, recipientId) {
     const message = JSON.parse(event.data);
     console.log('socket.onmessage->message:', message);
     console.log('socket.onmessage->message.messages', message.messages);
 
-    // Логіка для обробки отриманих повідомлень
-    if (message.messages) {
-        // await displayMessages(message.messages, message.users);
-        await loadAndScrollMessages(loggedInUserId, recipientId);
+    try {
+        // Логіка для обробки отриманих повідомлень
+        if (console.log('XXX', message.messages.length !== 0)) {
+            // await displayMessages(message.messages, message.users);
+            // await loadAndScrollMessages(loggedInUserId, recipientId);
+        }
+        console.log('GGG', await loadAndScrollMessages(loggedInUserId, recipientId));
+    } catch (error) {
+        console.log('errorGGG', error);
     }
-};
+}
 
 socket.onerror = function (error) {
     console.error('WebSocket error:', error);

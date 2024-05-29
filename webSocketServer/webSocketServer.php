@@ -87,3 +87,7 @@ $ws_worker->onClose = function ($connection) use (&$connectedUsers, &$connection
 
 // Run worker
 Worker::runAll();
+
+// $ws_worker->connectionTimeout = 600; // Таймаут з'єднання у секундах (10 хвилин)
+// $ws_worker->pingInterval = 30; // Інтервал пінгу у секундах
+// $ws_worker->pingNotResponseLimit = 2; // Ліміт пінгів без відповіді

@@ -20,9 +20,9 @@ async function addImages() {
         const result = await response.json();
 
         if ('success' in result) {
-            const messagesContainer = document.getElementById('messagesContainer');
-            await loadMessages(loggedInUserId, recipientId);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            await loadAndScrollMessages(loggedInUserId, recipientId);
+
         } else {
             alert("Failed to add image");
         }
