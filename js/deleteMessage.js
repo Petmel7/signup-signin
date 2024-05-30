@@ -12,6 +12,7 @@ async function deleteMessage(messageId, event) {
         });
 
         await loadAndScrollMessages(loggedInUserId, recipientId);
+
     } catch (error) {
         console.error('Error:', error);
     }
