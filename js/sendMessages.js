@@ -6,23 +6,22 @@ socket.onopen = function () {
     console.log('WebSocket connection opened');
 };
 
-socket.onmessage = async function (event, loggedInUserId, recipientId) {
+socket.onmessage = async function (event) {
     const message = JSON.parse(event.data);
     console.log('socket.onmessage->message:', message);
     console.log('socket.onmessage->message.messages', message.messages);
+    console.log('socket.onmessage->message.users', message.users);
 
     try {
-        // Логіка для обробки отриманих повідомлень
-        if (message.messages.length !== 0) {
-
-            await loadAndScrollMessages(loggedInUserId, recipientId);
-
+        if (Array.isArray(message.messages) && message.messages.length !== 0) {
+            await displayMessages(message.messages, message.users);
+        } else {
+            console.log('Received message is not in expected format:', message);
         }
-
     } catch (error) {
         console.log('onmessageError', error);
     }
-}
+};
 
 socket.onerror = function (error) {
     console.error('WebSocket error:', error);
@@ -31,34 +30,6 @@ socket.onerror = function (error) {
 socket.onclose = function () {
     console.log('WebSocket connection closed');
 };
-
-async function loadAndScrollMessages(loggedInUserId, recipientId) {
-    try {
-
-        const response = await fetch('hack/messages/get_messages.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sender_id: loggedInUserId,
-                recipient_id: recipientId
-            }),
-        });
-        const messagesData = await response.json();
-        console.log('loadAndScrollMessages->messagesData', messagesData);
-        const messages = messagesData.success.messages;
-        const users = messagesData.success.users;
-        const { container } = await displayMessages(messages, users);
-        console.log('container', container);
-        const scroll = container.scrollTop = container.scrollHeight;
-        console.log('scroll', scroll);
-
-    } catch (error) {
-        console.error('Error loading messages:', error);
-    }
-}
-loadAndScrollMessages(loggedInUserId, recipientId);
 
 // Функція для відправки повідомлень
 async function sendMessages(recipientId, event) {
@@ -77,20 +48,59 @@ async function sendMessages(recipientId, event) {
 
     console.log('sendMessages->message', message);
 
-    // Перевірка стану WebSocket перед відправкою
     if (socket.readyState === WebSocket.OPEN) {
         socket.send(JSON.stringify(message));
     } else {
         alert('WebSocket connection is not open.');
     }
     messageTextarea.value = '';
-    await loadAndScrollMessages(loggedInUserId, recipientId);
+    await loadAndDisplayMessages(loggedInUserId, recipientId);
+}
+
+// Функція для завантаження та відображення повідомлень
+async function loadAndDisplayMessages(loggedInUserId, recipientId) {
+    const messagesContainer = document.getElementById('messagesContainer');
+
+    const response = await fetch('hack/messages/get_messages.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            sender_id: loggedInUserId,
+            recipient_id: recipientId
+        }),
+    });
+
+    const messagesData = await response.json();
+    console.log('loadAndDisplayMessages->messagesData', messagesData);
+
+    if (messagesData.success) {
+        const messages = messagesData.success.messages;
+        const users = messagesData.success.users;
+
+        if (!Array.isArray(messages) || !Array.isArray(users)) {
+            console.error('Invalid messages or users format');
+            return;
+        }
+
+        console.log('displayMessages', messages);
+
+        await displayMessages(messages, users);
+    } else {
+        console.error('Failed to load messages:', messagesData);
+    }
 }
 
 // Функція для відображення отриманих повідомлень
 async function displayMessages(messages, users) {
     const messagesContainer = document.getElementById('messagesContainer');
-    console.log('displayMessages', messages);
+
+    if (!Array.isArray(messages) || !Array.isArray(users)) {
+        console.error('Invalid messages or users format');
+        return;
+    }
+
     let lastSenderId = null;
     let lastMessageTime = null;
 
@@ -102,11 +112,16 @@ async function displayMessages(messages, users) {
         const { messageClass, displayStyle } = getMessageStyles(isSender);
 
         const currentTime = new Date(message.timestamp).getTime();
-        const showAvatar = senderId !== lastSenderId ?? (currentTime - lastMessageTime > 60000);
+        const showAvatar = senderId !== lastSenderId || (currentTime - lastMessageTime > 60000);
 
         const { avatarDisplayStyle, marginLeftStyle, dynamicBorderStyle } = calculateStyles(showAvatar, isSender, displayStyle);
 
         const sender = users.find(user => user.id === senderId);
+
+        if (!sender) {
+            console.error('Sender not found:', senderId);
+            return '';
+        }
 
         if (showAvatar) {
             lastSenderId = senderId;
@@ -156,12 +171,14 @@ async function displayMessages(messages, users) {
         </li>`;
     }).join('');
     messagesContainer.innerHTML = messagesHTML;
-    return { container: messagesContainer, messages: messages };
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-window.onload = function () {
-    loadAndScrollMessages(loggedInUserId, recipientId);
-};
+// Завантажити повідомлення при першому завантаженні сторінки
+loadAndDisplayMessages(loggedInUserId, recipientId);
+
+
+
 
 
 
@@ -174,22 +191,20 @@ window.onload = function () {
 //     console.log('WebSocket connection opened');
 // };
 
-// socket.onmessage = async function (event, loggedInUserId, recipientId) {
-//     const message = JSON.parse(event.data);
-//     console.log('socket.onmessage->message:', message);
-//     console.log('socket.onmessage->message.messages', message.messages);
+// socket.onmessage = async function (event) {
+//     const messagesData = JSON.parse(event.data);
+//     console.log('=====:', messagesData);
 
-//     try {
-//         // Логіка для обробки отриманих повідомлень
-//         if (message.messages.length !== 0) {
+//     if (messagesData.success) {
+//         const messages = messagesData.success.messages;
+//         const users = messagesData.success.users;
 
-//             const display = await displayMessages(loggedInUserId, recipientId);
-//             console.log('display', display);
+//         if (!Array.isArray(messages) || !Array.isArray(users)) {
+//             console.error('Invalid messages or users format');
+//             return;
 //         }
-
-//     } catch (error) {
-//         console.log('onmessageError', error);
-//     }
+//         await displayMessages(messages, users);
+//     };
 // }
 
 // socket.onerror = function (error) {
@@ -217,38 +232,19 @@ window.onload = function () {
 
 //     console.log('sendMessages->message', message);
 
-//     // Перевірка стану WebSocket перед відправкою
 //     if (socket.readyState === WebSocket.OPEN) {
 //         socket.send(JSON.stringify(message));
 //     } else {
 //         alert('WebSocket connection is not open.');
 //     }
 //     messageTextarea.value = '';
-//     await displayMessages(loggedInUserId, recipientId);
+//     // displayMessages(messages, users)
 // }
 
 // // Функція для відображення отриманих повідомлень
-// async function displayMessages(loggedInUserId, recipientId) {
-
+// async function displayMessages(messages, users) {
 //     const messagesContainer = document.getElementById('messagesContainer');
 
-//     const response = await fetch('hack/messages/get_messages.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             sender_id: loggedInUserId,
-//             recipient_id: recipientId
-//         }),
-//     });
-
-//     const messagesData = await response.json();
-//     console.log('loadAndScrollMessages->messagesData', messagesData);
-//     const messages = messagesData.success.messages;
-//     const users = messagesData.success.users;
-
-//     console.log('displayMessages', messages);
 //     let lastSenderId = null;
 //     let lastMessageTime = null;
 
@@ -260,11 +256,16 @@ window.onload = function () {
 //         const { messageClass, displayStyle } = getMessageStyles(isSender);
 
 //         const currentTime = new Date(message.timestamp).getTime();
-//         const showAvatar = senderId !== lastSenderId ?? (currentTime - lastMessageTime > 60000);
+//         const showAvatar = senderId !== lastSenderId || (currentTime - lastMessageTime > 60000);
 
 //         const { avatarDisplayStyle, marginLeftStyle, dynamicBorderStyle } = calculateStyles(showAvatar, isSender, displayStyle);
 
 //         const sender = users.find(user => user.id === senderId);
+
+//         if (!sender) {
+//             console.error('Sender not found:', senderId);
+//             return '';
+//         }
 
 //         if (showAvatar) {
 //             lastSenderId = senderId;
@@ -314,7 +315,7 @@ window.onload = function () {
 //         </li>`;
 //     }).join('');
 //     messagesContainer.innerHTML = messagesHTML;
-//     const scroll = messagesContainer.scrollTop = messagesContainer.scrollHeight;
-//     console.log('scroll', scroll);
+//     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 // }
-// displayMessages(loggedInUserId, recipientId);
+
+// // displayMessages(messages, users);

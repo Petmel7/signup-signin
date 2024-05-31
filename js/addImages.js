@@ -21,7 +21,7 @@ async function addImages() {
 
         if ('success' in result) {
 
-            await loadAndScrollMessages(loggedInUserId, recipientId);
+            await loadAndDisplayMessages(loggedInUserId, recipientId);
 
         } else {
             alert("Failed to add image");
