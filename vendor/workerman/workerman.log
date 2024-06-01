@@ -240,3 +240,4 @@ Stack trace:
 #11 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
 #12 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(157): Workerman\Worker::runAll()
 #13 {main}
+2024-06-01 11:40:00 pid:1 Worker process terminated
