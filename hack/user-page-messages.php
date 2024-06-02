@@ -58,6 +58,7 @@ if (isset($_GET['username'])) {
         </div>
     </section>
 
+    <script type="module" src="componentsJs/socket.js"></script>
     <script src="js/updateMessages.js"></script>
     <script src="js/toggleDarkMode.js"></script>
     <script src="js/modal.js"></script>

@@ -241,3 +241,12 @@ Stack trace:
 #12 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(157): Workerman\Worker::runAll()
 #13 {main}
 2024-06-01 11:40:00 pid:1 Worker process terminated
+2024-06-02 11:51:25 pid:1 Error: Call to undefined function saveMessageWithImage() in C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php:200
+Stack trace:
+#0 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Connection\TcpConnection.php(646): {closure}(Object(Workerman\Connection\TcpConnection), '{"action":"add_...')
+#1 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #54)
+#2 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1488): Workerman\Events\Select->loop()
+#3 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(1405): Workerman\Worker::forkWorkersForWindows()
+#4 C:\xampp\htdocs\signup-signin\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#5 C:\xampp\htdocs\signup-signin\webSocketServer\webSocketServer.php(248): Workerman\Worker::runAll()
+#6 {main}
