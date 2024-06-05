@@ -59,7 +59,6 @@ if (isset($_GET['username'])) {
     </section>
 
     <script type="module" src="componentsJs/socket.js"></script>
-    <script src="js/updateMessages.js"></script>
     <script src="js/toggleDarkMode.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/forwarding.js"></script>
@@ -67,10 +66,7 @@ if (isset($_GET['username'])) {
     <script src="utils/utilities.js"></script>
     <script src="utils/style.js"></script>
     <script src="js/sendMessages.js"></script>
-    <!-- <script src="js/loadMessages.js"></script> -->
-    <!-- <script src="js/deleteMessage.js"></script> -->
     <script src="js/markMessageAsViewed.js"></script>
-    <!-- <script src="js/addImages.js"></script> -->
 
 </body>
 
